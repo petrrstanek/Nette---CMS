@@ -30,9 +30,6 @@ final class PagePresenter extends BasePresenter
 
 		//__UPDATE__-__MODE__ //
 		if ($pageId) {
-			/* $pageForm
-				->addSelect('tags', 'Kategorie: ', $this->model->fetchTags())
-				->setHtmlAttribute('class', 'selectButtons'); */
 
 			$pageForm
 				->addTextArea('content', 'Obsah:')
@@ -175,41 +172,12 @@ final class PagePresenter extends BasePresenter
 		$form->addRadioList('rTags', 'Odebrat Kategorii:', $allTags)->setHtmlAttribute('class', 'selectButtons');
 
 		$form
-			->addSubmit('delete', 'Smazat')
-			->setHtmlAttribute('class', 'button__delete')
-			->setValidationScope([$form['rTags']])->onClick[] = [$this, 'relatedRemoveGo'];
-
-		$form
 			->addSubmit('send', 'Přidat Kategorii')
-			->setHtmlAttribute('class', 'button__submit')
-			->setValidationScope([$form['tags']])->onClick[] = [$this, 'addTagFormSucceeded'];
+			->setHtmlAttribute('class', 'button__submit');
+			
+			$form->onSuccess[] = [$this, 'addTagFormSucceeded'];
 
 		return $form;
-	}
-
-	public function relatedRemoveGo(\stdClass $values): void
-	{
-		$pageId = $this->getParameter('pageId');
-		$page = $this->model->getPages()->get($pageId);
-		$relatedTags = $this->model
-			->getRelatedTags()
-			->select('page_id')
-			->where('tag_id', $values->rTags);
-		bdump($values->rTags);
-		foreach ($relatedTags as $relatedTag) {
-			/* if ($relatedTag->id == $values->rTags) {
-				$this->model
-					->getActiveTag()
-					->where('name', $relatedTag->name)
-					->delete();
-				$this->model
-					->getPosts()
-					->where('tags', $values->rTags)
-					->delete();
-				$this->flashMessage('Kategorie byla odebrána');
-				$this->redirect('Page:editPage', $page->id);
-			} */
-		}
 	}
 
 	public function addTagFormSucceeded(\stdClass $values): void
@@ -226,27 +194,6 @@ final class PagePresenter extends BasePresenter
 			$this->redirect('this');
 		}
 
-		/* $activeTag = $this->model
-			->getActiveTag()
-			->select('name')
-			->where('post_id', $pageId);
-		$sizeActiveTag = $activeTag->count('*');
-		$exist = false;
-
-		for ($i = 0; $i < $sizeActiveTag; $i++) {
-			bdump($activeTag[$i]);
-			if ($activeTag[$i]->name == $data->tags) {
-				$this->flashMessage('Tento příspěvek již má kategorii ' . $data->tags . '.');
-				$this->redirect('Post:show', $page->id);
-				$exist = true;
-			}
-		}
-		if ($exist === false) {
-			$this->model->getActiveTag()->insert([
-				'post_id' => $pageId,
-				'name' => $data->tags,
-			]);
-		} */
 		$this->flashMessage('Kategorie byla úspěšně přidána.', 'success');
 		$this->redirect('Page:editPage', $page->id);
 	}

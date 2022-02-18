@@ -23,60 +23,49 @@
     <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
       {$flash->message}
     </div>
-    
-     
-        
-          <h1 n:block="title" class="pt-4 text-center">
-            {$page->title} - Náhled
-          </h1>
-          {* <div class="container-tags py-4">
-            <div class="fix">
-              <div class="tags" n:ifset="$activetag->name" n:foreach="$activetags as $activetag">
-                {$activetag->name|noescape}
-              </div>
-            </div>
-          </div> *}
-          <div class="container post-show">
-            <div class="date-show">
-              {$page->updatedAt|noescape}
-            </div>
-            {$page->content|noescape}
-          </div>
-      
-      
-    
+    <h1 n:block="title" class="pt-4 text-center">
+      {$page->title} - Náhled
+    </h1>
+    <div class="container-tags py-4">
+      <div class="fix">
+        <div class="tags" n:foreach="$tagsActive as $tagActive">
+          {$tagActive->tag->name}
+        </div>
+      </div>
+    <div class="container post-show">
+      <div class="date-show">
+        {$page->createdAt|noescape}
+      </div>
+          {$page->content|noescape}
+    </div>
   </section>
 {/block}
 {block errorBox}
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
       {$flash->message}
-    </div>
+</div>
 {/block}
 {block adminContent}
 <div class="container">
-<section id="latte-show" class="mx-auto">
-  <h1 class="pt-4 text-center">
-    {$page->title} - Náhled
-  </h1>
-          <div class="container-tags py-4">
-            <div class="fix">
-              <div class="tags" n:foreach="$tagsActive as $tagActive">
-                 {$tagActive->tag->name}
-              </div>
-             
-              {* <a n:href="Page:addTagPage $page->id"><i class="fa-solid fa-plus"></i></a> *}
-            </div>
-          </div>
-          <div class="container post-show">
-            <div class="date-show">
-              {$page->updatedAt|noescape}
-            </div>
-            {$page->content|noescape}
-          </div>
+  <section id="latte-show" class="mx-auto">
+    <h1 class="pt-4 text-center">
+      {$page->title} - Náhled
+    </h1>
+    <div class="container-tags py-4">
+      <div class="fix">
+        <div class="tags" n:foreach="$tagsActive as $tagActive">
+          {$tagActive->tag->name}
+        </div>
+      </div>
+    </div>
+    <div class="container post-show">
+      <div class="date-show">
+        {$page->updatedAt|noescape}
+      </div>
+      {$page->content|noescape}
+    </div>
   </section>
 </div>
-
 {/block}
-
 </body>
 </html>

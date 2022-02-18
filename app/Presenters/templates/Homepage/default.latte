@@ -23,7 +23,7 @@
                 <h3>{$layPage->title}</h3>
                 <div class="post-inner">{$layPage->content|truncate:230|noescape}</div>
                 <div class="date">{$layPage->createdAt|noescape}</div>
-                <a n:href="Page:showPage $layPost->id" class="btn btn-outline-primary">Číst více</a>
+                <a n:href="Page:showPage $layPage->id" class="btn btn-outline-primary">Číst více</a>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@
 {block errorBox}
 {/block}
 {block adminContent}
-<section id="latte-admin-home" class="mx-auto">
+<section id="latte-admin-home" class="mx-auto mt-4">
 <table class="table table-hover">
   <thead>
     <tr>
@@ -62,6 +62,9 @@
       <th>
         Vytvoření/Aktualizace
       </th>
+      <th>
+      Editace
+      </th>
     </tr>
   </thead>
   <div n:foreach="$layPages as $layPage">
@@ -72,8 +75,8 @@
       <td>{$layPage->createdAt}</td>
       <td>
       <a n:href="Page:showPage $layPage->id"><i class="fa-solid fa-eye"></i></a>
-      <a n:href="Page:editPage $layPage->id"><i class="fa-thin fa-pen"></i></a>
-      <a href="#"><i class="fa-thin fa-trash-can"></i></a>
+      <a n:href="Page:editPage $layPage->id" class="px-3"><i class="fa-thin fa-pen"></i></a>
+      <a href="#">Delete</a>
       
       </td>
     </tr>

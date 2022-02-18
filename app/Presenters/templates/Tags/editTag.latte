@@ -4,13 +4,17 @@
 </div>
 {/block}
 {block adminContent}
-<a n:href="delete!" class="button button__delete"><i class="fa-solid fa-trash-can"></i></a>
+<div class="container">
+
 <div class="card mt-4">
-<div class="card-header">
+<div class="card-header" style="position:relative;">
 <h4 class="card-title">Editace kategorie</h4>
+<a n:href="delete!" class="button button__delete"><i class="fa-solid fa-trash-can"></i>Delete</a>
 </div>
 <div class="card-body">
 {control controlTagForm}
 </div>
 </div>
+</div>
+
 {/block}

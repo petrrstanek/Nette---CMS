@@ -35,6 +35,7 @@
           <div n:foreach="$tags as $tag" class="tag">
             <a n:href="Tags:editTag $tag->id" class="tags">{$tag->name}</a>
           </div>
+          <a n:href="Tags:createTag">&plus;</a>
         </div>
       </div>
     </div>
