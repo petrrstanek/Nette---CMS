@@ -169,7 +169,7 @@ final class PagePresenter extends BasePresenter
 			->setHtmlAttribute('id', 'mar')
 			->setRequired();
 
-		$form->addRadioList('rTags', 'Odebrat Kategorii:', $allTags)->setHtmlAttribute('class', 'selectButtons');
+		/* $form->addRadioList('rTags', 'Odebrat Kategorii:', $allTags)->setHtmlAttribute('class', 'selectButtons'); */
 
 		$form
 			->addSubmit('send', 'Přidat Kategorii')

@@ -6,6 +6,7 @@
   <title>{ifset title}{include title|stripHtml} | {/ifset}CMS Ed - Nette</title>
   <link rel="stylesheet" href="{$basePath}/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 {block navbar}
@@ -54,10 +55,10 @@
 							<a n:href="Homepage:"><span class="fa fa-home mr-3"></span> Přehled Stránek</a>
 						</li>
 						<li>
-							<a n:href="Page:createPage"><span class="fa fa-user mr-3"></span> Nová Stránka</a>
+							<a n:href="Page:createPage"><span class="fa fa-pencil mr-3"></span> Nová Stránka</a>
 						</li>
 						<li>
-							<a n:href="Tags:ManagTags"><span class="fa fa-briefcase mr-3"></span> Přehled Kategorií</a>
+							<a n:href="Tags:ManagTags"><span class="fa fa-tag mr-3"></span> Přehled Kategorií</a>
 						</li>
 					</ul>
 				</div>

@@ -51,6 +51,8 @@
     <h1 class="pt-4 text-center">
       {$page->title} - Náhled
     </h1>
+    <i class="fa-solid fa-square-pen"></i>
+    <a n:href="Page:editPage $page->id" class="button button__sumbit" style=" position: absolute; right: 40px"> <i class="fa fa-pencil" style="color: white;"></i></a>
     <div class="container-tags py-4">
       <div class="fix">
         <div class="tags" n:foreach="$tagsActive as $tagActive">

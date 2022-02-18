@@ -47,6 +47,7 @@
 {/block}
 {block adminContent}
 <section id="latte-admin-home" class="mx-auto mt-4">
+<div class="container">
 <table class="table table-hover">
   <thead>
     <tr>
@@ -71,7 +72,7 @@
     <tr>
       <td>{$layPage->id} </td>
       <td>{$layPage->title}</td>
-      <td>{$layPage->content}</td>
+      <td>{$layPage->content|truncate:100|noescape}</td>
       <td>{$layPage->createdAt}</td>
       <td>
       <a n:href="Page:showPage $layPage->id"><i class="fa-solid fa-eye"></i></a>
@@ -81,6 +82,8 @@
       </td>
     </tr>
   </div>
+</div>
+
 </table>
 </section>
 {/block}
