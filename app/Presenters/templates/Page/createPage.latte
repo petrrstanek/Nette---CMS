@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+{block content}
+{define header}
+{define navigation}
+  <div class="col-md-12 text-center"><a n:href="Homepage:default" class="button__transparent">
+      &larr; Dashboard</a></div>
+{/define}
+{include parent}
+{/define}
+
+{block errorBox}
+
+{/block}
+{block adminContent}
+<section id="latte-create" class="mx-auto">
+<div class="container">
+  <div class="card mt-4">
+        <div class="card-header">
+          <h4 class="card-title">Nová Stránka</h4>
+        </div>
+        <div class="card-body">
+          {control addPageForm}
+        </div>
+    </div>
+</div>
+
+</section>
+{/block}
+</body>
+</html>

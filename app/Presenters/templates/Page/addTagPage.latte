@@ -1,0 +1,17 @@
+{block errorBox}
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+{$flash->message}
+</div>
+{/block}
+{block adminContent}
+<div class="container">
+  <div class="card mt-4">
+   <div class="card-header">
+      <h4 class="card-title">Přidat Kategorii</h4>
+    </div>
+    <div class="card-body">
+      {control addTagForm}
+    </div>
+  </div>
+</div>
+{/block}

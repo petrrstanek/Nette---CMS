@@ -1,0 +1,9 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=localhost;dbname=csm-nette'
+	user: root
+	password: root
+
+

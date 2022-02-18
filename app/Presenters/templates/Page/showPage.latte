@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+{block content}
+  {define header}
+    {define navigation}
+      <div class="col-6 text-center text-md-end"><a n:href="Homepage:default" class="button__transparent" style="white-space: nowrap; padding-right: 25px">
+          &larr; Dashboard</a></div>
+      <div class="col-6 text-center text-md-start"><a n:href="Edit:edit $post->id" class="button__transparent" style="white-space: nowrap">
+          Upravit stránku
+        </a></div>
+    {/define}
+    {include parent}
+  {/define}
+  <section id="latte-show" class="mx-auto">
+    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+      {$flash->message}
+    </div>
+    
+     
+        
+          <h1 n:block="title" class="pt-4 text-center">
+            {$page->title} - Náhled
+          </h1>
+          {* <div class="container-tags py-4">
+            <div class="fix">
+              <div class="tags" n:ifset="$activetag->name" n:foreach="$activetags as $activetag">
+                {$activetag->name|noescape}
+              </div>
+            </div>
+          </div> *}
+          <div class="container post-show">
+            <div class="date-show">
+              {$page->updatedAt|noescape}
+            </div>
+            {$page->content|noescape}
+          </div>
+      
+      
+    
+  </section>
+{/block}
+{block errorBox}
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+      {$flash->message}
+    </div>
+{/block}
+{block adminContent}
+<div class="container">
+<section id="latte-show" class="mx-auto">
+  <h1 class="pt-4 text-center">
+    {$page->title} - Náhled
+  </h1>
+          <div class="container-tags py-4">
+            <div class="fix">
+              <div class="tags" n:foreach="$tagsActive as $tagActive">
+                 {$tagActive->tag->name}
+              </div>
+             
+              {* <a n:href="Page:addTagPage $page->id"><i class="fa-solid fa-plus"></i></a> *}
+            </div>
+          </div>
+          <div class="container post-show">
+            <div class="date-show">
+              {$page->updatedAt|noescape}
+            </div>
+            {$page->content|noescape}
+          </div>
+  </section>
+</div>
+
+{/block}
+
+</body>
+</html>

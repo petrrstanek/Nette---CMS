@@ -1,0 +1,16 @@
+{block errorBox}
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+{$flash->message}
+</div>
+{/block}
+{block adminContent}
+<a n:href="delete!" class="button button__delete"><i class="fa-solid fa-trash-can"></i></a>
+<div class="card mt-4">
+<div class="card-header">
+<h4 class="card-title">Editace kategorie</h4>
+</div>
+<div class="card-body">
+{control controlTagForm}
+</div>
+</div>
+{/block}

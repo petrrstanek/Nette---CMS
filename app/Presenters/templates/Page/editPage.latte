@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+{block content}
+{define header}
+  {define navigation}
+    <div class="col-6 text-center text-md-end">
+      <a n:href="Post:show $post->id" class="button__transparent">
+        &larr;&nbsp;Zpět </a>
+    </div>
+    <div class="col-6 text-center text-md-start">
+      <a n:href="Edit:addTag $post->id" class="button__transparent">&plus; Správa Kategorií</a>
+    </div>
+  {/define}
+  {include parent}
+{/define}
+{block errorBox}
+<div class="container">
+  <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+    {$flash->message}
+  </div>
+</div>
+{/block}
+{block adminContent}
+<div class="container">
+<section id="latte-edit">
+<div class="container-tags py-4">
+  <div class="fix">
+    <div class="tags" n:foreach="$tagsActive as $tagActive">
+      <a href="#">{$tagActive->tag->name}</a>
+    </div>
+    <a n:href="Page:addTagPage $page->id">Click</a>
+  </div>
+</div>
+<div class="card mt-4">
+          <div class="card-header">
+            <h4 class="card-title">Editace Příspěvku</h4>
+          </div>
+          <div class="card-body">
+            {control addPageForm}
+          </div>
+        </div>
+</section>
+</div>
+
+{/block}
+</body>
+</html>

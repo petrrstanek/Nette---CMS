@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+{block content}
+  {define header}
+    {define navigation}
+      <div class="col-6 text-center text-md-end ">
+        <a n:href="Homepage:" class="button__transparent multi-menu" style="padding-right: 20px">&larr; Dashboard</a>
+      </div>
+      <div class="col-6 text-center text-md-start">
+        <a n:href="Edit:createTag" class="button__transparent multi-menu">&plus; Správa
+          kategorii</a></div>
+    {/define}
+    {include parent}
+  {/define}
+{/block}
+{block errorBox}
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+      {$flash->message}
+    </div>
+{/block}
+{block adminContent}
+<section id="latte-manag-tags" class="text-center mx-auto">
+    <h2 class="py-5">Kategorie</h2>
+    <div class="row">
+      <div class="container">
+        <div class="col-md-12 container-tags d-flex justify-content-center align-self-center flex-wrap px-5">
+          <div n:foreach="$tags as $tag" class="tag">
+            <a n:href="Tags:editTag $tag->id" class="tags">{$tag->name}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{/block}
+</body>
+</html>

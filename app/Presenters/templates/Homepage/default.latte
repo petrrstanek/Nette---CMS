@@ -1,0 +1,83 @@
+{block content}
+  {define header}
+    {define navigation}
+      <div class="col-6 text-center text-md-end">
+        <div><a class="button__transparent" n:href="Edit:create" >
+          <i class="fas fa-edit me-1" style="font-size: 15px"></i>Nová stránka</a></div></div>
+      <div class="col-6 text-center text-md-start">  <div n:if="$user->isLoggedIn()" class="me-3"><a class="button__transparent" n:href="ManagTags:managTags" style="white-space: nowrap"><i
+                  class="fas fa-tags me-1" style="font-size: 15px"></i>Správa kategorií</a></div></div>
+    {/define}
+{include parent}
+  {/define}
+  <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+    {$flash->message}
+  </div>
+  <section id="latte-default">
+    <div class="container">
+      <h1 n:block="title" class="p-3 text-center">Poslední aktualizované stránky</h1>
+      <div class="row">
+        <div class="col-md-12">
+          <div n:foreach="$layPages as $layPage" class="post x-flex">
+            <div class="card">
+              <div class="card-body p-4">
+                <h3>{$layPage->title}</h3>
+                <div class="post-inner">{$layPage->content|truncate:230|noescape}</div>
+                <div class="date">{$layPage->createdAt|noescape}</div>
+                <a n:href="Page:showPage $layPost->id" class="btn btn-outline-primary">Číst více</a>
+              </div>
+            </div>
+          </div>
+          <div class="pagination pb-5 x-flex">
+            {if $page > 1}
+              <a n:href="default, $page - 1">Zpět</a>
+              &nbsp; | &nbsp;
+            {/if}
+             {$page} z {$lastPage}
+            {if $page < $lastPage}
+              &nbsp;|&nbsp;
+              <a n:href="default, $page + 1">Další</a>
+            {/if}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{/block}
+{block errorBox}
+{/block}
+{block adminContent}
+<section id="latte-admin-home" class="mx-auto">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>
+        ID
+      </th>
+      <th>
+        Název
+      </th>
+      <th>
+        Obsah
+      </th>
+      <th>
+        Vytvoření/Aktualizace
+      </th>
+    </tr>
+  </thead>
+  <div n:foreach="$layPages as $layPage">
+    <tr>
+      <td>{$layPage->id} </td>
+      <td>{$layPage->title}</td>
+      <td>{$layPage->content}</td>
+      <td>{$layPage->createdAt}</td>
+      <td>
+      <a n:href="Page:showPage $layPage->id"><i class="fa-solid fa-eye"></i></a>
+      <a n:href="Page:editPage $layPage->id"><i class="fa-thin fa-pen"></i></a>
+      <a href="#"><i class="fa-thin fa-trash-can"></i></a>
+      
+      </td>
+    </tr>
+  </div>
+</table>
+</section>
+{/block}
