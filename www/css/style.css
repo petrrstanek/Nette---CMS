@@ -7507,6 +7507,15 @@ form td {
   margin-bottom: 10px;
 }
 
+td h1,
+td h2,
+td h3,
+td h4,
+td h5,
+td h6 {
+  display: none;
+}
+
 form th {
   text-align: right;
 }
@@ -7843,7 +7852,7 @@ textarea.tinyMCE {
 a {
   -webkit-transition: 0.3s all ease;
   transition: 0.3s all ease;
-  color: #3445b4;
+  color: white;
 }
 
 a:hover, a:focus {
@@ -7867,7 +7876,7 @@ button:hover, button:focus {
 
 .wrapper {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 #sidebar {
@@ -7926,6 +7935,7 @@ button:hover, button:focus {
   display: block;
   color: rgba(255, 255, 255, 0.6);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white !important;
 }
 
 #sidebar ul li a span {
