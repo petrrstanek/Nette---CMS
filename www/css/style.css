@@ -7439,6 +7439,7 @@ body {
   color: #333;
   background-color: #eceef0;
   height: calc(100%);
+  overflow: hidden;
 }
 
 .fix {
