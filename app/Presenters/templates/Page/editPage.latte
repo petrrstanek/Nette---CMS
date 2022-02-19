@@ -21,14 +21,18 @@
 {block adminContent}
 <div class="container">
 <section id="latte-edit">
+
 <div class="container-tags py-2">
-  <div class="fix">
+<a n:href="Page:addTagPage $page->id">&plus;</a>
+  <div class="x-flex flex-wrap">
     <a n:href="delete!, $tagActive->tag->id" class="tags" n:foreach="$tagsActive as $tagActive">
       {$tagActive->tag->name}
     </a>
-    <a n:href="Page:addTagPage $page->id">&plus;</a>
+    
   </div>
 </div>
+
+
 <div class="card">
           <div class="card-header">
             <h4 class="card-title">Editace Příspěvku</h4>

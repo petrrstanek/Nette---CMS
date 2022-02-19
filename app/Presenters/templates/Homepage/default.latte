@@ -1,5 +1,5 @@
 {block content}
-  
+
   <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
     {$flash->message}
   </div>
@@ -58,38 +58,37 @@
       <th>Editace</th>
     </tr>
   </thead>
-  <div n:foreach="$layPages as $layPage">
+  <div n:foreach="$layAdminPages as $layAdminPage">
     <tr>
-      <td>{$layPage->id} </td>
-      <td>{$layPage->title}</td>
-      <td>{$layPage->content|truncate:100|noescape}</td>
-      {ifset $layPage->updatedAt}
-      <td>{$layPage->updatedAt}</td>
-      {elseifset $layPage->createdAt}
-      <td>{$layPage->createdAt}</td>
+      <td>{$layAdminPage->id} </td>
+      <td>{$layAdminPage->title}</td>
+      <td>{$layAdminPage->content|truncate:100|noescape}</td>
+      {ifset $layAdminPage->updatedAt}
+      <td>{$layAdminPage->updatedAt}</td>
+      {elseifset $layAdminPage->createdAt}
+      <td>{$layAdminPage->createdAt}</td>
       {/ifset}
       <td>
       <div class="d-flex">
-      <a n:href="Page:showPage $layPage->id"><i class="fa fa-eye preview-icon"></i></a>
-      <a n:href="Page:editPage $layPage->id" class="px-3"><i class="fa fa-pen edit-icon"></i></a>
-      <a n:href="delete!, $layPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash trash-icon" ></i></a>
-      <a n:href="add!, $layPage->id" class="fav-icon" ><i class="fa fa-star fav"></i></a>
+      <a n:href="Page:showPage $layAdminPage->id"><i class="fa fa-eye preview-icon"></i></a>
+      <a n:href="Page:editPage $layAdminPage->id" class="px-3"><i class="fa fa-pen edit-icon"></i></a>
+      <a n:href="delete!, $layAdminPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash trash-icon" ></i></a>
+      <a n:href="add!, $layAdminPage->id" class="fav-icon" ><i class="fa fa-star fav"></i></a>
       </div>
       
       </td>
     </tr>
   </div>
 </div>
-
 </table>
 <div class="pagination pb-5 x-flex">
-{if $page > 1}
-<a n:href="default, $page - 1"> Zpět</a>
+{if $adminPage > 1}
+<a n:href="default, $adminPage - 1"> Zpět</a>
 &nbsp; | &nbsp;
-{/if}{$page} z {$lastPage}
-{if $page < $lastPage}
+{/if}{$adminPage} z {$adminLastPage}
+{if $adminPage < $adminLastPage}
 &nbsp;|&nbsp;
-<a href="default, $page + 1">Další</a>
+<a n:href="default, $adminPage + 1">Další</a>
 {/if}
 </div>
 </section>
