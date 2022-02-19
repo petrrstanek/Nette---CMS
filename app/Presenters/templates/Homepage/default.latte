@@ -1,14 +1,5 @@
 {block content}
-  {define header}
-    {define navigation}
-      <div class="col-6 text-center text-md-end">
-        <div><a class="button__transparent" n:href="Edit:create" >
-          <i class="fas fa-edit me-1" style="font-size: 15px"></i>Nová stránka</a></div></div>
-      <div class="col-6 text-center text-md-start">  <div n:if="$user->isLoggedIn()" class="me-3"><a class="button__transparent" n:href="ManagTags:managTags" style="white-space: nowrap"><i
-                  class="fas fa-tags me-1" style="font-size: 15px"></i>Správa kategorií</a></div></div>
-    {/define}
-{include parent}
-  {/define}
+  
   <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
     {$flash->message}
   </div>
@@ -48,24 +39,18 @@
 {block adminContent}
 <section id="latte-admin-home" class="mx-auto mt-4">
 <div class="container">
+<div class="row">
+<div class="col-md-8">
+</div>
+</div>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>
-        ID
-      </th>
-      <th>
-        Název
-      </th>
-      <th>
-        Obsah
-      </th>
-      <th>
-        Vytvoření/Aktualizace
-      </th>
-      <th>
-      Editace
-      </th>
+      <th>ID</th>
+      <th>Název</th>
+      <th>Obsah</th>
+      <th>Vytvoření/Aktualizace</th>
+      <th>Editace</th>
     </tr>
   </thead>
   <div n:foreach="$layPages as $layPage">
@@ -79,15 +64,28 @@
       <td>{$layPage->createdAt}</td>
       {/ifset}
       <td>
-      <a n:href="Page:showPage $layPage->id"><i class="fa fa-eye"></i></a>
-      <a n:href="Page:editPage $layPage->id" class="pl-3"><i class="fa fa-pen"></i></a>
-      <a n:href="delete!, $layPage->id" class="" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash"></i></a>
-      <a n:href="add!, $layPage->id" class="fav-icon"><i class="fa fa-star"></i></a>
+      <div class="d-flex">
+      <a n:href="Page:showPage $layPage->id"><i class="fa fa-eye "></i></a>
+      <a n:href="Page:editPage $layPage->id" class="px-3"><i class="fa fa-pen"></i></a>
+      <a n:href="delete!, $layPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash" ></i></a>
+      <a n:href="add!, $layPage->id" class="fav-icon" ><i class="fa fa-star fav"></i></a>
+      </div>
+      
       </td>
     </tr>
   </div>
 </div>
 
 </table>
+<div class="pagination pb-5 x-flex">
+{if $page > 1}
+<a n:href="default, $page - 1"> Zpět</a>
+&nbsp; | &nbsp;
+{/if}{$page} z {$lastPage}
+{if $page < $lastPage}
+&nbsp;|&nbsp;
+<a href="default, $page + 1">Další</a>
+{/if}
+</div>
 </section>
 {/block}

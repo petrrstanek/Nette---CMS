@@ -23,7 +23,7 @@ final class HomepagePresenter extends BasePresenter
 	{
 		$pages = $this->model->getOrderedPages();
 		$lastPage = 0;
-		$this->template->layPages = $pages->page($page, 3, $lastPage);
+		$this->template->layPages = $pages->page($page, 8, $lastPage);
 		$this->template->lastPage = $lastPage;
 		$this->template->page = $page;
 	}

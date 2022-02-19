@@ -7688,27 +7688,18 @@ mark,
 /* @import "media";
 @import "close"; */
 /* @import "print";
-
 @import "toasts";
-
 @import "dropdown";
  */
 /* @import "button-group";
 @import "input-group";
 @import "custom-forms";
-
-
-
 @import "breadcrumb";
-
 @import "badge";
 @import "jumbotron";
 @import "alert";
 @import "progress";
-
 @import "list-group";
-
-
 @import "modal";
 @import "tooltip";
 @import "popover";
@@ -7716,15 +7707,23 @@ mark,
 @import "spinners"; */
 body {
   color: #333;
-  background-color: #eceef0;
-  height: calc(100%);
-  overflow: hidden;
+  background-color: #eceef0 !important;
+  height: 100vh;
+  /* overflow: hidden; */
 }
 
 .fix {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.fav {
+  color: blueviolet !important;
+}
+
+.fav .active {
+  color: #d00 !important;
 }
 
 a {
@@ -7865,6 +7864,7 @@ select[readonly] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 100%;
 }
 
 .card {
@@ -7886,6 +7886,29 @@ select[readonly] {
 
 .fav-icon .active {
   color: #e2c822 !important;
+}
+
+.trash-tag {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: black;
+}
+
+.trash-tag:hover {
+  color: red !important;
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+.fav-icon {
+  color: black;
+}
+
+.fav-icon:hover {
+  color: yellow;
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
 }
 
 .multi-menu {
@@ -7956,6 +7979,7 @@ textarea.tinyMCE {
   right: 3px;
   top: 8px;
   background-color: red;
+  color: white;
 }
 
 .button__secondary {
@@ -8022,9 +8046,19 @@ textarea.tinyMCE {
   padding: 1.5rem;
 }
 
+#latte-edit .tags:hover {
+  opacity: 0.25;
+  background-color: red;
+  color: white;
+}
+
 #latte-default {
   overflow: hidden;
   margin: 0 auto;
+}
+
+#latte-default a {
+  color: black !important;
 }
 
 #latte-default .post-inner h1,
@@ -8129,6 +8163,10 @@ textarea.tinyMCE {
   }
 }
 
+#latte-manag-tags a {
+  color: black;
+}
+
 #latte-manag-tags .container-buttons {
   margin-top: 15px;
 }
@@ -8146,6 +8184,27 @@ a:hover, a:focus {
           box-shadow: none;
 }
 
+@media only screen and (max-width: 768px) {
+  #sidebar {
+    display: none;
+  }
+  #header-mobile {
+    width: 100%;
+    height: 50px;
+    background-color: #0d6efd;
+  }
+  #header-mobile i {
+    font-size: 30px;
+    color: white;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #header-mobile {
+    display: none;
+  }
+}
+
 button {
   -webkit-transition: 0.3s all ease;
   transition: 0.3s all ease;
@@ -8160,7 +8219,7 @@ button:hover, button:focus {
 
 .wrapper {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 #sidebar {
@@ -8171,13 +8230,6 @@ button:hover, button:focus {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   position: relative;
-  /* @include media-breakpoint-down(sm) {
-		margin-left: -270px;
-
-		&.active {
-			margin-left: 0;
-		}
-	} */
 }
 
 #sidebar .h6 {
@@ -8185,7 +8237,7 @@ button:hover, button:focus {
 }
 
 #sidebar.active {
-  margin-left: -210px;
+  margin-left: -270px;
 }
 
 #sidebar h1 {

@@ -10,11 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-{if $user->isLoggedIn()}
-
-{else}
-
-{/if}
 {block navbar}
 <nav class="navbar navbar-expand-md navbar-light bg-white p-3 p-lg-0">
 		<div class="container">
@@ -47,6 +42,19 @@
 
 {if $user->isLoggedIn()}
 {include errorBox}
+<section id="header-mobile">
+<div class="xy-flex">
+  <div class="icon">
+    <a n:href="Homepage:"><i class="fa fa-home"></i></a>
+  </div>
+  <div class="icon px-5">
+    <a n:href="Page:createPage"><i class="fa fa-pencil"></i></a>
+  </div>
+  <div class="icon">
+    <a n:href="Page:ManagTags"><i class="fa fa-tag"></i></a>
+  </div>
+</div>
+</section>
 <div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="custom-menu">
@@ -70,13 +78,12 @@
 						<a n:href="Tags:ManagTags"><span class="fa fa-tag mr-3"></span> Přehled Kategorií</a>
 					</li>
 				</ul>
-
 				<div class="footer">
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;<script>
 							document.write(new Date().getFullYear());
-						</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by
+						</script> Všechny práva vyhrazena | Šablonu vytvořil <i class="icon-heart" aria-hidden="true"></i>
 						<a href="https://colorlib.com" target="_blank">Colorlib.com</a>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					</p>
@@ -85,8 +92,13 @@
 		</nav>
     {include adminContent}
 	</div>
-    
     {else}
+    {block header}
+      <div class="col-6 text-center text-md-end">
+        <div><a class="button__transparent" n:href="Homepage:" >
+          &larr; Zpět</a></div></div>
+
+  {/block}
     {include content}
     {/if}
 {block scripts}

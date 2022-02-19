@@ -1,27 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
 {block content}
-  {define header}
-    {define navigation}
-      <div class="col-6 text-center text-md-end"><a n:href="Homepage:default" class="button__transparent" style="white-space: nowrap; padding-right: 25px">
-          &larr; Dashboard</a></div>
-      <div class="col-6 text-center text-md-start"><a n:href="Edit:edit $post->id" class="button__transparent" style="white-space: nowrap">
-          Upravit stránku
-        </a></div>
-    {/define}
-    {include parent}
-  {/define}
   <section id="latte-show" class="mx-auto">
     <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
       {$flash->message}
+    </div>
+    <div class="row">
+        <div class="col-md-12 p-3 d-flex justify-content-center">
+          <a n:href="Homepage:" class="button__transparent">&larr; Zpět</a>
+      </div>
     </div>
     <h1 n:block="title" class="pt-4 text-center">
       {$page->title} - Náhled
@@ -32,6 +17,7 @@
           {$tagActive->tag->name}
         </div>
       </div>
+    </div>
     <div class="container post-show">
       <div class="date-show">
         {$page->createdAt|noescape}
@@ -52,7 +38,7 @@
       {$page->title} - Náhled
     </h1>
     <i class="fa-solid fa-square-pen"></i>
-    <a n:href="Page:editPage $page->id" class="button button__sumbit" style=" position: absolute; right: 40px"> <i class="fa fa-pencil" style="color: white;"></i></a>
+    <a n:href="Page:editPage $page->id" class="button button__sumbit" style=" position: absolute; right: 40px; top: 233px"> <i class="fa fa-pencil" style="color: white;"></i></a>
     <div class="container-tags py-4">
       <div class="fix">
         <div class="tags" n:foreach="$tagsActive as $tagActive">
@@ -62,16 +48,14 @@
     </div>
     <div class="container post-show">
       <div class="date-show">
-      {ifset $page->updatedAt}
-        {$page->updatedAt|noescape}
-      {elseifset $page->createdAt}
-      {$page->createdAt|noescape}
-      {/ifset}
+          {ifset $page->updatedAt}
+            {$page->updatedAt|noescape}
+          {elseifset $page->createdAt}
+            {$page->createdAt|noescape}
+          {/ifset}
       </div>
       {$page->content|noescape}
     </div>
   </section>
 </div>
 {/block}
-</body>
-</html>
