@@ -62,7 +62,11 @@
     </div>
     <div class="container post-show">
       <div class="date-show">
+      {ifset $page->updatedAt}
         {$page->updatedAt|noescape}
+      {elseifset $page->createdAt}
+      {$page->createdAt|noescape}
+      {/ifset}
       </div>
       {$page->content|noescape}
     </div>

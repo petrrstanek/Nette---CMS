@@ -6,32 +6,15 @@ collapse.addEventListener('click', () => {
 
 const editor = new FroalaEditor('#editor');
 
-let today = new Date();
-const months = [
-	'Ledna',
-	'Února',
-	'Března',
-	'Dubna',
-	'Května',
-	'Června',
-	'Července',
-	'Srpna',
-	'Září',
-	'Října',
-	'Listopadu',
-	'Prosince',
-];
-let date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
-let minutes = today.getMinutes();
-let sec = today.getSeconds();
-if (minutes < 10) {
-	minutes = '0' + minutes;
-}
-if (sec < 10) {
-	sec = '0' + sec;
-}
-let time = today.getHours() + ':' + minutes + ':' + sec;
-let dateTime = `${date} - ${time}`;
+const favIcons = document.querySelectorAll('.fav-icon');
+
+favIcons.forEach(favIcon => {
+	console.log(favIcon)
+	favIcon.addEventListener('click', function () {
+		console.log('click')
+	})
+});
+
 
 //Zakázat vstup pro datum
 const field = document.getElementById('time');

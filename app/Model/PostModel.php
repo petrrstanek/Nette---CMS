@@ -25,20 +25,6 @@ final class PostModel
 		return $this->database->table('pages_tags')->fetchPairs('id', 'name');
 	}
 
-	/* public function fetchRelatedActive(): array
-	{
-		return $this->database->table('tags')->fetchPairs('name', 'name');
-	} */
-
-	/* public function getRelatedActive($postId)
-	{
-		return $this->database
-			->table('posts')
-			->get($postId)
-			->related('activetags')
-			->fetchPairs('name', 'name');
-	} */
-
 	public function getRelatedTags()
 	{
 		return $this->database->table('pages_tags');

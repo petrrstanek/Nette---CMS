@@ -18,9 +18,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <div n:foreach="$layNavPosts as $layNavPost">
+        <div n:foreach="$favPages as $favPage">
           <li class="nav-item">
-            <a n:href="Page:showPage $layNavPost->id" class="nav-link button__transparent mx-sm-0 mx-auto">{$layNavPost->title}</a>
+            <a n:href="Page:showPage $favPage->id" class="nav-link button__transparent mx-sm-0 mx-auto">{$favPage->title}</a>
           </li>
         </div>
         {if $user->isLoggedIn()}

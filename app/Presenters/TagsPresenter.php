@@ -20,18 +20,14 @@ class TagsPresenter extends BasePresenter
 	protected function createComponentControlTagForm(): Form
 	{
 		$formTag = new Form();
-
 		$formTag->addText('name', 'Název Kategorie:')->setRequired();
-
 		$formTag->addSubmit('send', 'Aktualizovat')->setHtmlAttribute('class', 'button_submit');
-
-
 		return $formTag;
 	}
 
 	public function actionEditTag(int $tagId): void
 	{
-		$tag = $this->getTags()->get($tagId);
+		$tag = $this->model->getTags()->get($tagId);
 		$formTag = $this->getComponent('controlTagForm');
 		$formTag->setDefaults($tag->toArray());
 		$formTag->onSuccess[] = [$this, 'editTagProcess'];
@@ -60,11 +56,6 @@ class TagsPresenter extends BasePresenter
 		$tags = $this->model->getTags()->select('name');
 		$exist = false;
 
-		//__UPDATE - MODE__//
-		if ($tagId) {
-			
-		} else {
-			//__INSERT - MODE__//
 			foreach ($tags as $tag) {
 				if ($tag->name == $values->name) {
 					$this->flashMessage('Kategorie: ' . "$values->name" . ' již existuje');
@@ -73,7 +64,6 @@ class TagsPresenter extends BasePresenter
 					break;
 				}
 			}
-
 			if ($exist === false) {
 				$this->model->getTags()->insert([
 					'name' => $values->name,
@@ -82,11 +72,12 @@ class TagsPresenter extends BasePresenter
 				$this->redirect('Tags:ManagTags');
 			}
 		}
-	}
+
 
 	function handleDelete($tagId)
 	{
-		try {
+		try 
+		{
 			$tagId = $this->getParameter('tagId');
 			$tagToDelete = $this->model
 				->getTags()
@@ -94,7 +85,9 @@ class TagsPresenter extends BasePresenter
 				->delete();
 			$this->flashMessage('Kategorie byla smazána.');
 			$this->redirect('Tags:ManagTags');
-		} catch (Nette\Database\ForeignKeyConstraintViolationException $e) {
+		} 
+		catch (Nette\Database\ForeignKeyConstraintViolationException $e) 
+		{
 			$this->flashMessage('Nelze odstranit');
 			$this->redirect('this');
 		}
@@ -109,7 +102,6 @@ class TagsPresenter extends BasePresenter
 	public function renderEditTag(int $tagId): void
 	{
 		$tag = $this->model->getTags()->get($tagId);
-
 		$this->getComponent('controlTagForm')->setDefaults($tag->toArray());
 	}
 }

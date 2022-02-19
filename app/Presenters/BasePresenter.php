@@ -21,6 +21,6 @@ abstract class BasePresenter extends Presenter
 	{
 		parent::beforeRender();
 
-		$this->template->layNavPosts = $this->model->getOrderedPages()->limit(3);
+		$this->template->favPages = $this->model->getPages()->where('inMenu', 1);
 	}
 }

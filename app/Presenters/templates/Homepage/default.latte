@@ -73,15 +73,16 @@
       <td>{$layPage->id} </td>
       <td>{$layPage->title}</td>
       <td>{$layPage->content|truncate:100|noescape}</td>
-      {ifset $layPage->updatedAt }
+      {ifset $layPage->updatedAt}
       <td>{$layPage->updatedAt}</td>
       {elseifset $layPage->createdAt}
       <td>{$layPage->createdAt}</td>
       {/ifset}
       <td>
       <a n:href="Page:showPage $layPage->id"><i class="fa-solid fa-eye"></i></a>
-      <a n:href="Page:editPage $layPage->id" class="px-3"><i class="fa-thin fa-pen"></i></a>
-      <a href="#">Delete</a>
+      <a n:href="Page:editPage $layPage->id" class="pl-3"><i class="fa-thin fa-pen"></i></a>
+      <a n:href="delete!, $layPage->id" class="" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash"></i></a>
+      <a n:href="add!, $layPage->id" class="fav-icon"><i class="fa fa-star"></i></a>
       </td>
     </tr>
   </div>

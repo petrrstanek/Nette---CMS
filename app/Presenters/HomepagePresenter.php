@@ -21,13 +21,36 @@ final class HomepagePresenter extends BasePresenter
 
 	public function renderDefault(int $page = 1): void
 	{
-		$posts = $this->model->getOrderedPages();
+		$pages = $this->model->getOrderedPages();
 		$lastPage = 0;
-		$this->template->layPages = $posts->page($page, 3, $lastPage);
-		$this->template->page = $page;
+		$this->template->layPages = $pages->page($page, 3, $lastPage);
 		$this->template->lastPage = $lastPage;
 		$test = $this->model->getPages()->select('id');
 		$size = $test->count('*');
 		$this->template->relatedTags = $test;
+	}
+
+	public function handleDelete(int $pageId)
+	{
+		$page = $this->model->getPages()->get($pageId);
+		
+		$page->related('pages_tags')->delete();
+		$page->delete();
+	}
+
+	public function handleAdd(int $pageId)
+	{
+		$page = $this->model->getPages()->get($pageId);
+		bdump($page->inMenu);
+		if($page->inMenu == 0){
+			$page->update([
+				'inMenu' => 1
+			]);
+		} else{
+			$page->update([
+				'inMenu' => 0
+			]);
+		}
+		
 	}
 }

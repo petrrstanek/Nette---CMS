@@ -25,11 +25,11 @@ final class PagePresenter extends BasePresenter
 		if(!in_array($this->getAction(), ['createPage', 'editPage'])){
 			$this->error();
 		}
+
 		$pageForm = new Form();
 		$pageId = $this->getParameter('pageId');
 		$pageForm->addText('title', 'Titulek:')->setRequired();
 
-		//__UPDATE__-__MODE__ //
 		if (!$pageId) {
 			$fetchedTags = $this->model->fetchTags();
 			$pageForm->addSelect('tags', 'Kategorie: ', $fetchedTags);
@@ -92,7 +92,6 @@ final class PagePresenter extends BasePresenter
 	public function actionShowPage(int $pageId): void
 	{
 		$page = $this->model->getPages()->get($pageId);
-
 		$fkPageIds = $this->model->getRelatedTags()->select('page_id');
 
 		foreach ($fkPageIds as $fkPageId) {
@@ -110,23 +109,21 @@ final class PagePresenter extends BasePresenter
 	public function renderShowPage(int $pageId): void
 	{
 		$page = $this->model->getPages()->get($pageId);
-
+		$this->template->page = $page;
 		if (!$page) {
 			$this->error('Stránka nebyla nalezena.');
 		}
-		$this->template->page = $page;
-
+		
 		$tags = $this->model->getTags();
 		$pageId = $this->getParameter('pageId');
 		
 		$allTags = [];
 		foreach ($tags as $tag) {
 			$postTags = $tag->related('pages_tags')->where('page_id', $pageId);
-			
 			foreach ($postTags as $postTag) {
-			
 				$allTags[] = $postTag;
 			}
+
 			$this->template->tagsActive = $allTags;
 		}
 	}
@@ -143,6 +140,7 @@ final class PagePresenter extends BasePresenter
 			foreach ($postTags as $postTag) {
 				$allTags[] = $postTag;
 			}
+			
 			$this->template->tagsActive = $allTags;
 		}
 
@@ -152,7 +150,6 @@ final class PagePresenter extends BasePresenter
 	protected function createComponentAddTagForm(): Form
 	{
 		$form = new Form();
-
 		$pageId = $this->getParameter('pageId');
 
 		/* $activeId = $this->model->getPages()->get($pageId);
@@ -180,16 +177,13 @@ final class PagePresenter extends BasePresenter
 		$form
 			->addSubmit('send', 'Přidat Kategorii')
 			->setHtmlAttribute('class', 'button__submit');
-
 		return $form;
 	}
 
-	public function actionaddTagPage(int $pageId): void
+	public function actionAddTagPage(int $pageId): void
 	{
 		$page = $this->model->getPages()->get($pageId);
-
 		$form = $this->getComponent('addTagForm')->setDefaults($page->toArray());
-
 		$form->onSuccess[] = [$this, 'addTagFormSucceeded'];
 	}
 
@@ -202,7 +196,9 @@ final class PagePresenter extends BasePresenter
 				'page_id' => $pageId,
 				'tag_id' => $values->tags,
 			]);
-		} catch (Nette\Database\UniqueConstraintViolationException $e) {
+		} 
+		catch (Nette\Database\UniqueConstraintViolationException $e) 
+		{
 			$this->flashMessage('Nelze přidat, protože příspěvěk již obsahuje tuto kategorii');
 			$this->redirect('this');
 		}
@@ -215,5 +211,24 @@ final class PagePresenter extends BasePresenter
 	{
 		$page = $this->model->getPages()->get($pageId);
 		$this->template->page = $page;
+	}
+
+	public function handleDelete(int $tagId)
+	{
+	$pageId = $this->getParameter('pageId');
+	$tags = $this->model->getRelatedTags()->where('page_id', $pageId);
+	$size = $tags->count('*');
+	foreach($tags as $tag){
+		if($tag->tag_id == $tagId){
+			if($size > 1){
+				$tag->delete();
+				$this->flashMessage('Kategorie byla odstraněna');
+				$this->redirect('this');
+			}else{
+				$this->flashMessage('Nelze odstranit, příspěvek musí obsahovat min. 1. kategorii');
+				$this->redirect('this');
+			}
+		} 
+	}
 	}
 }

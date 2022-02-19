@@ -33,9 +33,11 @@
 <section id="latte-edit">
 <div class="container-tags py-4">
   <div class="fix">
-    <div class="tags" n:foreach="$tagsActive as $tagActive">
-      <a href="#">{$tagActive->tag->name}</a>
-    </div>
+    <a n:href="delete!, $tagActive->tag->id" class="tags" n:foreach="$tagsActive as $tagActive">
+      {$tagActive->tag->name}
+      
+    </a>
+   
     <a n:href="Page:addTagPage $page->id">&plus;</a>
   </div>
 </div>
