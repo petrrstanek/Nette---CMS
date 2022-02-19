@@ -2,69 +2,89 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>{ifset title}{include title|stripHtml} | {/ifset}CMS Ed - Nette</title>
   <link rel="stylesheet" href="{$basePath}/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+{if $user->isLoggedIn()}
+
+{else}
+
+{/if}
 {block navbar}
 <nav class="navbar navbar-expand-md navbar-light bg-white p-3 p-lg-0">
-  <div class="container">
-    <a class="navbar-brand" n:href="Homepage:">CMS - Ed</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <div n:foreach="$favPages as $favPage">
-          <li class="nav-item">
-            <a n:href="Page:showPage $favPage->id" class="nav-link button__transparent mx-sm-0 mx-auto">{$favPage->title}</a>
-          </li>
-        </div>
-        {if $user->isLoggedIn()}
-          <li class="nav-item"><a class="nav-link button__transparent" n:href="Sign:out"><i class="fas fa-sign-out-alt sign"></i>
-              Odhlásit</a></li>
-        {else}
-          <li class="nav-item"><a class="nav-link button__transparent" n:href="Sign:in"><i class="fas fa-sign-out-alt sign"></i>
-              Přihlásit</a></li>
-        {/if}
-      </ul>
-    </div>
-  </div>
-</nav>
+		<div class="container">
+			<a class="navbar-brand" n:href="Homepage:">CMS - Ed</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					{if $user->isLoggedIn()}
+          <div n:foreach="$favPages as $favPage">
+						<li class="nav-item">
+							<a n:href="Page:showPage $favPage->id"
+								class="nav-link button__transparent mx-sm-0 mx-auto">{$favPage->title}</a>
+						</li>
+					</div>
+					<li class="nav-item"><a class="nav-link button__transparent" n:href="Sign:out"><i
+								class="fas fa-sign-out-alt sign"></i>
+							Odhlásit</a></li>
+					{else}
+					<li class="nav-item"><a class="nav-link button__transparent" n:href="Sign:in"><i
+								class="fas fa-sign-out-alt sign"></i>
+							Přihlásit</a></li>
+					{/if}
+				</ul>
+			</div>
+		</div>
+	</nav>
 {/block}
 
 {if $user->isLoggedIn()}
 {include errorBox}
 <div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
-				<div class="custom-menu">
-					<button type="button" id="sidebarCollapse" class="btn btn-primary">
-						<i class="fa fa-bars"></i>
-						<span class="sr-only">Toggle Menu</span>
-					</button>
+		<nav id="sidebar">
+			<div class="custom-menu">
+				<button type="button" id="sidebarCollapse" class="btn btn-primary">
+					<i class="fa fa-bars"></i>
+					<span class="sr-only">Toggle Menu</span>
+				</button>
+			</div>
+			<div class="p-4">
+				<h1>
+					<a n:href="Homepage:" class="logo" style="color: white!important">CMS - Ed <span>Editor</span></a>
+				</h1>
+				<ul class="list-unstyled components mb-5">
+					<li class="active">
+						<a n:href="Homepage:"><span class="fa fa-home mr-3"></span> Přehled Stránek</a>
+					</li>
+					<li>
+						<a n:href="Page:createPage"><span class="fa fa-pencil mr-3"></span> Nová Stránka</a>
+					</li>
+					<li>
+						<a n:href="Tags:ManagTags"><span class="fa fa-tag mr-3"></span> Přehled Kategorií</a>
+					</li>
+				</ul>
+
+				<div class="footer">
+					<p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;<script>
+							document.write(new Date().getFullYear());
+						</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by
+						<a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
 				</div>
-				<div class="p-4">
-					<h1>
-						<a n:href="Homepage:" class="logo" style="color: white!important">CMS - Ed <span>Editor</span></a>
-					</h1>
-					<ul class="list-unstyled components mb-5">
-						<li class="active">
-							<a n:href="Homepage:"><span class="fa fa-home mr-3"></span> Přehled Stránek</a>
-						</li>
-						<li>
-							<a n:href="Page:createPage"><span class="fa fa-pencil mr-3"></span> Nová Stránka</a>
-						</li>
-						<li>
-							<a n:href="Tags:ManagTags"><span class="fa fa-tag mr-3"></span> Přehled Kategorií</a>
-						</li>
-					</ul>
-				</div>
-			</nav>
-      {include adminContent} 
-		</div>
+			</div>
+		</nav>
+    {include adminContent}
+	</div>
     
     {else}
     {include content}
@@ -73,7 +93,11 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
   <script src="https://kit.fontawesome.com/ac27657f07.js" crossorigin="anonymous"></script>
   <script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="{$basePath}/js/script.js"></script>
+  <script src="{$basePath}/js/jquery.min.js"></script>
+	<script src="{$basePath}/js/popper.js"></script>
+	<script src="{$basePath}/js/bootstrap.min.js"></script>
 {/block}
 </body>
 </html>

@@ -79,8 +79,8 @@
       <td>{$layPage->createdAt}</td>
       {/ifset}
       <td>
-      <a n:href="Page:showPage $layPage->id"><i class="fa-solid fa-eye"></i></a>
-      <a n:href="Page:editPage $layPage->id" class="pl-3"><i class="fa-thin fa-pen"></i></a>
+      <a n:href="Page:showPage $layPage->id"><i class="fa fa-eye"></i></a>
+      <a n:href="Page:editPage $layPage->id" class="pl-3"><i class="fa fa-pen"></i></a>
       <a n:href="delete!, $layPage->id" class="" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash"></i></a>
       <a n:href="add!, $layPage->id" class="fav-icon"><i class="fa fa-star"></i></a>
       </td>

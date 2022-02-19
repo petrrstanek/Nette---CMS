@@ -25,15 +25,12 @@ final class HomepagePresenter extends BasePresenter
 		$lastPage = 0;
 		$this->template->layPages = $pages->page($page, 3, $lastPage);
 		$this->template->lastPage = $lastPage;
-		$test = $this->model->getPages()->select('id');
-		$size = $test->count('*');
-		$this->template->relatedTags = $test;
+		$this->template->page = $page;
 	}
 
 	public function handleDelete(int $pageId)
 	{
 		$page = $this->model->getPages()->get($pageId);
-		
 		$page->related('pages_tags')->delete();
 		$page->delete();
 	}
@@ -51,6 +48,5 @@ final class HomepagePresenter extends BasePresenter
 				'inMenu' => 0
 			]);
 		}
-		
 	}
 }
