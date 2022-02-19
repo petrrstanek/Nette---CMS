@@ -152,28 +152,11 @@ final class PagePresenter extends BasePresenter
 		$form = new Form();
 		$pageId = $this->getParameter('pageId');
 
-		/* $activeId = $this->model->getPages()->get($pageId);
-
-		$tags = $activeId->related('pages_tags')->fetchPairs('id', 'id');
-
-		$tags = $this->model->getTags(); */
-
-		/* $allTags = [];
-		foreach ($tags as $tag) {
-			$postTags = $tag->related('pages_tags');
-
-			foreach ($postTags as $postTag) {
-				$allTags[] = $postTag->tag->name;
-			}
-		} */
-
 		$form
 			->addSelect('tags', 'Přidat Kategori:', $this->model->fetchTags())
 			->setHtmlAttribute('id', 'mar')
 			->setRequired();
-
-		/* $form->addRadioList('rTags', 'Odebrat Kategorii:', $allTags)->setHtmlAttribute('class', 'selectButtons'); */
-
+			
 		$form
 			->addSubmit('send', 'Přidat Kategorii')
 			->setHtmlAttribute('class', 'button__submit');

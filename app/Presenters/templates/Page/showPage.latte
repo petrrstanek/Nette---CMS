@@ -26,6 +26,11 @@
     </div>
   </section>
 {/block}
+{block footer}
+		<footer>
+		Copyright &copy; 2022 CMS - Ed
+		</footer>
+		{/block}
 {block errorBox}
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
       {$flash->message}

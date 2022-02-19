@@ -93,13 +93,8 @@
     {include adminContent}
 	</div>
     {else}
-    {block header}
-      <div class="col-6 text-center text-md-end">
-        <div><a class="button__transparent" n:href="Homepage:" >
-          &larr; Zpět</a></div></div>
-
-  {/block}
     {include content}
+		{include footer}
     {/if}
 {block scripts}
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>

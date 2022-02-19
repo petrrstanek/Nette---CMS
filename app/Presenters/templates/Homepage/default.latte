@@ -34,6 +34,11 @@
     </div>
   </section>
 {/block}
+{block footer}
+		<footer>
+		Copyright &copy; 2022 CMS - Ed
+		</footer>
+		{/block}
 {block errorBox}
 {/block}
 {block adminContent}
@@ -65,9 +70,9 @@
       {/ifset}
       <td>
       <div class="d-flex">
-      <a n:href="Page:showPage $layPage->id"><i class="fa fa-eye "></i></a>
-      <a n:href="Page:editPage $layPage->id" class="px-3"><i class="fa fa-pen"></i></a>
-      <a n:href="delete!, $layPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash" ></i></a>
+      <a n:href="Page:showPage $layPage->id"><i class="fa fa-eye preview-icon"></i></a>
+      <a n:href="Page:editPage $layPage->id" class="px-3"><i class="fa fa-pen edit-icon"></i></a>
+      <a n:href="delete!, $layPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash trash-icon" ></i></a>
       <a n:href="add!, $layPage->id" class="fav-icon" ><i class="fa fa-star fav"></i></a>
       </div>
       
