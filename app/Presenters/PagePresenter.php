@@ -20,59 +20,63 @@ final class PagePresenter extends BasePresenter
 		$this->model = $model;
 	}
 
-	protected function createComponentAddPageForm(): Form
+	protected function createComponentPageForm(): Form
 	{
+		if(!in_array($this->getAction(), ['createPage', 'editPage'])){
+			$this->error();
+		}
 		$pageForm = new Form();
-
 		$pageId = $this->getParameter('pageId');
-
 		$pageForm->addText('title', 'Titulek:')->setRequired();
 
 		//__UPDATE__-__MODE__ //
-		if ($pageId) {
-
-			$pageForm
-				->addTextArea('content', 'Obsah:')
-				->setHtmlAttribute('id', 'editor')
-				->setRequired();
-
-			$pageForm
-				->addSubmit('send', 'Aktualizovat')
-				->setHtmlAttribute('class', 'button__submit')
-				->setValidationScope([$pageForm['content'], $pageForm['title']])->onClick[] = [$this, 'pageFormSucceeded'];
-		} else {
-			//__INSERT__MODE__//
+		if (!$pageId) {
 			$fetchedTags = $this->model->fetchTags();
 			$pageForm->addSelect('tags', 'Kategorie: ', $fetchedTags);
+		} 
 
-			$pageForm
+		$pageForm
 				->addTextArea('content', 'Obsah:')
 				->setHtmlAttribute('id', 'editor')
 				->setRequired();
 
-			$pageForm->addSubmit('send', 'Uložit');
-			$pageForm->onSuccess[] = [$this, 'pageFormSucceeded'];
-		}
+		$pageForm
+				->addSubmit('send', 'Aktualizovat')
+				->setHtmlAttribute('class', 'button__submit');
+
 		return $pageForm;
 	}
 
-	public function pageFormSucceeded(\stdClass $values): void
+	public function actionCreatePage()
+	{
+			$pageForm = $this->getComponent('pageForm');
+			$pageForm->onSuccess[] = [$this, 'addPageFormProcess'];
+	}
+
+	public function actionEditPage(int $pageId): void
+	{
+		$page = $this->model->getPages()->get($pageId);
+		$pageForm = $this->getComponent('pageForm');
+		$pageForm->setDefaults($page->toArray());
+		$pageForm->onSuccess[] = [$this,'editPageFormProcess'];
+	}
+
+	public function editPageFormProcess(\stdClass $values)
 	{
 		$pageId = $this->getParameter('pageId');
-		bdump($pageId);
-		//__UPDATE__MODE__
-		if ($pageId) {
-			$page = $this->model->getPages()->get($pageId);
-			$page->update([
-				'updatedAt' => new DateTime(),
-				'title' => $values->title,
-				'content' => $values->content,
-			]);
-			$this->flashMessage('Příspěvek byl aktualizován');
-			$this->redirect('this');
-		} else {
-			//__INSERT__MODE__
+		$page = $this->model->getPages()->get($pageId);
+		$page->update([
+			'updatedAt' => new DateTime(),
+			'title' => $values->title,
+			'content' => $values->content,
+		]);
+		$this->flashMessage('Příspěvek byl aktualizován');
+		$this->redirect('this');
+	}
 
+	public function addPageFormProcess(\stdClass $values): void
+	{
+			$pageId = $this->getParameter('pageId');
 			$page = $this->model->getPages()->insert([
 				'title' => $values->title,
 				'content' => $values->content,
@@ -83,17 +87,11 @@ final class PagePresenter extends BasePresenter
 			]);
 			$this->flashMessage('Aktualizace proběhla úspěšně.', 'success');
 			$this->redirect('Page:showPage', $page->id);
-		}
 	}
 
-	public function renderShowPage(int $pageId): void
+	public function actionShowPage(int $pageId): void
 	{
 		$page = $this->model->getPages()->get($pageId);
-
-		if (!$page) {
-			$this->error('Stránka nebyla nalezena.');
-		}
-		$this->template->page = $page;
 
 		$fkPageIds = $this->model->getRelatedTags()->select('page_id');
 
@@ -107,6 +105,16 @@ final class PagePresenter extends BasePresenter
 					]);
 			}
 		}
+	}
+
+	public function renderShowPage(int $pageId): void
+	{
+		$page = $this->model->getPages()->get($pageId);
+
+		if (!$page) {
+			$this->error('Stránka nebyla nalezena.');
+		}
+		$this->template->page = $page;
 
 		$tags = $this->model->getTags();
 		$pageId = $this->getParameter('pageId');
@@ -126,21 +134,19 @@ final class PagePresenter extends BasePresenter
 	public function renderEditPage(int $pageId): void
 	{
 		$page = $this->model->getPages()->get($pageId);
-		$this->template->page = $page;
-		$this->getComponent('addPageForm')->setDefaults($page->toArray());
-
+		$pageId = $this->getParameter('pageId');
 		$tags = $this->model->getTags();
 
-		$pageId = $this->getParameter('pageId');
 		$allTags = [];
 		foreach ($tags as $tag) {
 			$postTags = $tag->related('pages_tags')->where('page_id', $pageId);
 			foreach ($postTags as $postTag) {
 				$allTags[] = $postTag;
 			}
-
 			$this->template->tagsActive = $allTags;
 		}
+
+		$this->template->page = $page;
 	}
 
 	protected function createComponentAddTagForm(): Form
@@ -149,20 +155,20 @@ final class PagePresenter extends BasePresenter
 
 		$pageId = $this->getParameter('pageId');
 
-		$activeId = $this->model->getPages()->get($pageId);
+		/* $activeId = $this->model->getPages()->get($pageId);
 
 		$tags = $activeId->related('pages_tags')->fetchPairs('id', 'id');
 
-		$tags = $this->model->getTags();
+		$tags = $this->model->getTags(); */
 
-		$allTags = [];
+		/* $allTags = [];
 		foreach ($tags as $tag) {
 			$postTags = $tag->related('pages_tags');
 
 			foreach ($postTags as $postTag) {
 				$allTags[] = $postTag->tag->name;
 			}
-		}
+		} */
 
 		$form
 			->addSelect('tags', 'Přidat Kategori:', $this->model->fetchTags())
@@ -174,10 +180,17 @@ final class PagePresenter extends BasePresenter
 		$form
 			->addSubmit('send', 'Přidat Kategorii')
 			->setHtmlAttribute('class', 'button__submit');
-			
-			$form->onSuccess[] = [$this, 'addTagFormSucceeded'];
 
 		return $form;
+	}
+
+	public function actionaddTagPage(int $pageId): void
+	{
+		$page = $this->model->getPages()->get($pageId);
+
+		$form = $this->getComponent('addTagForm')->setDefaults($page->toArray());
+
+		$form->onSuccess[] = [$this, 'addTagFormSucceeded'];
 	}
 
 	public function addTagFormSucceeded(\stdClass $values): void
@@ -201,9 +214,6 @@ final class PagePresenter extends BasePresenter
 	public function renderAddTagPage(int $pageId)
 	{
 		$page = $this->model->getPages()->get($pageId);
-
-		$this->getComponent('addTagForm')->setDefaults($page->toArray());
-
 		$this->template->page = $page;
 	}
 }

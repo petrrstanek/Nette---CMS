@@ -25,12 +25,36 @@ class TagsPresenter extends BasePresenter
 
 		$formTag->addSubmit('send', 'Aktualizovat')->setHtmlAttribute('class', 'button_submit');
 
-		$formTag->onSuccess[] = [$this, 'controlTagFormProcess'];
 
 		return $formTag;
 	}
 
-	public function controlTagFormProcess(\stdClass $values): void
+	public function actionEditTag(int $tagId): void
+	{
+		$tag = $this->getTags()->get($tagId);
+		$formTag = $this->getComponent('controlTagForm');
+		$formTag->setDefaults($tag->toArray());
+		$formTag->onSuccess[] = [$this, 'editTagProcess'];
+	}
+
+	public function actionCreateTag(): void
+	{
+		$formTag = $this->getComponent('controlTagForm');
+		$formTag->onSuccess[] = [$this, 'createTagProcess'];
+	}
+
+	public function editTagProcess(\stdClass $values): void
+	{
+		$tagId = $this->getParameter('tagId');
+		$tag = $this->model->getTags()->get($tagId);
+			$tag->update([
+				'name' => $values->name,
+			]);
+			$this->flashMessage('Kategorie byla aktualizována.');
+			$this->redirect('Tags:ManagTags');
+	}
+
+	public function createTagProcess(\stdClass $values): void
 	{
 		$tagId = $this->getParameter('tagId');
 		$tags = $this->model->getTags()->select('name');
@@ -38,12 +62,7 @@ class TagsPresenter extends BasePresenter
 
 		//__UPDATE - MODE__//
 		if ($tagId) {
-			$tag = $this->model->getTags()->get($tagId);
-			$tag->update([
-				'name' => $values->name,
-			]);
-			$this->flashMessage('Kategorie byla aktualizována.');
-			$this->redirect('Tags:ManagTags');
+			
 		} else {
 			//__INSERT - MODE__//
 			foreach ($tags as $tag) {
