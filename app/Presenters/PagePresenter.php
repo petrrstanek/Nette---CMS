@@ -215,4 +215,28 @@ final class PagePresenter extends BasePresenter
 		} 
 	}
 	}
+
+	public function handleAdd(int $pageId)
+	{
+		$page = $this->model->getPages()->get($pageId);
+		if($page->inMenu == 0){
+			$page->update([
+				'inMenu' => 1
+			]);
+		} else{
+			$page->update([
+				'inMenu' => 0
+			]);
+		}
+	}
+
+	public function handleDeletePage(int $pageId)
+	{
+		$page = $this->model->getPages()->get($pageId);
+		bdump($page);
+		$page->related('pages_tags')->delete();
+		$page->delete();
+		$this->flashMessage('Stránka byla úspěšně odstraněna.');
+		$this->redirect('Homepage:');
+	}
 }

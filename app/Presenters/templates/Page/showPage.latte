@@ -28,12 +28,13 @@
 {/block}
 {include errorBox}
 {block adminContent}
-<div class="container">
+
   <section id="latte-show" class="mx-auto pos-r">
-    <h1 class="pt-4 text-center">
+  <div class="container">
+   <h1 class="pt-4 text-center">
       {$page->title} - Náhled
     </h1>
-    
+  </div>
     <div class="container-tags py-4">
       <div class="fix">
         <div class="tags" n:foreach="$tagsActive as $tagActive">
@@ -41,19 +42,21 @@
         </div>
       </div>
     </div>
-    <div class="container post-show">
-    <a n:href="Page:editPage $page->id" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
-      <div class="date-show">
-          {ifset $page->updatedAt}
-            {$page->updatedAt|noescape}
-          {elseifset $page->createdAt}
-            {$page->createdAt|noescape}
-          {/ifset}
+    <div class="container">
+      <div class="post-show">
+        <a n:href="Page:editPage $page->id" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
+        <div class="date-show">
+            {ifset $page->updatedAt}
+              {$page->updatedAt|noescape}
+            {elseifset $page->createdAt}
+              {$page->createdAt|noescape}
+            {/ifset}
+        </div>
+        {$page->content|noescape}
       </div>
-      {$page->content|noescape}
     </div>
   {import footer.latte}
   {include footer}
   </section>
-</div>
+
 {/block}

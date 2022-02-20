@@ -23,7 +23,7 @@ final class HomepagePresenter extends BasePresenter
 	{
 		$pages = $this->model->getCreatedPages();
 		$lastPage = 0;//zustava
-	$newPages = $this->model->getCreatedPages();
+		$newPages = $this->model->getCreatedPages();
 		$endPage = 0;
 		
 		
@@ -31,7 +31,6 @@ final class HomepagePresenter extends BasePresenter
 		$this->template->lastPage = $endPage;//zustava
 		$this->template->page = $page;
 		
-	
 		
 		$this->template->userPages = $newPages->page($page, 3, $lastPage);
 		$this->template->endPage = $lastPage;
@@ -48,7 +47,6 @@ final class HomepagePresenter extends BasePresenter
 	public function handleAdd(int $pageId)
 	{
 		$page = $this->model->getPages()->get($pageId);
-		bdump($page->inMenu);
 		if($page->inMenu == 0){
 			$page->update([
 				'inMenu' => 1

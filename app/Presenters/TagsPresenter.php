@@ -88,7 +88,7 @@ class TagsPresenter extends BasePresenter
 		} 
 		catch (Nette\Database\ForeignKeyConstraintViolationException $e) 
 		{
-			$this->flashMessage('Nelze odstranit');
+			$this->flashMessage('Nelze odstranit, protože jeden z příspěvku obsahuje tuto kategorii.');
 			$this->redirect('this');
 		}
 	}

@@ -6,8 +6,8 @@ collapse.addEventListener('click', () => {
 
 const editor = new FroalaEditor('#editor');
 
-const favIcons = document.querySelectorAll('.fav');
-
+const favIcons = document.querySelectorAll('.header-icons');
+console.log(favIcons)
 favIcons.forEach(favIcon => {
 	console.log(favIcon)
 	favIcon.addEventListener('click', function () {

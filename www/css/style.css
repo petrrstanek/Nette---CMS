@@ -1,3 +1,9 @@
+/*!
+ * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -5415,7 +5421,6 @@ a.text-dark:hover, a.text-dark:focus {
   border: 0;
 }
 
-/* @import 'forms'; */
 .nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6380,6 +6385,7 @@ mark,
 
 /* @import "media";
 @import "close"; 
+@import 'forms'; 
 @import 'buttons'; 
 @import "print";
 @import "toasts";
@@ -6855,7 +6861,7 @@ button:hover, button:focus {
 
 #latte-edit .card {
   width: 85%;
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
 }
 
 #latte-edit .tags:hover {
@@ -6968,7 +6974,7 @@ button:hover, button:focus {
   padding: 80px 90px;
   -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
           box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
-  margin-bottom: 30px;
+  margin: 0 auto 20px auto;
 }
 
 #latte-show .date-show {
@@ -6998,6 +7004,10 @@ button:hover, button:focus {
       flex-wrap: wrap;
 }
 
+#latte-admin-home .container-table {
+  overflow: auto;
+}
+
 #latte-manag-tags a {
   color: black;
 }
@@ -7015,16 +7025,19 @@ button:hover, button:focus {
     width: 100%;
   }
   .post-show {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 30px;
-    padding: 70px 50px;
+    width: 95% !important;
+    height: 100% !important;
+    margin-bottom: 30px !important;
+    padding: 70px 5Opx;
   }
 }
 
 @media only screen and (max-width: 768px) {
   #sidebar {
     display: none;
+  }
+  .mobile-view {
+    display: block !important;
   }
   #header-mobile {
     width: 100%;
@@ -7049,7 +7062,7 @@ button:hover, button:focus {
         -ms-flex-pack: center;
             justify-content: center;
     position: absolute;
-    bottom: 0;
+    bottom: -100px;
   }
   .parent {
     min-height: 100vh;
@@ -7060,15 +7073,9 @@ button:hover, button:focus {
   .wrapper {
     display: none !important;
   }
-  .wh-100 {
-    width: 100%;
-  }
 }
 
 @media only screen and (min-width: 768px) {
-  #header-mobile {
-    display: none;
-  }
   .nav-link.button__transparent {
     -webkit-transition: 0.3s;
     transition: 0.3s;
@@ -7079,14 +7086,10 @@ button:hover, button:focus {
   .nav-link.button__transparent:before {
     margin: 0 !important;
   }
-}
-
-@media only screen and (min-width: 768px) {
-  .wh-100 {
-    width: 100%;
-    /* height: 100vh; */
+  .mobile-view {
+    display: none !important;
   }
-  #admin-footer {
+  #admin-footer-mobile {
     display: none;
   }
 }

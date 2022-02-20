@@ -1,5 +1,4 @@
 {block content}
-
   <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
     {$flash->message}
   </div>
@@ -44,10 +43,8 @@
 {block adminContent}
 <section id="latte-admin-home" class="mx-auto mt-4 wh-100">
 <div class="container" style="padding: 20px 90px;">
-<div class="row">
-<div class="col-md-8">
-</div>
-</div>
+
+<div class="container-table">
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -62,7 +59,7 @@
     <tr>
       <td>{$layPage->id} </td>
       <td>{$layPage->title}</td>
-      <td>{$layPage->content|truncate:100|noescape}</td>
+      <td>{$layPage->content|truncate:70|noescape}</td>
       {ifset $layPage->updatedAt}
       <td>{$layPage->updatedAt}</td>
       {elseifset $layPage->createdAt}
@@ -75,12 +72,13 @@
       <a n:href="delete!, $layPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="bi bi-trash-fill trash-icon" ></i></a>
       <a n:href="add!, $layPage->id" class="fav-icon" ><i class="bi bi-star-fill fav"></i></a>
       </div>
-      
       </td>
     </tr>
   </div>
 </div>
 </table>
+</div>
+
 <div class="pagination pb-5 x-flex">
 {if $page > 1}
 <a n:href="default, $page - 1"> Zpět</a>
