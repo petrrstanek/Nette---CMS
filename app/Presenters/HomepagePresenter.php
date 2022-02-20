@@ -27,14 +27,14 @@ final class HomepagePresenter extends BasePresenter
 		$endPage = 0;
 		
 		
-		$this->template->layPages = $pages->page($page, 5, $lastPage);
-		$this->template->lastPage = $lastPage;//zustava
+		$this->template->layPages = $pages->page($page, 5, $endPage);
+		$this->template->lastPage = $endPage;//zustava
 		$this->template->page = $page;
 		
 	
 		
-		$this->template->userPages = $newPages->page($page, 3, $endPage);
-		$this->template->endPage = $endPage;
+		$this->template->userPages = $newPages->page($page, 3, $lastPage);
+		$this->template->endPage = $lastPage;
 		$this->template->paginator = $page;
 	}
 
