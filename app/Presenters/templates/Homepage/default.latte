@@ -43,7 +43,7 @@
 {/block}
 {block adminContent}
 <section id="latte-admin-home" class="mx-auto mt-4 wh-100">
-<div class="container">
+<div class="container" style="padding: 20px 90px;">
 <div class="row">
 <div class="col-md-8">
 </div>
@@ -58,22 +58,22 @@
       <th>Editace</th>
     </tr>
   </thead>
-  <div n:foreach="$layAdminPages as $layAdminPage">
+  <div n:foreach="$layPages as $layPage">
     <tr>
-      <td>{$layAdminPage->id} </td>
-      <td>{$layAdminPage->title}</td>
-      <td>{$layAdminPage->content|truncate:100|noescape}</td>
-      {ifset $layAdminPage->updatedAt}
-      <td>{$layAdminPage->updatedAt}</td>
-      {elseifset $layAdminPage->createdAt}
-      <td>{$layAdminPage->createdAt}</td>
+      <td>{$layPage->id} </td>
+      <td>{$layPage->title}</td>
+      <td>{$layPage->content|truncate:100|noescape}</td>
+      {ifset $layPage->updatedAt}
+      <td>{$layPage->updatedAt}</td>
+      {elseifset $layPage->createdAt}
+      <td>{$layPage->createdAt}</td>
       {/ifset}
       <td>
       <div class="d-flex">
-      <a n:href="Page:showPage $layAdminPage->id"><i class="bi bi-eye-fill preview-icon"></i></a>
-      <a n:href="Page:editPage $layAdminPage->id" class="px-3"><i class="bi bi-pen-fill edit-icon"></i></a>
-      <a n:href="delete!, $layAdminPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="bi bi-trash-fill trash-icon" ></i></a>
-      <a n:href="add!, $layAdminPage->id" class="fav-icon" ><i class="bi bi-star-fill fav"></i></a>
+      <a n:href="Page:showPage $layPage->id"><i class="bi bi-eye-fill preview-icon"></i></a>
+      <a n:href="Page:editPage $layPage->id" class="px-3"><i class="bi bi-pen-fill edit-icon"></i></a>
+      <a n:href="delete!, $layPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="bi bi-trash-fill trash-icon" ></i></a>
+      <a n:href="add!, $layPage->id" class="fav-icon" ><i class="bi bi-star-fill fav"></i></a>
       </div>
       
       </td>
@@ -82,13 +82,13 @@
 </div>
 </table>
 <div class="pagination pb-5 x-flex">
-{if $adminPage > 1}
-<a n:href="default, $adminPage - 1"> Zpět</a>
+{if $page > 1}
+<a n:href="default, $page - 1"> Zpět</a>
 &nbsp; | &nbsp;
-{/if}{$adminPage} z {$adminLastPage}
-{if $adminPage < $adminLastPage}
+{/if}{$page} z {$lastPage}
+{if $page < $lastPage}
 &nbsp;|&nbsp;
-<a n:href="default, $adminPage + 1">Další</a>
+<a n:href="default, $page + 1">Další</a>
 {/if}
 </div>
 </section>

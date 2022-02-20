@@ -26,14 +26,10 @@
     </div>
   </section>
 {/block}
-{block errorBox}
-<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
-  {$flash->message}
-</div>
-{/block}
+{include errorBox}
 {block adminContent}
 <div class="container">
-  <section id="latte-show" class="mx-auto">
+  <section id="latte-show" class="mx-auto pos-r">
     <h1 class="pt-4 text-center">
       {$page->title} - Náhled
     </h1>
@@ -56,6 +52,8 @@
       </div>
       {$page->content|noescape}
     </div>
+  {import footer.latte}
+  {include footer}
   </section>
 </div>
 {/block}

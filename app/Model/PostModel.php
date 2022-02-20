@@ -40,8 +40,8 @@ final class PostModel
 		return $this->database->table('tags');
 	}
 
-	public function getOrderedPages(): Nette\Database\Table\Selection
+	public function getCreatedPages(): Nette\Database\Table\Selection
 	{
-		return $this->database->table('pages')->order('createdAt DESC');
+		return $this->database->table('pages')->order('updatedAt DESC');
 	}
 }

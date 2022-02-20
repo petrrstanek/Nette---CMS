@@ -1,24 +1,12 @@
 {block content}
-{define header}
-  {define navigation}
-    <div class="col-6 text-center text-md-end">
-      <a n:href="Post:show $post->id" class="button__transparent">
-        &larr;&nbsp;Zpět </a>
-    </div>
-    <div class="col-6 text-center text-md-start">
-      <a n:href="Edit:addTag $post->id" class="button__transparent">&plus; Správa Kategorií</a>
-    </div>
-  {/define}
-  {include parent}
-{/define}
 {block errorBox}
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
   {$flash->message}
 </div>
 {/block}
 {block adminContent}
-<div class="container">
-<section id="latte-edit">
+
+<section id="latte-edit" class="pos-r">
   <div class="container-tags py-2">
     <a n:href="Page:addTagPage $page->id">&plus;</a>
     <div class="x-flex flex-wrap">
@@ -41,6 +29,7 @@
       {control pageForm}
     </div>
         </div>
+        {import footer.latte}
+        {include footer}
 </section>
-</div>
 {/block}

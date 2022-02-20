@@ -7708,8 +7708,12 @@ mark,
 body {
   color: #333;
   background-color: #eceef0 !important;
-  height: 100vh;
+  /* height: 100%; */
   /* overflow: hidden; */
+}
+
+.admin-content-mobile {
+  display: none;
 }
 
 a {
@@ -7803,7 +7807,9 @@ select[readonly] {
 }
 
 .wrapper {
+  position: relative;
   width: 100%;
+  min-height: 100vh;
 }
 
 #sidebar {
@@ -7930,6 +7936,31 @@ a[data-toggle='collapse'] {
   #sidebarCollapse span {
     display: none;
   }
+}
+
+a {
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+  color: white;
+}
+
+a:hover, a:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+button {
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+
+button:hover, button:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 .btn.btn-primary {
@@ -8065,25 +8096,6 @@ a[data-toggle='collapse'] {
   white-space: nowrap;
 }
 
-@media only screen and (max-width: 992px) {
-  .card {
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .nav-link.button__transparent {
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-  }
-  .nav-link.button__transparent:hover:before {
-    width: 21%;
-  }
-  .nav-link.button__transparent:before {
-    margin: 0 !important;
-  }
-}
-
 .button {
   padding: 10px;
   background-color: #0d6efd;
@@ -8155,14 +8167,44 @@ a[data-toggle='collapse'] {
   transition: 0.3s;
 }
 
-.wh-100 {
-  width: 100%;
-  height: 100vh;
+@media only screen and (min-width: 768px) {
+  .wh-100 {
+    width: 100%;
+    /* height: 100vh; */
+  }
+  #admin-footer {
+    display: none;
+  }
 }
 
-@media only screen and (min-width: 768px) {
-  footer #admin {
-    display: none;
+@media only screen and (max-width: 768px) {
+  #admin-footer-mobile {
+    height: 80px;
+    width: 100%;
+    background-color: #f7f7f7;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: absolute;
+    bottom: 0;
+  }
+  .parent {
+    min-height: 100vh;
+  }
+  .pos-r {
+    position: relative;
+  }
+  .wrapper {
+    display: none !important;
+  }
+  .wh-100 {
+    width: 100%;
   }
 }
 
@@ -8213,10 +8255,6 @@ a[data-toggle='collapse'] {
   color: yellow !important;
   -webkit-transform: scale(0.98);
           transform: scale(0.98);
-}
-
-#latte-admin-home {
-  height: 100vh;
 }
 
 #latte-default {
@@ -8292,7 +8330,7 @@ a[data-toggle='collapse'] {
 }
 
 #latte-show .post-show {
-  position: relative;
+  /* position: relative; */
   width: 75%;
   height: 100%;
   background-color: #fff;
@@ -8330,15 +8368,6 @@ a[data-toggle='collapse'] {
       flex-wrap: wrap;
 }
 
-@media only screen and (max-width: 992px) {
-  #latte-show .post-show {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 30px;
-    padding: 70px 50px;
-  }
-}
-
 #latte-manag-tags a {
   color: black;
 }
@@ -8347,17 +8376,16 @@ a[data-toggle='collapse'] {
   margin-top: 15px;
 }
 
-a {
-  -webkit-transition: 0.3s all ease;
-  transition: 0.3s all ease;
-  color: white;
-}
-
-a:hover, a:focus {
-  text-decoration: none !important;
-  outline: none !important;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+@media only screen and (max-width: 992px) {
+  .card {
+    width: 100%;
+  }
+  .post-show {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 30px;
+    padding: 70px 50px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -8379,16 +8407,14 @@ a:hover, a:focus {
   #header-mobile {
     display: none;
   }
-}
-
-button {
-  -webkit-transition: 0.3s all ease;
-  transition: 0.3s all ease;
-}
-
-button:hover, button:focus {
-  text-decoration: none !important;
-  outline: none !important;
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  .nav-link.button__transparent {
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+  .nav-link.button__transparent:hover:before {
+    width: 21%;
+  }
+  .nav-link.button__transparent:before {
+    margin: 0 !important;
+  }
 }

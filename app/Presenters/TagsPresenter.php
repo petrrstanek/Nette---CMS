@@ -47,7 +47,7 @@ class TagsPresenter extends BasePresenter
 				'name' => $values->name,
 			]);
 			$this->flashMessage('Kategorie byla aktualizována.');
-			$this->redirect('Tags:default');
+			$this->redirect('Tags:');
 	}
 
 	public function createTagProcess(\stdClass $values): void
@@ -59,7 +59,7 @@ class TagsPresenter extends BasePresenter
 			foreach ($tags as $tag) {
 				if ($tag->name == $values->name) {
 					$this->flashMessage('Kategorie: ' . "$values->name" . ' již existuje');
-					$this->redirect('Tags:default');
+					$this->redirect('Tags:');
 					$exist = true;
 					break;
 				}
@@ -69,7 +69,7 @@ class TagsPresenter extends BasePresenter
 					'name' => $values->name,
 				]);
 				$this->flashMessage('Úspěšně jste přidal kategorii: ' . "$values->name" . ' ', 'success');
-				$this->redirect('Tags:default');
+				$this->redirect('Tags:');
 			}
 		}
 
@@ -84,7 +84,7 @@ class TagsPresenter extends BasePresenter
 				->get($tagId)
 				->delete();
 			$this->flashMessage('Kategorie byla smazána.');
-			$this->redirect('Tags:default');
+			$this->redirect('Tags:');
 		} 
 		catch (Nette\Database\ForeignKeyConstraintViolationException $e) 
 		{

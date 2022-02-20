@@ -80,6 +80,7 @@ final class PagePresenter extends BasePresenter
 			$page = $this->model->getPages()->insert([
 				'title' => $values->title,
 				'content' => $values->content,
+				'updatedAt' => new DateTime(),
 				'createdAt' => new DateTime(),
 			]);
 			$this->model->getRelatedTags()->insert([

@@ -42,70 +42,69 @@
 
 {if $user->isLoggedIn()}
 {block adminLayOut}
-{include errorBox}
-<section id="header-mobile">
-<div class="xy-flex">
-  <div class="icon">
-    <a n:href="Homepage:"><i class="bi bi-house-door"></i></a>
-  </div>
-  <div class="icon px-5">
-    <a n:href="Page:createPage"><i class="bi bi-pencil-square"></i></a>
-  </div>
-  <div class="icon">
-    <a n:href="Tags:ManagTags"><i class="bi bi-tags"></i></a>
-  </div>
-</div>
-</section>
-<div class="wrapper d-flex align-items-stretch">
-		<nav id="sidebar">
-			<div class="custom-menu">
-				<button type="button" id="sidebarCollapse" class="btn btn-primary">
-					<i class="fa fa-bars"></i>
-					<span class="sr-only">Toggle Menu</span>
-				</button>
+	{block errorBox}
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+			{$flash->message}
+		</div>
+	{/block}
+	<section id="header-mobile">
+		<div class="xy-flex">
+			<div class="icon">
+				<a n:href="Homepage:"><i class="bi bi-house-door"></i></a>
 			</div>
-			<div class="p-4">
-				<h1>
-					<a n:href="Homepage:" class="logo" style="color: white!important">CMS - Ed <span>Editor</span></a>
-				</h1>
-				<ul class="list-unstyled components mb-5">
-					<li class="active">
-						<a n:href="Homepage:"><i class="bi bi-house-door"></i> Přehled Stránek</a>
-					</li>
-					<li>
-						<a n:href="Page:createPage"><i class="bi bi-pencil-square"></i> Nová Stránka</a>
-					</li>
-					<li>
-						<a n:href="Tags:default"><i class="bi bi-tags"></i> Přehled Kategorií</a>
-					</li>
-				</ul>
-				<div class="footer">
-					<p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;<script>
-							document.write(new Date().getFullYear());
-						</script> Všechny práva vyhrazena | Šablonu vytvořil <i class="icon-heart" aria-hidden="true"></i>
-						<a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
+			<div class="icon px-5">
+				<a n:href="Page:createPage"><i class="bi bi-pencil-square"></i></a>
+			</div>
+			<div class="icon">
+				<a n:href="Tags:"><i class="bi bi-tags"></i></a>
+			</div>
+		</div>
+		{include adminContent}
+	</section>
+
+	
+	<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+						<i class="bi bi-list" style="font-size: 16px"></i>
+						<span class="sr-only">Toggle Menu</span>
+					</button>
 				</div>
-			</div>
-		</nav>
-    {include adminContent}	
-</div>
+				<div class="p-4">
+					<h1>
+						<a n:href="Homepage:" class="logo" style="color: white!important">CMS - Ed <span>Editor</span></a>
+					</h1>
+					<ul class="list-unstyled components mb-5">
+						<li class="active">
+							<a n:href="Homepage:"><i class="bi bi-house-door"></i> Přehled Stránek</a>
+						</li>
+						<li>
+							<a n:href="Page:createPage"><i class="bi bi-pencil-square"></i> Nová Stránka</a>
+						</li>
+						<li>
+							<a n:href="Tags:default"><i class="bi bi-tags"></i> Přehled Kategorií</a>
+						</li>
+					</ul>
+					<div class="footer">
+						<p>
+							Copyright &copy;<script>
+								document.write(new Date().getFullYear());
+							</script> Všechny práva vyhrazena | Šablonu vytvořil <i class="icon-heart" aria-hidden="true"></i>
+							<a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						</p>
+					</div>
+				</div>
+			</nav>
+			{include adminContent}
+	</div>
 {/block}
-{* {block footer}
-<footer id="admin">
-Copyright &copy; 2022 CMS
-</footer>
-{/block} *}
+
     {else}
     {include content}
-	
     {/if}
 {block scripts}
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
-  <script src="https://kit.fontawesome.com/ac27657f07.js" crossorigin="anonymous"></script>
   <script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
   <script src="{$basePath}/js/script.js"></script>
   <script src="{$basePath}/js/jquery.min.js"></script>
