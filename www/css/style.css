@@ -7708,12 +7708,6 @@ mark,
 body {
   color: #333;
   background-color: #eceef0 !important;
-  /* height: 100%; */
-  /* overflow: hidden; */
-}
-
-.admin-content-mobile {
-  display: none;
 }
 
 a {
@@ -7725,19 +7719,6 @@ a:hover {
   color: #0d6efd;
   -webkit-transform: scale(0.98);
           transform: scale(0.98);
-}
-
-input {
-  outline: 0;
-  padding: 5px;
-  border: 2px solid #eceef0;
-  border-radius: 5px;
-  -webkit-transition: 0.2s ease;
-  transition: 0.2s ease;
-}
-
-input:focus {
-  border: 2px solid #0d6efd;
 }
 
 div.flash {
@@ -7792,6 +7773,19 @@ input {
 label {
   text-align: center;
   font-weight: bold;
+}
+
+input {
+  outline: 0;
+  padding: 5px;
+  border: 2px solid #eceef0;
+  border-radius: 5px;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+input:focus {
+  border: 2px solid #0d6efd;
 }
 
 input[value='Odstranit'] {
@@ -8118,23 +8112,6 @@ button:hover, button:focus {
   color: white;
 }
 
-.button__secondary {
-  width: 150px;
-  background-color: #0d6efd;
-  color: white;
-  padding: 10px;
-  border: 0;
-  border-radius: 8px;
-  outline: 0;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-}
-
-.button__secondary:active {
-  -webkit-transform: scale(0.98);
-          transform: scale(0.98);
-}
-
 .button__transparent {
   color: black;
   background-color: transparent !important;
@@ -8165,47 +8142,6 @@ button:hover, button:focus {
   margin: 0 auto !important;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-}
-
-@media only screen and (min-width: 768px) {
-  .wh-100 {
-    width: 100%;
-    /* height: 100vh; */
-  }
-  #admin-footer {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  #admin-footer-mobile {
-    height: 80px;
-    width: 100%;
-    background-color: #f7f7f7;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    position: absolute;
-    bottom: 0;
-  }
-  .parent {
-    min-height: 100vh;
-  }
-  .pos-r {
-    position: relative;
-  }
-  .wrapper {
-    display: none !important;
-  }
-  .wh-100 {
-    width: 100%;
-  }
 }
 
 #header {
@@ -8376,6 +8312,10 @@ button:hover, button:focus {
   margin-top: 15px;
 }
 
+.admin-content-mobile {
+  display: none;
+}
+
 @media only screen and (max-width: 992px) {
   .card {
     width: 100%;
@@ -8401,6 +8341,34 @@ button:hover, button:focus {
     font-size: 30px;
     color: white;
   }
+  #admin-footer-mobile {
+    height: 80px;
+    width: 100%;
+    background-color: #f7f7f7;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: absolute;
+    bottom: 0;
+  }
+  .parent {
+    min-height: 100vh;
+  }
+  .pos-r {
+    position: relative;
+  }
+  .wrapper {
+    display: none !important;
+  }
+  .wh-100 {
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -8416,5 +8384,15 @@ button:hover, button:focus {
   }
   .nav-link.button__transparent:before {
     margin: 0 !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .wh-100 {
+    width: 100%;
+    /* height: 100vh; */
+  }
+  #admin-footer {
+    display: none;
   }
 }

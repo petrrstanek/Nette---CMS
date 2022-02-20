@@ -8,25 +8,25 @@
       <h1 n:block="title" class="p-3 text-center">Poslední aktualizované stránky</h1>
       <div class="row">
         <div class="col-md-12">
-          <div n:foreach="$layPages as $layPage" class="post x-flex">
+          <div n:foreach="$userPages as $userPage" class="post x-flex">
             <div class="card">
               <div class="card-body p-4">
-                <h3>{$layPage->title}</h3>
-                <div class="post-inner">{$layPage->content|truncate:230|noescape}</div>
-                <div class="date">{$layPage->createdAt|noescape}</div>
-                <a n:href="Page:showPage $layPage->id" class="btn btn-outline-primary">Číst více</a>
+                <h3>{$userPage->title}</h3>
+                <div class="post-inner">{$userPage->content|truncate:230|noescape}</div>
+                <div class="date">{$userPage->updatedAt|noescape}</div>
+                <a n:href="Page:showPage $userPage->id" class="btn btn-outline-primary">Číst více</a>
               </div>
             </div>
           </div>
           <div class="pagination pb-5 x-flex">
-            {if $page > 1}
-              <a n:href="default, $page - 1">Zpět</a>
+            {if $paginator > 1}
+              <a n:href="default, $paginator - 1">Zpět</a>
               &nbsp; | &nbsp;
             {/if}
-             {$page} z {$lastPage}
-            {if $page < $lastPage}
+             {$paginator} z {$lastPage}
+            {if $paginator < $lastPage}
               &nbsp;|&nbsp;
-              <a n:href="default, $page + 1">Další</a>
+              <a n:href="default, $paginator + 1">Další</a>
             {/if}
           </div>
         </div>
@@ -85,8 +85,8 @@
 {if $page > 1}
 <a n:href="default, $page - 1"> Zpět</a>
 &nbsp; | &nbsp;
-{/if}{$page} z {$lastPage}
-{if $page < $lastPage}
+{/if}{$page} z {$endPage}
+{if $page < $endPage}
 &nbsp;|&nbsp;
 <a n:href="default, $page + 1">Další</a>
 {/if}

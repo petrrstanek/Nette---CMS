@@ -19,20 +19,23 @@ final class HomepagePresenter extends BasePresenter
 		$this->model = $model;
 	}
 
-	public function renderDefault(int $page = 1, int $adminPage = 1): void
+	public function renderDefault(int $page = 1, int $newPage = 1): void
 	{
 		$pages = $this->model->getCreatedPages();
-		$lastPage = 0;
+		$lastPage = 0;//zustava
+	$newPages = $this->model->getCreatedPages();
+		$endPage = 0;
+		
+		
 		$this->template->layPages = $pages->page($page, 5, $lastPage);
-		$this->template->lastPage = $lastPage;
+		$this->template->lastPage = $lastPage;//zustava
 		$this->template->page = $page;
-
-	/* 	$newPages = $this->model->getCreatedPages();
-
-		$newLastPage = 0;
-		$this->template->layAdminPages = $newPages->page($adminPage, 3, $newLastPage);
-		$this->template->adminLastPage = $newLastPage;
-		$this->template->adminPage = $adminPage; */
+		
+	
+		
+		$this->template->userPages = $newPages->page($page, 3, $endPage);
+		$this->template->endPage = $endPage;
+		$this->template->paginator = $page;
 	}
 
 	public function handleDelete(int $pageId)
