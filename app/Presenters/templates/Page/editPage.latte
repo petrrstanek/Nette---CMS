@@ -12,34 +12,34 @@
   {include parent}
 {/define}
 {block errorBox}
-
-  <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
-    {$flash->message}
-  </div>
-
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+  {$flash->message}
+</div>
 {/block}
 {block adminContent}
 <div class="container">
 <section id="latte-edit">
-
-<div class="container-tags py-2">
-<a n:href="Page:addTagPage $page->id">&plus;</a>
-  <div class="x-flex flex-wrap">
-    <a n:href="delete!, $tagActive->tag->id" class="tags" n:foreach="$tagsActive as $tagActive">
-      {$tagActive->tag->name}
-    </a>
-    
+  <div class="container-tags py-2">
+    <a n:href="Page:addTagPage $page->id">&plus;</a>
+    <div class="x-flex flex-wrap">
+      <a n:href="delete!, $tagActive->tag->id" class="tags" n:foreach="$tagsActive as $tagActive">
+        {$tagActive->tag->name}
+      </a>
+    </div>
   </div>
-</div>
-
-
-<div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Editace Příspěvku</h4>
-          </div>
-          <div class="card-body">
-            {control pageForm}
-          </div>
+  <div class="card">
+    <div class="card-header" style="positon: relative;">
+      <h4 class="card-title">Editace Příspěvku</h4>
+      <div class="d-flex header-icons">
+      <a href="" class="h-icon-start"><i class="bi bi-star-fill"></i></a>
+      <a href="do = delete!" class="h-icon-trash"><i class="bi bi-trash-fill"></i></a>
+      
+      
+      </div>
+    </div>
+    <div class="card-body">
+      {control pageForm}
+    </div>
         </div>
 </section>
 </div>

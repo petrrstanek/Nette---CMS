@@ -26,14 +26,9 @@
     </div>
   </section>
 {/block}
-{block footer}
-		<footer>
-		Copyright &copy; 2022 CMS - Ed
-		</footer>
-		{/block}
 {block errorBox}
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
-      {$flash->message}
+  {$flash->message}
 </div>
 {/block}
 {block adminContent}
@@ -42,8 +37,7 @@
     <h1 class="pt-4 text-center">
       {$page->title} - Náhled
     </h1>
-    <i class="fa-solid fa-square-pen"></i>
-    <a n:href="Page:editPage $page->id" class="button button__sumbit edit-button edit-mobile" style=" position: absolute; right: 40px; top: 233px"> <i class="fa fa-pencil" style="color: white;"></i></a>
+    
     <div class="container-tags py-4">
       <div class="fix">
         <div class="tags" n:foreach="$tagsActive as $tagActive">
@@ -52,6 +46,7 @@
       </div>
     </div>
     <div class="container post-show">
+    <a n:href="Page:editPage $page->id" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
       <div class="date-show">
           {ifset $page->updatedAt}
             {$page->updatedAt|noescape}

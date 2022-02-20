@@ -42,7 +42,7 @@
 {block errorBox}
 {/block}
 {block adminContent}
-<section id="latte-admin-home" class="mx-auto mt-4">
+<section id="latte-admin-home" class="mx-auto mt-4 wh-100">
 <div class="container">
 <div class="row">
 <div class="col-md-8">
@@ -70,10 +70,10 @@
       {/ifset}
       <td>
       <div class="d-flex">
-      <a n:href="Page:showPage $layAdminPage->id"><i class="fa fa-eye preview-icon"></i></a>
-      <a n:href="Page:editPage $layAdminPage->id" class="px-3"><i class="fa fa-pen edit-icon"></i></a>
-      <a n:href="delete!, $layAdminPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="fa fa-trash trash-icon" ></i></a>
-      <a n:href="add!, $layAdminPage->id" class="fav-icon" ><i class="fa fa-star fav"></i></a>
+      <a n:href="Page:showPage $layAdminPage->id"><i class="bi bi-eye-fill preview-icon"></i></a>
+      <a n:href="Page:editPage $layAdminPage->id" class="px-3"><i class="bi bi-pen-fill edit-icon"></i></a>
+      <a n:href="delete!, $layAdminPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="bi bi-trash-fill trash-icon" ></i></a>
+      <a n:href="add!, $layAdminPage->id" class="fav-icon" ><i class="bi bi-star-fill fav"></i></a>
       </div>
       
       </td>

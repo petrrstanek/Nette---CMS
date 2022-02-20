@@ -7802,23 +7802,6 @@ select[readonly] {
   cursor: not-allowed;
 }
 
-footer {
-  background-color: #fff;
-  height: 80px;
-  width: 100%;
-  color: black;
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  text-align: center;
-}
-
 .wrapper {
   width: 100%;
 }
@@ -8010,11 +7993,6 @@ a[data-toggle='collapse'] {
   height: 100%;
 }
 
-.card {
-  width: 70%;
-  margin: 0 auto;
-}
-
 .card-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -8064,6 +8042,7 @@ a[data-toggle='collapse'] {
   top: 10px;
   right: 20px;
   color: black;
+  font-size: 20px;
 }
 
 .trash-tag:hover {
@@ -8176,24 +8155,13 @@ a[data-toggle='collapse'] {
   transition: 0.3s;
 }
 
-@media only screen and (max-width: 768px) {
-  .edit-mobile {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-  }
-  .edit-button {
-    display: none;
-  }
+.wh-100 {
+  width: 100%;
+  height: 100vh;
 }
 
 @media only screen and (min-width: 768px) {
-  .edit-button {
-    position: absolute;
-    top: 233px;
-    right: 30px;
-  }
-  .edit-mobile {
+  footer #admin {
     display: none;
   }
 }
@@ -8213,23 +8181,42 @@ a[data-toggle='collapse'] {
   padding: 1.5rem;
 }
 
-#latte-manag-tags {
-  height: 100vh;
-  overflow: hidden;
-}
-
-#latte-sign {
-  height: 100%;
-}
-
-#latte-admin-home {
-  height: 100vh;
+#latte-edit .card {
+  width: 85%;
+  margin: 0 auto;
 }
 
 #latte-edit .tags:hover {
   opacity: 0.25;
   background-color: red;
   color: white;
+}
+
+#latte-edit .header-icons {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 20px;
+}
+
+#latte-edit .header-icons .h-icon-trash {
+  padding-left: 15px;
+}
+
+#latte-edit .header-icons .h-icon-trash:hover {
+  color: red !important;
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+#latte-edit .header-icons .h-icon-start:hover {
+  color: yellow !important;
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+#latte-admin-home {
+  height: 100vh;
 }
 
 #latte-default {
@@ -8321,6 +8308,15 @@ a[data-toggle='collapse'] {
   top: 20px;
   right: 40px;
   opacity: 0.2;
+}
+
+#latte-show .edit-button {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  border: 1px solid aliceblue;
+  border-radius: 20px;
+  padding: 1px 20px;
 }
 
 #latte-show .fix {

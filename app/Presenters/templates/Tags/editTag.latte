@@ -4,17 +4,17 @@
 </div>
 {/block}
 {block adminContent}
-<div class="container">
-
-<div class="card my-3">
-<div class="card-header" style="position:relative;">
-<h4 class="card-title">Editace kategorie</h4>
-<a n:href="delete!" class="trash-tag"><i class="fa fa-trash"></i></a>
+<section id="latte-edit-tag" class="wh-100">
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-header" style="position:relative;">
+          <h4 class="card-title">Editace kategorie</h4>
+          <a n:href="delete!" class="trash-tag"><i class="bi bi-trash-fill"></i></a>
+      </div>
+      <div class="card-body">
+        {control controlTagForm}
+      </div>
+    </div>
 </div>
-<div class="card-body">
-{control controlTagForm}
-</div>
-</div>
-</div>
-
+</section>
 {/block}
