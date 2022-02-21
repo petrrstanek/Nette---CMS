@@ -6508,7 +6508,7 @@ select[readonly] {
 
 #sidebar {
   min-width: 210px;
-  max-width: 270px;
+  max-width: 210px;
   background: #0d6efd;
   color: #fff;
   -webkit-transition: all 0.3s;
@@ -6521,7 +6521,7 @@ select[readonly] {
 }
 
 #sidebar.active {
-  margin-left: -270px;
+  margin-left: -210px;
 }
 
 #sidebar h1 {
@@ -6826,7 +6826,7 @@ button:hover, button:focus {
 }
 
 .button__transparent:hover:before {
-  width: 100%;
+  width: 100% !important;
   padding: 10px;
 }
 
@@ -6839,7 +6839,7 @@ button:hover, button:focus {
   right: 0;
   width: 0;
   left: 0;
-  margin: 0 auto !important;
+  /* margin: 0 auto !important; */
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -6857,6 +6857,11 @@ button:hover, button:focus {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 1.5rem;
+}
+
+#latte-create .card {
+  width: 85%;
+  margin: 15px auto 30px auto;
 }
 
 #latte-edit .card {
@@ -7021,9 +7026,6 @@ button:hover, button:focus {
 }
 
 @media only screen and (max-width: 992px) {
-  .card {
-    width: 100%;
-  }
   .post-show {
     width: 95% !important;
     height: 100% !important;
