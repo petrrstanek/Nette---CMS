@@ -44,4 +44,9 @@ final class PostModel
 	{
 		return $this->database->table('pages')->order('updatedAt DESC');
 	}
+
+	public function getUsers()
+	{
+		return $this->database->table('users');
+	}
 }

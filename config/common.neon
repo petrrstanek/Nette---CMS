@@ -17,5 +17,9 @@ di:
 		tags: no
 
 security:
-	users:
-		admin: secret  # user 'admin, password 'secret'
+		authentication:
+				# expirace
+				expiration: 30 minutes
+
+				#uložiště
+				storage: session

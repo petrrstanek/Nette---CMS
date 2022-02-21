@@ -13,11 +13,13 @@ use Nette\Utils\DateTime;
 final class PagePresenter extends BasePresenter
 {
 	private postModel $model;
+	
 
 	public function __construct(PostModel $model)
 	{
 		parent::__construct($model);
 		$this->model = $model;
+		
 	}
 
 	protected function createComponentPageForm(): Form
