@@ -43,7 +43,7 @@
 {block adminContent}
 <section id="latte-admin-home" class="mx-auto mt-4 wh-100">
 <div class="container" style="padding: 20px 90px;">
-
+<h3 class="text-center py-2">Poslední aktualizované stránky</h3>
 <div class="container-table">
 <table class="table table-bordered table-hover">
   <thead>
@@ -70,7 +70,7 @@
       <a n:href="Page:showPage $layPage->id"><i class="bi bi-eye-fill preview-icon"></i></a>
       <a n:href="Page:editPage $layPage->id" class="px-3"><i class="bi bi-pen-fill edit-icon"></i></a>
       <a n:href="delete!, $layPage->id" class="pr-3" onClick="return confirm('Opravdu si přejete stránku smazat?');"><i class="bi bi-trash-fill trash-icon" ></i></a>
-      <a n:href="add!, $layPage->id" class="fav-icon" ><i class="bi bi-star-fill fav"></i></a>
+      <a n:href="add!, $layPage->id" class="fav-icon"><i class="bi bi-star-fill fav"></i></a>
       </div>
       </td>
     </tr>
@@ -78,7 +78,6 @@
 </div>
 </table>
 </div>
-
 <div class="pagination pb-5 x-flex">
 {if $page > 1}
 <a n:href="default, $page - 1"> Zpět</a>

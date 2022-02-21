@@ -22,7 +22,6 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 		parent::__construct($model, $auth);
 		$this->model = $model;
 		$this->auth = $auth;
-
 	}
 
 	protected function createComponentSignInForm(): Form
@@ -42,7 +41,6 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 	public function signInFormSucceeded(Form $signForm, \stdClass $data): void
 	{
 			$user = $this->getUser();
-			bdump($user);
 			$user->setAuthenticator($this->auth);
 			$user->login($data->username, $data->password);
 			$this->redirect('Homepage:');
@@ -64,6 +62,7 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 		->setRequired('Prosím vyplňte');
 
 		$regForm->addPassword('password', 'Heslo')
+
 		->addRule($regForm::MIN_LENGTH, 'Heslo musí mít alespoň 8 znaků', 8)
 		->setRequired('Prosím vyplňte');
 
@@ -73,9 +72,7 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 		->setRequired('Prosím vyplňte');
 
 		$regForm->addSubmit('send', 'Registrovat');
-		
 		$regForm->onSuccess[] = [$this, 'registerProcess'];
-
 		return $regForm;
 	}
 

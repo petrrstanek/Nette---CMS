@@ -235,7 +235,6 @@ final class PagePresenter extends BasePresenter
 	public function handleDeletePage(int $pageId)
 	{
 		$page = $this->model->getPages()->get($pageId);
-		bdump($page);
 		$page->related('pages_tags')->delete();
 		$page->delete();
 		$this->flashMessage('Stránka byla úspěšně odstraněna.');
