@@ -4,7 +4,6 @@
   {$flash->message}
 </div>
 {/block}
-{block adminContent}
 <section id="latte-edit" class="pos-r">
   <div class="container-tags py-2">
     <a n:href="Page:addTagPage $page->id">&plus;</a>
@@ -26,7 +25,8 @@
       {control pageForm}
     </div>
         </div>
-        {import footer.latte}
-        {include footer}
+       
 </section>
+ {import footer.latte}
+        {include footer}
 {/block}

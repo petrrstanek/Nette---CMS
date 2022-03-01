@@ -43,7 +43,7 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 			$user = $this->getUser();
 			$user->setAuthenticator($this->auth);
 			$user->login($data->username, $data->password);
-			$this->redirect('Homepage:');
+			$this->redirect('Admin:');
 		
 	}
 

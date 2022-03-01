@@ -1,6 +1,10 @@
 {
+  "scripts": {
+    "compile:sass": "node-sass vendor/scss/style.scss www/css/style.css -w"
+  },
   "devDependencies": {
     "@prettier/plugin-php": "^0.18.1",
+    "node-sass": "^7.0.1",
     "prettier": "^2.5.1"
   },
   "dependencies": {

@@ -19,7 +19,6 @@ final class PagePresenter extends BasePresenter
 	{
 		parent::__construct($model);
 		$this->model = $model;
-		
 	}
 
 	protected function createComponentPageForm(): Form
@@ -111,24 +110,30 @@ final class PagePresenter extends BasePresenter
 
 	public function renderShowPage(int $pageId): void
 	{
-		$page = $this->model->getPages()->get($pageId);
-		$this->template->page = $page;
-		if (!$page) {
-			$this->error('Stránka nebyla nalezena.');
-		}
-		
-		$tags = $this->model->getTags();
-		$pageId = $this->getParameter('pageId');
-		
-		$allTags = [];
-		foreach ($tags as $tag) {
-			$postTags = $tag->related('pages_tags')->where('page_id', $pageId);
-			foreach ($postTags as $postTag) {
-				$allTags[] = $postTag;
+		parent::startup();
+		if($this->getUser()->isLoggedIn()){
+			$this->redirect('Sign:in');
+		} else{
+			$page = $this->model->getPages()->get($pageId);
+			$this->template->page = $page;
+			if (!$page) {
+				$this->error('Stránka nebyla nalezena.');
 			}
-
-			$this->template->tagsActive = $allTags;
+			
+			$tags = $this->model->getTags();
+			$pageId = $this->getParameter('pageId');
+			
+			$allTags = [];
+			foreach ($tags as $tag) {
+				$postTags = $tag->related('pages_tags')->where('page_id', $pageId);
+				foreach ($postTags as $postTag) {
+					$allTags[] = $postTag;
+				}
+	
+				$this->template->tagsActive = $allTags;
+			}
 		}
+	
 	}
 
 	public function renderEditPage(int $pageId): void
@@ -201,43 +206,54 @@ final class PagePresenter extends BasePresenter
 
 	public function handleDelete(int $tagId)
 	{
-	$pageId = $this->getParameter('pageId');
-	$tags = $this->model->getRelatedTags()->where('page_id', $pageId);
-	$size = $tags->count('*');
-	foreach($tags as $tag){
-		if($tag->tag_id == $tagId){
-			if($size > 1){
-				$tag->delete();
-				$this->flashMessage('Kategorie byla odstraněna');
-				$this->redirect('this');
-			}else{
-				$this->flashMessage('Nelze odstranit, příspěvek musí obsahovat min. 1. kategorii');
-				$this->redirect('this');
+		parent::startup();
+		if(!$this->getUser()->isLoggedIn()){
+			$this->redirect('Sign:in');
+		} else{
+			$pageId = $this->getParameter('pageId');
+			$tags = $this->model->getRelatedTags()->where('page_id', $pageId);
+			$size = $tags->count('*');
+			foreach($tags as $tag){
+				if($tag->tag_id == $tagId){
+					if($size > 1){
+						$tag->delete();
+						$this->flashMessage('Kategorie byla odstraněna');
+						$this->redirect('this');
+					}else{
+						$this->flashMessage('Nelze odstranit, příspěvek musí obsahovat min. 1. kategorii');
+						$this->redirect('this');
+					}
+				} 
 			}
-		} 
-	}
+		}
 	}
 
 	public function handleAdd(int $pageId)
 	{
-		$page = $this->model->getPages()->get($pageId);
-		if($page->inMenu == 0){
-			$page->update([
-				'inMenu' => 1
-			]);
-		} else{
-			$page->update([
-				'inMenu' => 0
-			]);
+		parent::startup();
+		if(!$this->getUser()->isLoggedIn){
+			$page = $this->model->getPages()->get($pageId);
+			if($page->inMenu == 0){
+				$page->update([
+					'inMenu' => 1
+				]);
+			} else{
+				$page->update([
+					'inMenu' => 0
+				]);
+			}
 		}
 	}
 
 	public function handleDeletePage(int $pageId)
 	{
-		$page = $this->model->getPages()->get($pageId);
-		$page->related('pages_tags')->delete();
-		$page->delete();
-		$this->flashMessage('Stránka byla úspěšně odstraněna.');
-		$this->redirect('Homepage:');
+		parent::startup();
+		if(!$this->getUser()->isLoggedIn){
+			$page = $this->model->getPages()->get($pageId);
+			$page->related('pages_tags')->delete();
+			$page->delete();
+			$this->flashMessage('Stránka byla úspěšně odstraněna.');
+			$this->redirect('Admin:');
+		}
 	}
 }

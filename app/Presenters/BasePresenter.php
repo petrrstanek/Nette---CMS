@@ -17,6 +17,14 @@ abstract class BasePresenter extends Presenter
 		$this->model = $model;
 	}
 
+	// protected function startup()
+	// {
+	// 	parent::startup();
+	// 	if(!$this->getUser()->isLoggedIn()){
+	// 		$this->redirect('Sign:in');
+	// 	}
+	// }
+
 	public function beforeRender()
 	{
 		parent::beforeRender();

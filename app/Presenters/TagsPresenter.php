@@ -27,6 +27,7 @@ class TagsPresenter extends BasePresenter
 
 	public function actionEditTag(int $tagId): void
 	{
+		
 		$tag = $this->model->getTags()->get($tagId);
 		$formTag = $this->getComponent('controlTagForm');
 		$formTag->setDefaults($tag->toArray());
@@ -59,7 +60,7 @@ class TagsPresenter extends BasePresenter
 			foreach ($tags as $tag) {
 				if ($tag->name == $values->name) {
 					$this->flashMessage('Kategorie: ' . "$values->name" . ' již existuje');
-					$this->redirect('Tags:');
+					$this->redirect('this');
 					$exist = true;
 					break;
 				}
@@ -76,32 +77,31 @@ class TagsPresenter extends BasePresenter
 
 	function handleDelete($tagId)
 	{
-		try 
-		{
-			$tagId = $this->getParameter('tagId');
-			$tagToDelete = $this->model
-				->getTags()
-				->get($tagId)
-				->delete();
-			$this->flashMessage('Kategorie byla smazána.');
-			$this->redirect('Tags:');
-		} 
-		catch (Nette\Database\ForeignKeyConstraintViolationException $e) 
-		{
-			$this->flashMessage('Nelze odstranit, protože jeden z příspěvku obsahuje tuto kategorii.');
-			$this->redirect('this');
-		}
+		parent::startup();
+			if($this->getUser()->isLoggedIn())
+			{
+				$this->redirect('Sign:in');
+			} else{
+				try 
+				{
+					$tagId = $this->getParameter('tagId');
+					$tagToDelete = $this->model
+						->getTags()
+						->get($tagId)
+						->delete();
+					$this->flashMessage('Kategorie byla smazána.');
+					$this->redirect('Tags:');
+				} 
+				catch (Nette\Database\ForeignKeyConstraintViolationException $e) 
+				{
+					$this->flashMessage('Nelze odstranit, protože jeden z příspěvku obsahuje tuto kategorii.');
+					$this->redirect('this');
+				}
+			}
 	}
 
 	public function renderDefault(): void
 	{
-		$tags = $this->model->getTags();
 		$this->template->tags = $this->model->getTags();
-	}
-
-	public function renderEditTag(int $tagId): void
-	{
-		$tag = $this->model->getTags()->get($tagId);
-		$this->getComponent('controlTagForm')->setDefaults($tag->toArray());
 	}
 }

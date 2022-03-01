@@ -1,7 +1,11 @@
+
+{block content}
 {block errorBox}
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+{$flash->message}
+</div>
 {/block}
-{block adminContent}
-<section id="latte-create-tag" class="w-100">
+<section id="latte-create-tag" class="w-100 pos-r">
 <div class="container">
   <div class="card mt-5 w-75 mx-auto">
     <div class="card-header">

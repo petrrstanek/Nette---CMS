@@ -1,4 +1,5 @@
 {block content}
+{if !$user->isLoggedIn()}
   <section id="latte-show" class="mx-auto">
     <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
       {$flash->message}
@@ -25,9 +26,7 @@
           {$page->content|noescape}
     </div>
   </section>
-{/block}
-{include errorBox}
-{block adminContent}
+{else}
   <section id="latte-show" class="mx-auto pos-r">
   <div class="container">
    <h1 class="pt-4 text-center">
@@ -54,7 +53,8 @@
         {$page->content|noescape}
       </div>
     </div>
+  </section>
   {import footer.latte}
   {include footer}
-  </section>
+  {/if}
 {/block}

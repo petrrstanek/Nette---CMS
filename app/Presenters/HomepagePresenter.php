@@ -9,7 +9,7 @@ use App\Model\PostModel;
 use Nette\Application\UI\Form;
 use App\Presenters\BasePresenter;
 
-final class HomepagePresenter extends BasePresenter
+final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
 	private postModel $model;
 
@@ -19,42 +19,13 @@ final class HomepagePresenter extends BasePresenter
 		$this->model = $model;
 	}
 
-	public function renderDefault(int $page = 1, int $newPage = 1): void
+	public function renderDefault(int $page = 1): void
 	{
-		$pages = $this->model->getCreatedPages();
-		$lastPage = 0;//zustava
 		$newPages = $this->model->getCreatedPages();
-		$endPage = 0;
-		
-		
-		$this->template->layPages = $pages->page($page, 5, $endPage);
-		$this->template->lastPage = $endPage;//zustava
-		$this->template->page = $page;
-		
+		$lastPage = 0;//zustava
 		
 		$this->template->userPages = $newPages->page($page, 3, $lastPage);
-		$this->template->endPage = $lastPage;
+		$this->template->lastPage = $lastPage;
 		$this->template->paginator = $page;
-	}
-
-	public function handleDelete(int $pageId)
-	{
-		$page = $this->model->getPages()->get($pageId);
-		$page->related('pages_tags')->delete();
-		$page->delete();
-	}
-
-	public function handleAdd(int $pageId)
-	{
-		$page = $this->model->getPages()->get($pageId);
-		if($page->inMenu == 0){
-			$page->update([
-				'inMenu' => 1
-			]);
-		} else{
-			$page->update([
-				'inMenu' => 0
-			]);
-		}
 	}
 }
