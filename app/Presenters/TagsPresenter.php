@@ -10,6 +10,7 @@ use App\Presenters\BasePresenter;
 class TagsPresenter extends BasePresenter
 {
 	private postModel $model;
+	private $var;
 
 	public function __construct(PostModel $model)
 	{
@@ -102,6 +103,11 @@ class TagsPresenter extends BasePresenter
 
 	public function renderDefault(): void
 	{
+		
 		$this->template->tags = $this->model->getTags();
+	}
+
+	public function renderEditTag(): void{
+		
 	}
 }
