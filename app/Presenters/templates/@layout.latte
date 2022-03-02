@@ -44,6 +44,11 @@
 {/block}
 
 {if $user->isLoggedIn()}
+{block errorBox}
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+{$flash->message}
+</div>
+{/block}
 	<div class="wrapper d-flex">
 			<nav id="sidebar">
 				<div class="custom-menu">

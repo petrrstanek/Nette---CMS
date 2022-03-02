@@ -57,7 +57,8 @@ class TagsPresenter extends BasePresenter
 		$tagId = $this->getParameter('tagId');
 		$tags = $this->model->getTags()->select('name');
 		$exist = false;
-
+		bdump($tags);
+		
 			foreach ($tags as $tag) {
 				if ($tag->name == $values->name) {
 					$this->flashMessage('Kategorie: ' . "$values->name" . ' již existuje');

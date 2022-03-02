@@ -1,9 +1,5 @@
 {block content}
-{block errorBox}
-<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
-  {$flash->message}
-</div>
-{/block}
+{include errorBox}
 <section id="latte-default" class="text-center mx-auto w-100 pos-r">
     <h2 class="py-5">Kategorie</h2>
     <div class="row">
