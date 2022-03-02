@@ -10,7 +10,7 @@ use App\Presenters\BasePresenter;
 class TagsPresenter extends BasePresenter
 {
 	private postModel $model;
-	private $var;
+	private $tag;
 
 	public function __construct(PostModel $model)
 	{
@@ -28,10 +28,8 @@ class TagsPresenter extends BasePresenter
 
 	public function actionEditTag(int $tagId): void
 	{
-		
-		$tag = $this->model->getTags()->get($tagId);
+		$this->tag = $this->model->getTags()->get($tagId);
 		$formTag = $this->getComponent('controlTagForm');
-		$formTag->setDefaults($tag->toArray());
 		$formTag->onSuccess[] = [$this, 'editTagProcess'];
 	}
 
@@ -109,6 +107,7 @@ class TagsPresenter extends BasePresenter
 	}
 
 	public function renderEditTag(): void{
-		
+		$formTag = $this->getComponent('controlTagForm');
+		$formTag->setDefaults($this->tag->toArray());
 	}
 }
