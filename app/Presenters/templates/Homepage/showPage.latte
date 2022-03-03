@@ -3,7 +3,6 @@
     <div class="row">
         <div class="col-md-12 p-3 d-flex justify-content-center">
           <a n:href="Homepage:" class="button__transparent">&larr; Zpět</a>
-          <a n:href="Page:editPage $page->id" n:if="$user->isLoggedIn()" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
       </div>
     </div>
     <h1 n:block="title" class="pt-4 text-center">
@@ -15,6 +14,7 @@
         </div>
     </div>
     <div class="container post-show">
+ <a n:href="Page:editPage $page->id" n:if="$user->isLoggedIn()" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
       <div class="date-show">
         {$page->createdAt|noescape}
       </div>

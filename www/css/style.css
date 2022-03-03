@@ -4461,6 +4461,12 @@ a {
     color: yellow !important;
     transform: scale(0.98); }
 
+.date {
+  position: absolute;
+  top: 9px;
+  right: 22px;
+  opacity: 0.5; }
+
 #latte-default .post-inner h1,
 #latte-default .post-inner h2,
 #latte-default .post-inner h3,
@@ -4468,12 +4474,6 @@ a {
 #latte-default .post-inner h5,
 #latte-default .post-inner h6 {
   display: none; }
-
-#latte-default .date {
-  position: absolute;
-  top: 9px;
-  right: 22px;
-  opacity: 0.5; }
 
 #latte-default .post:not(:last-child) {
   padding-bottom: 10px; }
