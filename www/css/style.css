@@ -4171,6 +4171,43 @@ mark,
   .blockquote-footer::before {
     content: "\2014\00A0"; }
 
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0; }
+  to {
+    background-position: 0 0; } }
+
+.progress {
+  display: flex;
+  height: 1rem;
+  overflow: hidden;
+  font-size: 0.75rem;
+  background-color: #e9ecef;
+  border-radius: 0.25rem; }
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #007bff;
+  transition: width 0.6s ease; }
+  @media (prefers-reduced-motion: reduce) {
+    .progress-bar {
+      transition: none; } }
+
+.progress-bar-striped {
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 1rem 1rem; }
+
+.progress-bar-animated {
+  animation: progress-bar-stripes 1s linear infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .progress-bar-animated {
+      animation: none; } }
+
 /* @import "media";
 @import "close"; 
 @import 'forms'; 
@@ -4186,7 +4223,7 @@ mark,
 @import "badge";
 @import "jumbotron";
 @import "alert";
-@import "progress";
+
 @import "list-group";
 @import "modal";
 @import "tooltip";
@@ -4441,6 +4478,34 @@ a {
       width: 0;
       left: 0;
       transition: 0.3s; }
+
+#latte-dashboard .card {
+  flex-direction: row;
+  flex: 1; }
+
+#latte-dashboard .bg-icon {
+  opacity: 0.3;
+  font-size: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+#latte-dashboard .progress {
+  width: 270px; }
+
+#latte-dashboard i {
+  font-size: 60px;
+  opacity: 0.3; }
+
+#latte-dashboard .card-body {
+  text-transform: uppercase;
+  font-style: bold; }
+
+#latte-dashboard .card::before {
+  content: '';
+  border: 1px solid #0d6efd;
+  opacity: 0.2; }
 
 #latte-edit .tags:hover {
   opacity: 0.25;

@@ -1,34 +1,36 @@
 {block content}
 <section id="latte-dashboard" class="w-100 pos-r">
+<div class="d-flex align-items-center h-100">
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-    <div class="card">
-      <div class="card-body">
-        Zkompletované stránky <i class="bi bi-journal-check"></i>
+    <div class="card border-left-primary">
+      <div class="card-body d-flex">
+        Zkompletované
+        <p class="inner-number">524</p>
+        <i class="bi bi-journal-check ml-auto"></i>
       </div>
     </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row py-4">
     <div class="d-flex justify-content-center w-100">
       <div class="col-md-6 d-flex justify-content-center">
-        <div class="card w-75">
-          <div class="card-body">
-          Stránky k opravě <i class="bi bi-gear-fill"></i>
-          </div>
+        <div class="card">
+          <div class="card-body d-flex">
+            Zbývající <br>
+            <p class="inner-number'">5</p>
+            <i class="bi bi-folder2-open ml-auto"></i>
+          </div>   
         </div>
       </div>
       <div class="col-md-6 d-flex justify-content-center">
-        <div class="card w-75">
-          <div class="card-header">
-            <h5 class="card-title">
-              Zbývající stránky
-            </h5>
-          </div>
-          <div class="card-body">
-          Zbývající stránky <i class="bi bi-folder2-open"></i>
-          </div>
+        <div class="card">
+          <div class="card-body d-flex">
+            k aktualizaci
+            <p class="inner-number">1</p>
+            <i class="bi bi-exclamation-square ml-auto"></i>
+          </div>  
         </div>
       </div>
     </div>
@@ -36,12 +38,35 @@
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="card">
-        <div class="card-body">
-        
+        <div class="card-body d-flex">
+        <div class="inner d-flex flex-column">
+          Návštěvnost
+          <div class="bar1 d-flex align-items-center">
+            Počítač
+            <div class="progress ml-3">
+              <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width: 35%">35%</div>
+            </div>
+          </div>
+          <div class="bar1 d-flex align-items-center">
+            Telefon
+              <div class="progress ml-3">
+                <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width: 55%">55%</div>
+              </div>
+          </div>
+          <div class="bar1 d-flex align-items-center">
+            Tablet
+            <div class="progress ml-3">
+              <div class="progress-bar dg-danger progress-bar-striped progress-bar-animated" style="width: 10%">10%</div>
+            </div>
+          </div>
+      </div>     
+   <i class="bi bi-people-fill ml-auto"></i>
         </div>
       </div>  
     </div>
   </div>
+</div>
+
 </div>
 
 
