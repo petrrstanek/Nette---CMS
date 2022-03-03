@@ -33,7 +33,6 @@ class FormFactory
 	public function processForm(Form $addTagForm, array $values): void
 	{
 		try{
-
 			$this->facade->process($values);
 
 		}catch(AnyModelException $e) {
@@ -41,7 +40,4 @@ class FormFactory
 		}
 
 	}
-
-
-
 }

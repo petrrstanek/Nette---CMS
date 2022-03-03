@@ -14,12 +14,17 @@ class Bootstrap
 		$configurator = new Configurator;
 		$appDir = dirname(__DIR__);
 
-		//$configurator->setDebugMode('secret@23.75.345.200'); // enable for your remote IP
-		$configurator->enableTracy($appDir . '/log');
-
 		$configurator->setTimeZone('Europe/Prague');
-		$configurator->setTempDirectory($appDir . '/temp');
+		$configurator->addParameters(['wwwDir' => dirname(__DIR__) . '/web']);
 
+		$configurator->setDebugMode(true);
+		if (isset($_ENV['APP_ENVIRONMENT']) && $_ENV['APP_ENVIRONMENT'] === 'DEV') {
+			$configurator->setTempDirectory('/app-temp');
+		} else {
+			$configurator->setTempDirectory($appDir . '/temp');
+		}
+
+		$configurator->enableTracy($appDir . '/log');
 		$configurator->createRobotLoader()
 			->addDirectory(__DIR__)
 			->register();
@@ -33,4 +38,5 @@ class Bootstrap
 }
 
 use Tracy\Debugger;
+
 Debugger::enable();

@@ -13,7 +13,8 @@ use Nette\Utils\DateTime;
 final class PagePresenter extends BasePresenter
 {
 	private postModel $model;
-	
+	private $page;
+	private $related;
 
 	public function __construct(PostModel $model)
 	{
@@ -21,239 +22,181 @@ final class PagePresenter extends BasePresenter
 		$this->model = $model;
 	}
 
+	protected function startup(){
+		parent::startup();
+		if(!$this->user->isLoggedIn()){
+			$this->redirect('Sign:in');
+		}
+	}
+
+	public function renderOverview(int $page = 1): void
+	{
+		$pages = $this->model->getCreatedPages();
+		$endPage = 0;
+
+		$this->template->layPages = $pages->page($page, 5, $endPage);
+		$this->template->endPage = $endPage;
+		$this->template->page = $page;
+	}
+
 	protected function createComponentPageForm(): Form
 	{
-		if(!in_array($this->getAction(), ['createPage', 'editPage'])){
-			$this->error();
+		$pageForm = new Form();
+		$pageForm->addText('title', 'Titulek:')->setRequired();
+		if (!$this->page) {
+			$pageForm->addMultiSelect('tags', 'Kategorie: ', $this->model->fetchTags());
 		}
 
-		$pageForm = new Form();
-		$pageId = $this->getParameter('pageId');
-		$pageForm->addText('title', 'Titulek:')->setRequired();
+		$pageForm->addTextArea('content', 'Obsah:')
+			->setHtmlAttribute('id', 'editor')
+			->setRequired();
 
-		if (!$pageId) {
-			$fetchedTags = $this->model->fetchTags();
-			$pageForm->addSelect('tags', 'Kategorie: ', $fetchedTags);
-		} 
-
-		$pageForm
-				->addTextArea('content', 'Obsah:')
-				->setHtmlAttribute('id', 'editor')
-				->setRequired();
-
-		$pageForm
-				->addSubmit('send', 'Aktualizovat')
-				->setHtmlAttribute('class', 'button__submit');
+		$pageForm->addSubmit('send', 'Aktualizovat')
+			->setHtmlAttribute('class', 'button__submit');
 
 		return $pageForm;
 	}
 
 	public function actionCreatePage()
 	{
-			$pageForm = $this->getComponent('pageForm');
-			$pageForm->onSuccess[] = [$this, 'addPageFormProcess'];
+		$this->getComponent('pageForm')->onSuccess[] = [$this, 'addPageFormProcess'];
 	}
 
 	public function actionEditPage(int $pageId): void
 	{
-		$page = $this->model->getPages()->get($pageId);
-		$pageForm = $this->getComponent('pageForm');
-		$pageForm->setDefaults($page->toArray());
-		$pageForm->onSuccess[] = [$this,'editPageFormProcess'];
+		$this->page = $this->model->getPages()->get($pageId);
+		if (!$this->page) {
+			$this->error('Stránka nebyla nalezena.');
+		}
+
+		$this->related = [];
+		$postTags = $this->page->related('pages_tags');
+		foreach ($postTags as $postTag) {
+			$this->related[] = $postTag;
+		}
+		$this->getComponent('pageForm')->setDefaults($this->page->toArray())
+		->onSuccess[] = [$this, 'editPageFormProcess'];
+	}
+
+	public function addPageFormProcess(\stdClass $values): void
+	{
+		$page = $this->model->getPages()->insert([
+			'title' => $values->title,
+			'content' => $values->content,
+			'updatedAt' => new DateTime(),
+			'createdAt' => new DateTime(),
+		]);
+
+		foreach($values->tags as $tag){
+			$this->model->getRelatedTags()->insert([
+				'page_id' => $page->id,
+				'tag_id' => $tag,
+			]);
+		}
+		$this->flashMessage('Aktualizace proběhla úspěšně.', 'success');
+		$this->redirect('Homepage:showPage', $page->id);
+	}
+
+	public function renderEditPage(): void
+	{
+		$this->template->page = $this->page;
+		$this->template->tagsActive = $this->related;
 	}
 
 	public function editPageFormProcess(\stdClass $values)
 	{
-		$pageId = $this->getParameter('pageId');
-		$page = $this->model->getPages()->get($pageId);
-		$page->update([
+		$this->page->update([
 			'updatedAt' => new DateTime(),
 			'title' => $values->title,
 			'content' => $values->content,
 		]);
 		$this->flashMessage('Příspěvek byl aktualizován');
-		$this->redirect('this');
+		$this->redirect('Homepage:showPage', $this->page->id);
 	}
 
-	public function addPageFormProcess(\stdClass $values): void
+	public function actionAddTagPage(int $pageId): void
 	{
-			$pageId = $this->getParameter('pageId');
-			$page = $this->model->getPages()->insert([
-				'title' => $values->title,
-				'content' => $values->content,
-				'updatedAt' => new DateTime(),
-				'createdAt' => new DateTime(),
-			]);
-			$this->model->getRelatedTags()->insert([
-				'tag_id' => $values->tags,
-			]);
-			$this->flashMessage('Aktualizace proběhla úspěšně.', 'success');
-			$this->redirect('Page:showPage', $page->id);
+		$this->page = $this->model->getPages()->get($pageId);
+		$this->getComponent('addTagForm')->setDefaults($this->page->toArray())
+		->onSuccess[] = [$this, 'addTagFormSucceeded'];
 	}
 
-	public function actionShowPage(int $pageId): void
+	public function renderAddTagPage()
 	{
-		$page = $this->model->getPages()->get($pageId);
-		$fkPageIds = $this->model->getRelatedTags()->select('page_id');
-
-		foreach ($fkPageIds as $fkPageId) {
-			if ($fkPageId->page_id == null) {
-				$this->model
-					->getRelatedTags()
-					->where('page_id', null)
-					->update([
-						'page_id' => $page->id,
-					]);
-			}
-		}
-	}
-
-	public function renderShowPage(int $pageId): void
-	{
-		parent::startup();
-		if($this->getUser()->isLoggedIn()){
-			$this->redirect('Sign:in');
-		} else{
-			$page = $this->model->getPages()->get($pageId);
-			$this->template->page = $page;
-			if (!$page) {
-				$this->error('Stránka nebyla nalezena.');
-			}
-			
-			$tags = $this->model->getTags();
-			$pageId = $this->getParameter('pageId');
-			
-			$allTags = [];
-			foreach ($tags as $tag) {
-				$postTags = $tag->related('pages_tags')->where('page_id', $pageId);
-				foreach ($postTags as $postTag) {
-					$allTags[] = $postTag;
-				}
-	
-				$this->template->tagsActive = $allTags;
-			}
-		}
-	
-	}
-
-	public function renderEditPage(int $pageId): void
-	{
-		$page = $this->model->getPages()->get($pageId);
-		$pageId = $this->getParameter('pageId');
-		$tags = $this->model->getTags();
-
-		$allTags = [];
-		foreach ($tags as $tag) {
-			$postTags = $tag->related('pages_tags')->where('page_id', $pageId);
-			foreach ($postTags as $postTag) {
-				$allTags[] = $postTag;
-			}
-			
-			$this->template->tagsActive = $allTags;
-		}
-
-		$this->template->page = $page;
+		$this->template->page = $this->page;
 	}
 
 	protected function createComponentAddTagForm(): Form
 	{
 		$form = new Form();
-		$pageId = $this->getParameter('pageId');
-
 		$form
-			->addSelect('tags', 'Přidat Kategori:', $this->model->fetchTags())
+			->addMultiSelect('tags', 'Přidat Kategori:', $this->model->fetchTags())
 			->setHtmlAttribute('id', 'mar')
 			->setRequired();
-			
+
 		$form
 			->addSubmit('send', 'Přidat Kategorii')
 			->setHtmlAttribute('class', 'button__submit');
 		return $form;
 	}
 
-	public function actionAddTagPage(int $pageId): void
-	{
-		$page = $this->model->getPages()->get($pageId);
-		$form = $this->getComponent('addTagForm')->setDefaults($page->toArray());
-		$form->onSuccess[] = [$this, 'addTagFormSucceeded'];
-	}
-
 	public function addTagFormSucceeded(\stdClass $values): void
 	{
 		try {
-			$pageId = $this->getParameter('pageId');
-			$page = $this->model->getPages()->get($pageId);
-			$this->model->getRelatedTags()->insert([
-				'page_id' => $pageId,
-				'tag_id' => $values->tags,
-			]);
-		} 
-		catch (Nette\Database\UniqueConstraintViolationException $e) 
-		{
+			foreach($values->tags as $tag){
+				$this->model->getRelatedTags()->insert([
+					'page_id' => $this->page->id,
+					'tag_id' => $tag,
+				]);
+			}
+		} catch (Nette\Database\UniqueConstraintViolationException $e) {
 			$this->flashMessage('Nelze přidat, protože příspěvěk již obsahuje tuto kategorii');
 			$this->redirect('this');
 		}
-
 		$this->flashMessage('Kategorie byla úspěšně přidána.', 'success');
-		$this->redirect('Page:editPage', $page->id);
+		$this->redirect('Page:editPage', $this->page->id);
 	}
 
-	public function renderAddTagPage(int $pageId)
+	public function handleDeleteTag(int $tagId)
 	{
-		$page = $this->model->getPages()->get($pageId);
-		$this->template->page = $page;
-	}
-
-	public function handleDelete(int $tagId)
-	{
-		parent::startup();
-		if(!$this->getUser()->isLoggedIn()){
-			$this->redirect('Sign:in');
-		} else{
-			$pageId = $this->getParameter('pageId');
-			$tags = $this->model->getRelatedTags()->where('page_id', $pageId);
-			$size = $tags->count('*');
-			foreach($tags as $tag){
-				if($tag->tag_id == $tagId){
-					if($size > 1){
-						$tag->delete();
-						$this->flashMessage('Kategorie byla odstraněna');
-						$this->redirect('this');
-					}else{
-						$this->flashMessage('Nelze odstranit, příspěvek musí obsahovat min. 1. kategorii');
-						$this->redirect('this');
-					}
-				} 
+		$tags = $this->page->related('pages_tags');
+		$size = $tags->count('*');
+		foreach ($tags as $tag) {
+			if ($tag->tag_id == $tagId) {
+				if ($size > 1) {
+					$tag->delete();
+					$this->flashMessage('Kategorie byla odstraněna');
+					$this->redirect('this');
+				} else {
+					$this->flashMessage('Nelze odstranit, příspěvek musí obsahovat min. 1. kategorii');
+					$this->redirect('this');
+				}
 			}
 		}
 	}
 
 	public function handleAdd(int $pageId)
 	{
-		parent::startup();
-		if(!$this->getUser()->isLoggedIn){
 			$page = $this->model->getPages()->get($pageId);
-			if($page->inMenu == 0){
+			if ($page->inMenu == 0) {
 				$page->update([
 					'inMenu' => 1
 				]);
-			} else{
+			} else {
 				$page->update([
 					'inMenu' => 0
 				]);
 			}
-		}
+			$this->flashMessage('Stránka byla přidána do menu');
+			$this->redirect('this');
 	}
 
 	public function handleDeletePage(int $pageId)
 	{
-		parent::startup();
-		if(!$this->getUser()->isLoggedIn){
 			$page = $this->model->getPages()->get($pageId);
 			$page->related('pages_tags')->delete();
 			$page->delete();
 			$this->flashMessage('Stránka byla úspěšně odstraněna.');
-			$this->redirect('Admin:');
-		}
+			$this->redirect('Page:overview');
 	}
 }

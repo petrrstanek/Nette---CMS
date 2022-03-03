@@ -23,14 +23,11 @@ class MyAuthenticator implements Nette\Security\Authenticator
 		->where('username', $username)
 		->fetch();
 		
-		bdump($row);
-
 		if(!$row){
 			throw new Nette\Security\AuthenticationException('Uživatel nebyl nalezen');
 		}
-		bdump($password);
 
-		if($password !== $row->password){
+		 else if(!$this->passwords->verify($password, $row->password)){
 			throw new Nette\Security\AuthenticationException('Špatné heslo');
 		}
 

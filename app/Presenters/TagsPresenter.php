@@ -26,88 +26,63 @@ class TagsPresenter extends BasePresenter
 		return $formTag;
 	}
 
-	public function actionEditTag(int $tagId): void
+	public function renderDefault(): void
 	{
-		$this->tag = $this->model->getTags()->get($tagId);
-		$formTag = $this->getComponent('controlTagForm');
-		$formTag->onSuccess[] = [$this, 'editTagProcess'];
+		$this->template->tags = $this->model->getTags();
 	}
 
 	public function actionCreateTag(): void
 	{
-		$formTag = $this->getComponent('controlTagForm');
-		$formTag->onSuccess[] = [$this, 'createTagProcess'];
+		$this->tag = $this->model->getTags();
+		$this->getComponent('controlTagForm')->onSuccess[] = [$this, 'createTagProcess'];
 	}
 
-	public function editTagProcess(\stdClass $values): void
+	public function actionEditTag(int $tagId): void
 	{
-		$tagId = $this->getParameter('tagId');
-		$tag = $this->model->getTags()->get($tagId);
-			$tag->update([
-				'name' => $values->name,
-			]);
+		$this->tag = $this->model->getTags()->get($tagId);
+		$this->getComponent('controlTagForm')->setDefaults($this->tag->toArray())
+		->onSuccess[] = [$this, 'editTagProcess'];
+	}
+
+	public function editTagProcess(array $values): void
+	{
+			$this->tag->update($values);
 			$this->flashMessage('Kategorie byla aktualizována.');
 			$this->redirect('Tags:');
 	}
 
 	public function createTagProcess(\stdClass $values): void
 	{
-		$tagId = $this->getParameter('tagId');
-		$tags = $this->model->getTags()->select('name');
 		$exist = false;
-		bdump($tags);
-		
-			foreach ($tags as $tag) {
-				if ($tag->name == $values->name) {
-					$this->flashMessage('Kategorie: ' . "$values->name" . ' již existuje');
-					$this->redirect('this');
-					$exist = true;
-					break;
-				}
-			}
-			if ($exist === false) {
-				$this->model->getTags()->insert([
-					'name' => $values->name,
-				]);
-				$this->flashMessage('Úspěšně jste přidal kategorii: ' . "$values->name" . ' ', 'success');
-				$this->redirect('Tags:');
+		foreach ($this->tag as $tag) {
+			if ($tag->name == $values->name) {
+				$this->flashMessage('Kategorie: ' . "$values->name" . ' již existuje');
+				$this->redirect('this');
+				$exist = true;
+				break;
 			}
 		}
-
-
+		if ($exist === false) {
+			$this->tag->insert([
+				'name' => $values->name,
+			]);
+			$this->flashMessage('Úspěšně jste přidal kategorii: ' . "$values->name" . ' ', 'success');
+			$this->redirect('Tags:');
+		}
+	}
+	
 	function handleDelete($tagId)
 	{
-		parent::startup();
-			if($this->getUser()->isLoggedIn())
-			{
-				$this->redirect('Sign:in');
-			} else{
-				try 
-				{
-					$tagId = $this->getParameter('tagId');
-					$tagToDelete = $this->model
-						->getTags()
-						->get($tagId)
-						->delete();
-					$this->flashMessage('Kategorie byla smazána.');
-					$this->redirect('Tags:');
-				} 
-				catch (Nette\Database\ForeignKeyConstraintViolationException $e) 
-				{
-					$this->flashMessage('Nelze odstranit, protože jeden z příspěvku obsahuje tuto kategorii.');
-					$this->redirect('this');
-				}
-			}
-	}
-
-	public function renderDefault(): void
-	{
-		
-		$this->template->tags = $this->model->getTags();
-	}
-
-	public function renderEditTag(): void{
-		$formTag = $this->getComponent('controlTagForm');
-		$formTag->setDefaults($this->tag->toArray());
+		try 
+		{
+			$this->model->getTags()->get($tagId)->delete();
+			$this->flashMessage('Kategorie byla smazána.');
+			$this->redirect('Tags:');
+		} 
+		catch (Nette\Database\ForeignKeyConstraintViolationException $e) 
+		{
+			$this->flashMessage('Nelze odstranit, protože jeden z příspěvku obsahuje tuto kategorii.');
+			$this->redirect('this');
+		}
 	}
 }

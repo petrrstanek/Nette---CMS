@@ -1,0 +1,23 @@
+{block content}
+<section id="latte-show" class="mx-auto">
+    <div class="row">
+        <div class="col-md-12 p-3 d-flex justify-content-center">
+          <a n:href="Homepage:" class="button__transparent">&larr; Zpět</a>
+          <a n:href="Page:editPage $page->id" n:if="$user->isLoggedIn()" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
+      </div>
+    </div>
+    <h1 n:block="title" class="pt-4 text-center">
+      {$page->title}
+    </h1>
+    <div class="container-tags py-4 d-flex flex-wrap justify-content-center">
+        <div class="tags" n:foreach="$page->related('pages_tags') as $tag">
+          {$tag->tag->name}
+        </div>
+    </div>
+    <div class="container post-show">
+      <div class="date-show">
+        {$page->createdAt|noescape}
+      </div>
+          {$page->content|noescape}
+    </div>
+</section>

@@ -1,40 +1,34 @@
+{block navMenu}
+{/block} 
 {block content}
-  <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
-    {$flash->message}
-  </div>
-  <section id="latte-default">
-    <div class="container">
-      <h1 n:block="title" class="p-3 text-center">Poslední aktualizované stránky</h1>
-      <div class="row">
-        <div class="col-md-12">
-          <div n:foreach="$userPages as $userPage" class="post x-flex">
-            <div class="card">
-              <div class="card-body p-4">
-                <h3>{$userPage->title}</h3>
-                <div class="post-inner">{$userPage->content|truncate:230|noescape}</div>
-                <div class="date">{$userPage->updatedAt|noescape}</div>
-                <a n:href="Page:showPage $userPage->id" class="btn btn-outline-primary">Číst více</a>
-              </div>
+<section id="latte-default">
+  <div class="container">
+    <h1 n:block="title" class="p-3 text-center">Poslední aktualizované stránky</h1>
+    <div class="row">
+      <div class="col-md-12">
+        <div n:foreach="$userPages as $userPage" class="post x-flex">
+          <div class="card">
+            <div class="card-body p-4">
+              <h3>{$userPage->title}</h3>
+              <div class="post-inner">{$userPage->content|truncate:230|noescape}</div>
+              <div class="date">{$userPage->updatedAt|noescape}</div>
+              <a n:href="Homepage:showPage $userPage->id" class="btn btn-outline-primary">Číst více</a>
             </div>
           </div>
-          <div class="pagination pb-5 x-flex">
-            {if $paginator > 1}
-              <a n:href="default, $paginator - 1">Zpět</a>
-              &nbsp; | &nbsp;
-            {/if}
-             {$paginator} z {$lastPage}
-            {if $paginator < $lastPage}
-              &nbsp;|&nbsp;
-              <a n:href="default, $paginator + 1">Další</a>
-            {/if}
-          </div>
+        </div>
+        <div class="pagination pb-5 text-center">
+          {if $paginator > 1}
+            <a n:href="default, $paginator - 1">Zpět</a>
+            &nbsp; | &nbsp;
+          {/if}
+            {$paginator} z {$lastPage}
+          {if $paginator < $lastPage}
+            &nbsp;|&nbsp;
+            <a n:href="default, $paginator + 1">Další</a>
+          {/if}
         </div>
       </div>
     </div>
-  </section>
-{/block}
-{block footer}
-		<footer>
-		Copyright &copy; 2022 CMS - Ed
-		</footer>
+  </div>
+</section>
 {/block}

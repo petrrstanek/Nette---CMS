@@ -4202,7 +4202,7 @@ a {
   color: black !important; }
   a:hover {
     color: #0d6efd;
-    transform: scale(0.98); }
+    transform: scale(0.98node); }
 
 div.flash {
   color: black;
@@ -4353,9 +4353,12 @@ select[readonly] {
 a[data-toggle='collapse'] {
   position: relative; }
 
-@media (max-width: 991.98px) {
-  #sidebarCollapse span {
-    display: none; } }
+#sidebarCollapse {
+  border: 0;
+  outline: none; }
+  @media (max-width: 991.98px) {
+    #sidebarCollapse span {
+      display: none; } }
 
 a {
   transition: 0.3s all ease;
@@ -4364,24 +4367,6 @@ a {
     text-decoration: none !important;
     outline: none !important;
     box-shadow: none; }
-
-button {
-  transition: 0.3s all ease; }
-  button:hover, button:focus {
-    text-decoration: none !important;
-    outline: none !important;
-    box-shadow: none !important; }
-
-.btn.btn-primary {
-  background: #0d6efd;
-  border-color: #0d6efd; }
-  .btn.btn-primary:hover, .btn.btn-primary:focus {
-    background: #0d6efd !important;
-    border-color: #0d6efd !important; }
-
-.container-tags {
-  display: flex;
-  justify-content: center; }
 
 .tags {
   width: 140px;
@@ -4394,28 +4379,6 @@ button {
   border-radius: 40px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
   border-color: transparent; }
-
-.x-flex {
-  display: flex;
-  justify-content: center; }
-
-.xy-flex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; }
-
-.card-flex {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-.fix {
-  display: flex;
-  flex-wrap: wrap; }
-
-.fav-icon .active {
-  color: #e2c822 !important; }
 
 .preview-icon:hover {
   color: #0d6efd !important; }
@@ -4448,9 +4411,6 @@ button {
     color: yellow;
     transform: scale(0.98); }
 
-.multi-menu {
-  white-space: nowrap; }
-
 .button {
   padding: 10px;
   background-color: #0d6efd;
@@ -4460,12 +4420,6 @@ button {
   color: white; }
   .button:hover {
     transform: scale(0.98); }
-  .button__delete {
-    position: absolute;
-    right: 3px;
-    top: 8px;
-    background-color: red;
-    color: white; }
   .button__transparent {
     color: black;
     background-color: transparent !important;
@@ -4486,23 +4440,7 @@ button {
       right: 0;
       width: 0;
       left: 0;
-      /* margin: 0 auto !important; */
       transition: 0.3s; }
-
-#header {
-  background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.5rem; }
-
-#latte-create .card {
-  width: 85%;
-  margin: 15px auto 30px auto; }
-
-#latte-edit .card {
-  width: 85%;
-  margin: 0 auto 30px auto; }
 
 #latte-edit .tags:hover {
   opacity: 0.25;
@@ -4519,57 +4457,30 @@ button {
     #latte-edit .header-icons .h-icon-trash:hover {
       color: red !important;
       transform: scale(0.98); }
-  #latte-edit .header-icons .h-icon-start:hover {
+  #latte-edit .header-icons .h-icon-fav:hover {
     color: yellow !important;
     transform: scale(0.98); }
 
-#latte-default {
-  overflow: hidden;
-  margin: 0 auto; }
-  #latte-default a {
-    color: black !important; }
-  #latte-default .post-inner h1,
-  #latte-default .post-inner h2,
-  #latte-default .post-inner h3,
-  #latte-default .post-inner h4,
-  #latte-default .post-inner h5,
-  #latte-default .post-inner h6 {
-    display: none; }
-  #latte-default .date {
-    position: absolute;
-    top: 9px;
-    right: 22px;
-    opacity: 0.5; }
-  #latte-default .btn-new-page {
-    position: absolute;
-    left: calc(-5vw + 60px);
-    top: 6.5rem; }
-  #latte-default .btn-new-page {
-    width: 65px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0; }
-  #latte-default .btn-new-tag {
-    padding: 0;
-    width: 65px;
-    height: 60px;
-    align-items: center;
-    display: flex;
-    margin-top: 30px;
-    justify-content: center;
-    position: absolute;
-    left: calc(-5vw + 60px); }
-  #latte-default .post:not(:last-child) {
-    padding-bottom: 10px; }
-  #latte-default .tags-homepage {
-    text-align: right; }
+#latte-default .post-inner h1,
+#latte-default .post-inner h2,
+#latte-default .post-inner h3,
+#latte-default .post-inner h4,
+#latte-default .post-inner h5,
+#latte-default .post-inner h6 {
+  display: none; }
+
+#latte-default .date {
+  position: absolute;
+  top: 9px;
+  right: 22px;
+  opacity: 0.5; }
+
+#latte-default .post:not(:last-child) {
+  padding-bottom: 10px; }
 
 #latte-show .post-show {
   position: relative;
   width: 75%;
-  height: 100%;
   background-color: #fff;
   border: 1px solid #e5e5e5;
   padding: 80px 90px;
@@ -4590,27 +4501,6 @@ button {
   border-radius: 20px;
   padding: 1px 20px; }
 
-#latte-show .fix {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap; }
-
-#latte-admin-home {
-  /* span {
-		display: none;
-	} */ }
-  #latte-admin-home .container-table {
-    overflow: auto; }
-
-#latte-manag-tags a {
-  color: black; }
-
-#latte-manag-tags .container-buttons {
-  margin-top: 15px; }
-
-.admin-content-mobile {
-  display: none; }
-
 @media only screen and (max-width: 992px) {
   .post-show {
     width: 95% !important;
@@ -4619,6 +4509,8 @@ button {
     padding: 70px 5Opx; } }
 
 @media only screen and (max-width: 768px) {
+  .card {
+    flex: 1; }
   #latte-admin-home .container {
     padding: 20px !important; }
   .container-table {
@@ -4634,14 +4526,13 @@ button {
     top: -246px;
     height: 540px;
     width: 50px;
-    min-width: 0px;
-    /* top: -80px; */ }
+    min-width: 0px; }
     #sidebar ul li {
-      font-size: 34px;
-      height: 40px;
-      width: 32; }
-      #sidebar ul li .href-create {
-        padding: 10px 40px; }
+      font-size: 28px;
+      display: flex;
+      justify-content: center; }
+      #sidebar ul li a {
+        height: 220px; }
       #sidebar ul li p {
         display: none; }
     #sidebar .bi-list::before {
@@ -4650,29 +4541,18 @@ button {
       display: none; }
     #sidebar .nav-content {
       transform: rotate(-90deg);
-      align-self: center;
-      margin-left: -95px; }
+      display: flex; }
     #sidebar .custom-menu {
-      top: 80px; }
+      top: 75px; }
+    #sidebar .href-create {
+      padding-right: 40px; }
+    #sidebar .href-overview {
+      padding: 0 40px; }
     #sidebar .components {
       display: flex;
       margin-bottom: 0px; }
-    #sidebar .footer {
-      display: none; }
   .navbar {
     z-index: 2; }
-  .card {
-    flex: 1; }
-  #admin-footer-mobile {
-    height: 80px;
-    width: 100%;
-    background-color: #f7f7f7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    bottom: -100px; }
-  .parent {
-    min-height: 100vh; }
   .pos-r {
     position: relative;
     top: -450px; } }
@@ -4685,6 +4565,4 @@ button {
     .nav-link.button__transparent:before {
       margin: 0 !important; }
   .active {
-    margin-left: -210px; }
-  #admin-footer-mobile {
-    display: none; } }
+    margin-left: -210px; } }
