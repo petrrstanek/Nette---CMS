@@ -182,13 +182,15 @@ final class PagePresenter extends BasePresenter
 				$page->update([
 					'inMenu' => 1
 				]);
+				$this->flashMessage('Stránka byla přidána do menu');
+			$this->redirect('this');
 			} else {
 				$page->update([
 					'inMenu' => 0
 				]);
+				$this->flashMessage('Stránka byla odebrána z menu');
+				$this->redirect('this');
 			}
-			$this->flashMessage('Stránka byla přidána do menu');
-			$this->redirect('this');
 	}
 
 	public function handleDeletePage(int $pageId)

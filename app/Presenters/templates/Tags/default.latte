@@ -1,15 +1,37 @@
 {block content}
-<section id="latte-default" class="text-center mx-auto w-100 pos-r">
-    <h2 class="py-5">Kategorie</h2>
-    <div class="row">
-      <div class="container">
-        <div class="col-md-12 container-tags d-flex justify-content-center align-self-center flex-wrap px-5">
-          <a n:href="Tags:createTag">&plus;</a>
-          <div n:foreach="$tags as $tag" class="tag">
-            <a n:href="Tags:editTag $tag->id" class="tags">{$tag->name}</a>
-          </div>
-        </div>
-      </div>
-    </div>
+<section id="latte-default" class=" text-center mx-auto w-100">
+  <h2 class="py-5">Kategorie</h2>
+  <div class="container d-flex justify-content-center">
+  <div class="container-table overflow-auto">
+    <table class="table bordered table-hover mb-4" style="border: 1px solid rgba(0,0,0, 0.1);">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Název kategorie</th>
+          <th>Editace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr n:foreach="$tags as $tag">
+          <td>
+          {$tag->id}
+          </td>
+          <td>
+            {$tag->name}
+          </td>
+          <td>
+            <div class="d-flex justify-content-center">
+            <a n:href="Tags:editTag $tag->id" class="mr-2"><i class="bi bi-pen-fill edit-icon"></i></a>
+            <a n:href="delete! $tag->id"><i class="bi bi-trash-fill trash-icon" ></i></a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  
+   <a n:href="Tags:createTag" class="button" style="color: #fff;">Přidat kategorii</a>
 </section>
+
 

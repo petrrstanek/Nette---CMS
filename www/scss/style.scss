@@ -71,6 +71,11 @@ form .error {
 	font-weight: bold;
 }
 
+#mar,
+#frm-pageForm-tags {
+	width: 100%;
+}
+
 table,
 input {
 	width: 100%;
@@ -247,6 +252,7 @@ a[data-toggle='collapse'] {
 			display: none;
 		}
 	}
+
 	border: 0;
 	outline: none;
 }
@@ -335,7 +341,7 @@ a {
 	border: 0;
 	outline: none;
 	border-radius: 8px;
-	color: white;
+	color: white !important;
 
 	&:hover {
 		transform: scale(0.98);
@@ -372,51 +378,53 @@ a {
 	}
 }
 
-#latte-dashboard{
-	.card{
+#latte-dashboard {
+	padding: 50px;
+
+	.card {
 		flex-direction: row;
 		flex: 1;
 	}
 
-	.bg-icon{
-		opacity: 0.3; 
-		font-size: 500px; 
-		position:absolute;
+	.bg-icon {
+		opacity: 0.3;
+		font-size: 500px;
+		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
 
-	.progress{
+	.progress {
 		width: 80%;
 	}
 
-	i{
+	i {
 		font-size: 60px;
 		opacity: 0.3;
 	}
 
-		.header{
-			text-transform: uppercase;
-			font-weight: 500;	
-			padding: 10px 10px;
-		}	
+	.header {
+		text-transform: uppercase;
+		font-weight: 500;
+		padding: 10px 10px;
+	}
 
-		.card-body{
-			padding: 0;
-		}
+	.card-body {
+		padding: 0;
+	}
 
-		.inner-number{
-			align-self: center;
-			font-size: 60px;
-			margin: auto;
-		}
-	
+	.inner-number {
+		align-self: center;
+		font-size: 60px;
+		margin-left: auto;
+	}
 
-	.card::before{
+
+	.card::before {
 		content: '';
-	border: 1px solid #0d6efd;
-	opacity: 0.2;
+		border: 1px solid #0d6efd;
+		opacity: 0.2;
 	}
 }
 
@@ -446,7 +454,7 @@ a {
 			}
 		}
 
-		.h-icon-fav{
+		.h-icon-fav {
 			&:hover {
 				color: yellow !important;
 				transform: scale(0.98);
@@ -466,6 +474,7 @@ a {
 
 #latte-default {
 	.post-inner {
+
 		h1,
 		h2,
 		h3,
@@ -476,12 +485,14 @@ a {
 		}
 	}
 
-	
+
 
 	.post:not(:last-child) {
 		padding-bottom: 10px;
 	}
 }
+
+#latte-add-tag-page {}
 
 //*** - SHOW - ***///
 
@@ -494,6 +505,7 @@ a {
 		padding: 80px 90px;
 		box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
 		margin: 0 auto 20px auto;
+
 	}
 
 	.date-show {
@@ -520,14 +532,87 @@ a {
 		width: 95% !important;
 		height: 100% !important;
 		margin-bottom: 30px !important;
-		padding: 70px 5Opx;
+		padding: 70px 50px !important;
+	}
+
+	.date-show {
+		position: absolute !important;
+		top: -25px !important;
+		right: 4px !important;
+		opacity: 1 !important;
 	}
 }
 
 @media only screen and (max-width: 768px) {
 
-	.card{
+	.card {
 		flex: 1;
+	}
+
+
+	#sidebar {
+		display: none !important;
+	}
+
+	.mobile-bar {
+		background-color: $main-color;
+	}
+
+	.menu {
+		li {
+			a {
+				i{
+					font-size: 40px;
+					color: #fff;
+				}
+				p {
+					display: none
+				}
+			}
+		}
+	}
+
+	.custom-menu {
+		display: none !important;
+	}
+
+	#latte-edit-tag {
+		margin-bottom: 270px;
+		margin-top: -150px !important;
+	}
+
+	#latte-create-tag {
+		margin-top: -145px !important;
+		margin-bottom: 310px;
+	}
+
+	#latte-default {
+		margin-bottom: 135px;
+		margin-top: -120px;
+	}
+
+	#latte-create {
+		display: flex;
+		padding: 10px;
+	}
+
+	#latte-dashboard {
+		margin-top: -75px !important;
+		padding: 0;
+		.order {
+			order: 3;
+		}
+		margin-top: 0;
+	}
+
+	#latte-edit {
+		display: flex;
+		flex-direction: column;
+		padding: 10px;
+
+		.card {
+			width: 100% !important;
+		}
 	}
 
 	#latte-admin-home {
@@ -537,7 +622,7 @@ a {
 	}
 
 	.container-table {
-		width: 370px;
+		width: 300px;
 	}
 
 	.wrapper {
@@ -553,18 +638,27 @@ a {
 	#sidebar {
 		transform: rotate(90deg);
 		display: flex;
-		top: -246px;
-		height: 540px;
+		top: -290px;
 		width: 50px;
 		min-width: 0px;
+
 		ul {
+
 			li {
-				font-size: 28px;
+				font-size: 40px;
 				display: flex;
 				justify-content: center;
-				a{
-					height: 220px;
+
+				a {
+					color: $main-color !important;
+					height: 40px;
+					border-bottom: none;
+
+					&:hover {
+						color: black !important;
+					}
 				}
+
 				p {
 					display: none;
 				}
@@ -585,17 +679,19 @@ a {
 		}
 
 		.custom-menu {
-			top: 75px;
+			top: 100px;
 		}
 
-		.href-create{
+		.href-create {
 			padding-right: 40px;
 		}
-		.href-overview{
+
+		.href-overview {
 			padding: 0 40px;
 		}
 
 		.components {
+			padding: 15px !important;
 			display: flex;
 			margin-bottom: 0px;
 		}
@@ -604,13 +700,18 @@ a {
 	.navbar {
 		z-index: 2;
 	}
+
 	.pos-r {
 		position: relative;
-		top: -450px
+		top: -250px
 	}
 }
 
 @media only screen and (min-width: 768px) {
+
+	.mobile-bar {
+		display: none !important;
+	}
 
 	.nav-link {
 		&.button__transparent {
@@ -625,6 +726,7 @@ a {
 			}
 		}
 	}
+
 	.active {
 		margin-left: -210px;
 	}

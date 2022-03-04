@@ -4277,6 +4277,10 @@ form .error {
   color: #d00;
   font-weight: bold; }
 
+#mar,
+#frm-pageForm-tags {
+  width: 100%; }
+
 table,
 input {
   width: 100%; }
@@ -4455,7 +4459,7 @@ a {
   border: 0;
   outline: none;
   border-radius: 8px;
-  color: white; }
+  color: white !important; }
   .button:hover {
     transform: scale(0.98); }
   .button__transparent {
@@ -4480,42 +4484,37 @@ a {
       left: 0;
       transition: 0.3s; }
 
-#latte-dashboard .card {
-  flex-direction: row;
-  flex: 1; }
-
-#latte-dashboard .bg-icon {
-  opacity: 0.3;
-  font-size: 500px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
-
-#latte-dashboard .progress {
-  width: 80%; }
-
-#latte-dashboard i {
-  font-size: 60px;
-  opacity: 0.3; }
-
-#latte-dashboard .header {
-  text-transform: uppercase;
-  font-weight: 500;
-  padding: 10px 10px; }
-
-#latte-dashboard .card-body {
-  padding: 0; }
-
-#latte-dashboard .inner-number {
-  align-self: center;
-  font-size: 60px;
-  margin: auto; }
-
-#latte-dashboard .card::before {
-  content: '';
-  border: 1px solid #0d6efd;
-  opacity: 0.2; }
+#latte-dashboard {
+  padding: 50px; }
+  #latte-dashboard .card {
+    flex-direction: row;
+    flex: 1; }
+  #latte-dashboard .bg-icon {
+    opacity: 0.3;
+    font-size: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  #latte-dashboard .progress {
+    width: 80%; }
+  #latte-dashboard i {
+    font-size: 60px;
+    opacity: 0.3; }
+  #latte-dashboard .header {
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 10px 10px; }
+  #latte-dashboard .card-body {
+    padding: 0; }
+  #latte-dashboard .inner-number {
+    align-self: center;
+    font-size: 60px;
+    margin-left: auto; }
+  #latte-dashboard .card::before {
+    content: '';
+    border: 1px solid #0d6efd;
+    opacity: 0.2; }
 
 #latte-edit .tags:hover {
   opacity: 0.25;
@@ -4581,15 +4580,55 @@ a {
     width: 95% !important;
     height: 100% !important;
     margin-bottom: 30px !important;
-    padding: 70px 5Opx; } }
+    padding: 70px 50px !important; }
+  .date-show {
+    position: absolute !important;
+    top: -25px !important;
+    right: 4px !important;
+    opacity: 1 !important; } }
 
 @media only screen and (max-width: 768px) {
   .card {
     flex: 1; }
+  #sidebar {
+    display: none !important; }
+  .mobile-bar {
+    background-color: #0d6efd; }
+  .menu li a i {
+    font-size: 40px;
+    color: #fff; }
+  .menu li a p {
+    display: none; }
+  .custom-menu {
+    display: none !important; }
+  #latte-edit-tag {
+    margin-bottom: 270px;
+    margin-top: -150px !important; }
+  #latte-create-tag {
+    margin-top: -145px !important;
+    margin-bottom: 310px; }
+  #latte-default {
+    margin-bottom: 135px;
+    margin-top: -120px; }
+  #latte-create {
+    display: flex;
+    padding: 10px; }
+  #latte-dashboard {
+    margin-top: -75px !important;
+    padding: 0;
+    margin-top: 0; }
+    #latte-dashboard .order {
+      order: 3; }
+  #latte-edit {
+    display: flex;
+    flex-direction: column;
+    padding: 10px; }
+    #latte-edit .card {
+      width: 100% !important; }
   #latte-admin-home .container {
     padding: 20px !important; }
   .container-table {
-    width: 370px; }
+    width: 300px; }
   .wrapper {
     flex-direction: column;
     align-items: center;
@@ -4599,16 +4638,19 @@ a {
   #sidebar {
     transform: rotate(90deg);
     display: flex;
-    top: -246px;
-    height: 540px;
+    top: -290px;
     width: 50px;
     min-width: 0px; }
     #sidebar ul li {
-      font-size: 28px;
+      font-size: 40px;
       display: flex;
       justify-content: center; }
       #sidebar ul li a {
-        height: 220px; }
+        color: #0d6efd !important;
+        height: 40px;
+        border-bottom: none; }
+        #sidebar ul li a:hover {
+          color: black !important; }
       #sidebar ul li p {
         display: none; }
     #sidebar .bi-list::before {
@@ -4619,21 +4661,24 @@ a {
       transform: rotate(-90deg);
       display: flex; }
     #sidebar .custom-menu {
-      top: 75px; }
+      top: 100px; }
     #sidebar .href-create {
       padding-right: 40px; }
     #sidebar .href-overview {
       padding: 0 40px; }
     #sidebar .components {
+      padding: 15px !important;
       display: flex;
       margin-bottom: 0px; }
   .navbar {
     z-index: 2; }
   .pos-r {
     position: relative;
-    top: -450px; } }
+    top: -250px; } }
 
 @media only screen and (min-width: 768px) {
+  .mobile-bar {
+    display: none !important; }
   .nav-link.button__transparent {
     transition: 0.3s; }
     .nav-link.button__transparent:hover:before {

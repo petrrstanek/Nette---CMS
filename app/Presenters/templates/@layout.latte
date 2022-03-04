@@ -19,6 +19,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ml-auto">
+				{if $user->isLoggedIn()}
 				{block navMenu}
 				<li n:foreach="$mainMenu as $favPage" class="nav-item">
 					<a n:href="Admin:dashboard $favPage->id" class="nav-link button__transparent mx-sm-0 mx-auto">
@@ -26,7 +27,6 @@
 					</a>
 				</li>
 				{/block}
-				{if $user->isLoggedIn()}
 				<li class="nav-item"><a class="nav-link button__transparent" n:href="Sign:out"><i class="fas fa-sign-out-alt sign"></i> Odhlásit</a></li>
 				{else}
 				<li class="nav-item"><a class="nav-link button__transparent" n:href="Sign:in"><i class="fas fa-sign-out-alt sign"></i> Přihlásit</a></li>
@@ -36,6 +36,24 @@
 	</div>
 </nav>
 {/block}
+{if $user->isLoggedIn()}
+		<div class="mobile-bar">
+<ul class="list-unstyled menu d-flex justify-content-around">
+			<li>
+			<a n:href="Admin:dashboard"><i class="bi bi-house-door"></i><p>Dashboard</p> </a>
+			</li>
+				<li class="href-overview">
+					<a n:href="Page:overview"><i class="bi bi-file-font"></i> <p> Přehled Stránek</p></a>
+				</li>
+				<li class="href-create">
+					<a n:href="Page:createPage"><i class="bi bi-pencil-square"></i> <p>Nová Stránka</p> </a>
+				</li>
+				<li>
+					<a n:href="Tags:"><i class="bi bi-tags"></i> <p>Přehled Kategorií</p></a>
+				</li>
+			</ul>
+</div>
+{/if}
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
 			{$flash->message}
 		</div>

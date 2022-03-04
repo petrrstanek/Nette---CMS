@@ -60,7 +60,7 @@ final class SignPresenter extends BasePresenter
 	protected function createComponentRegisterForm(): Form
 	{
 		$regForm = new Form;
-		$regForm->addText('username', 'Uživatelské jméno(email)')
+		$regForm->addText('username', 'Uživatelské jméno')
 		->setRequired('Prosím vyplňte');
 
 		$regForm->addPassword('password', 'Heslo')
