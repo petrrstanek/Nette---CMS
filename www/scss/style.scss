@@ -11,6 +11,7 @@ $secondary: #44bef1;
 body {
 	color: #333;
 	background-color: $bg-color-primary !important;
+	font-family: 'Inter', sans-serif;
 }
 
 a {
@@ -387,7 +388,7 @@ a {
 	}
 
 	.progress{
-		width: 270px ;
+		width: 80%;
 	}
 
 	i{
@@ -395,10 +396,22 @@ a {
 		opacity: 0.3;
 	}
 
-	.card-body{
-		text-transform: uppercase;
-		font-style: bold;
-	}
+		.header{
+			text-transform: uppercase;
+			font-weight: 500;	
+			padding: 10px 10px;
+		}	
+
+		.card-body{
+			padding: 0;
+		}
+
+		.inner-number{
+			align-self: center;
+			font-size: 60px;
+			margin: auto;
+		}
+	
 
 	.card::before{
 		content: '';
@@ -530,6 +543,7 @@ a {
 	.wrapper {
 		flex-direction: column;
 		align-items: center;
+		justify-content: flex-start;
 	}
 
 	.active {

@@ -4232,7 +4232,8 @@ mark,
 @import "spinners";  */
 body {
   color: #333;
-  background-color: #eceef0 !important; }
+  background-color: #eceef0 !important;
+  font-family: 'Inter', sans-serif; }
 
 a {
   text-decoration: none !important;
@@ -4492,15 +4493,24 @@ a {
   transform: translate(-50%, -50%); }
 
 #latte-dashboard .progress {
-  width: 270px; }
+  width: 80%; }
 
 #latte-dashboard i {
   font-size: 60px;
   opacity: 0.3; }
 
-#latte-dashboard .card-body {
+#latte-dashboard .header {
   text-transform: uppercase;
-  font-style: bold; }
+  font-weight: 500;
+  padding: 10px 10px; }
+
+#latte-dashboard .card-body {
+  padding: 0; }
+
+#latte-dashboard .inner-number {
+  align-self: center;
+  font-size: 60px;
+  margin: auto; }
 
 #latte-dashboard .card::before {
   content: '';
@@ -4582,7 +4592,8 @@ a {
     width: 370px; }
   .wrapper {
     flex-direction: column;
-    align-items: center; }
+    align-items: center;
+    justify-content: flex-start; }
   .active {
     margin-top: -49px; }
   #sidebar {
