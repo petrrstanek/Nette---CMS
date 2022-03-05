@@ -6,6 +6,7 @@ use Nette;
 use App\Model\PostModel;
 use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Form;
+use Ublaboo\DataGrid\DataGrid;
 
 abstract class BasePresenter extends Presenter
 {

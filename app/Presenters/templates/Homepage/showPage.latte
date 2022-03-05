@@ -15,7 +15,7 @@
     </div>
     <div class="container">
     <div class="post-show">
- <a n:href="Page:editPage $page->id" n:if="$user->isLoggedIn()" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
+      <a n:href="Page:editPage $page->id" n:if="$user->isLoggedIn()" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
       <div class="date-show">
         {$page->createdAt|noescape}
       </div>

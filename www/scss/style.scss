@@ -1,6 +1,4 @@
-@import '../../vendor/bootstrap/bootstrap';
-@import '../../vendor/bootstrap/variables';
-@import '../../vendor/bootstrap/mixins';
+@import 'bootstrap';
 
 $bg-color-primary: #eceef0;
 $main-color: #0d6efd;
@@ -383,7 +381,7 @@ a {
 		&:hover {
 			opacity: 0.25;
 			background-color: red;
-			color: white;
+			color: #fff;
 		}
 	}
 
@@ -537,14 +535,10 @@ a {
 		flex-direction: column;
 		align-items: center;
 	}
-
-		h1 {
-			display: none;
-		}
 	}
 
-	@media only screen and (min-width: 992px){
+	@media only screen and (min-width: 768px){
 		.mobile-bar {
-			display: none !important;
+			display: none;
 		}
 	}

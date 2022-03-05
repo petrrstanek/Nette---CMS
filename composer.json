@@ -19,7 +19,9 @@
 		"nette/security": "^3.1",
 		"nette/utils": "^3.2",
 		"latte/latte": "^2.9",
-		"tracy/tracy": "^2.9"
+		"tracy/tracy": "^2.9",
+		"ublaboo/datagrid": "^6.9",
+		"ublaboo/datagrid-nette-database-data-source": "^2.1"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",

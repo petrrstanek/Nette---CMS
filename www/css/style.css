@@ -4486,7 +4486,7 @@ a {
 #latte-edit .tags:hover {
   opacity: 0.25;
   background-color: red;
-  color: white; }
+  color: #fff; }
 
 #latte-edit .header-icons {
   position: absolute;
@@ -4576,10 +4576,8 @@ a {
     width: 300px; }
   .wrapper {
     flex-direction: column;
-    align-items: center; }
-  h1 {
-    display: none; } }
+    align-items: center; } }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
   .mobile-bar {
-    display: none !important; } }
+    display: none; } }

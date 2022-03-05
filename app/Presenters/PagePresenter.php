@@ -35,6 +35,13 @@ final class PagePresenter extends BasePresenter
 		}
 	}
 
+	protected function createComponentSimpleGrid($name): DataGrid
+	{
+		$grid = new DataGrid($this, $name);
+		$grid->setDataSource($this->model->getPages());
+
+	}
+
 	public function renderOverview(int $page = 1): void
 	{
 		$pages = $this->model->getCreatedPages();
