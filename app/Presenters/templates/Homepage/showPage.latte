@@ -1,5 +1,5 @@
 {block content}
-<section id="latte-show" class=" mx-auto">
+<section id="latte-show" class=" w-100 mx-auto">
     <div class="row">
         <div class="col-md-12 p-3 d-flex justify-content-center">
           <a n:href="Homepage:" class="button__transparent">&larr; Zpět</a>
@@ -13,11 +13,13 @@
           {$tag->tag->name}
         </div>
     </div>
-    <div class="container post-show">
+    <div class="container">
+    <div class="post-show">
  <a n:href="Page:editPage $page->id" n:if="$user->isLoggedIn()" class="edit-button"><i class="bi bi-pen mr-2"></i>Upravit</a>
       <div class="date-show">
         {$page->createdAt|noescape}
       </div>
           {$page->content|noescape}
+    </div>
     </div>
 </section>

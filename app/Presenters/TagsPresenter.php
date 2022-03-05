@@ -6,7 +6,7 @@ use Nette;
 use App\Model\PostModel;
 use Nette\Application\UI\Form;
 use App\Presenters\BasePresenter;
-use App\Model\TagsFactory;
+use App\Forms\TagsFactory;
 
 class TagsPresenter extends BasePresenter
 {
@@ -22,7 +22,7 @@ class TagsPresenter extends BasePresenter
 		$this->tagsFactory = $tagsFactory;
 	}
 
-	protected function createComponentControlTagForm(): Form
+	protected function createComponentCreateTagForm(): Form
 	{
 		return $this->tagsFactory->createTag($this->tag);
 	}
@@ -34,8 +34,7 @@ class TagsPresenter extends BasePresenter
 
 	public function actionCreateTag(): void
 	{
-		$this->tag = $this->model->getTags();
-		$this->getComponent('controlTagForm')->onSuccess[] = function(Form $form)
+		$this->getComponent('createTagForm')->onSuccess[] = function(Form $form)
 		{
 			$this->flashMessage('Úspěšně jste přidal kategorii');
 			$this->redirect('Tags:');
@@ -45,7 +44,7 @@ class TagsPresenter extends BasePresenter
 	public function actionEditTag(int $tagId): void
 	{
 		$this->tag = $this->model->getTags()->get($tagId);
-		$this->getComponent('controlTagForm')->setDefaults($this->tag->toArray())
+		$this->getComponent('createTagForm')->setDefaults($this->tag->toArray())
 		->onSuccess[] = function(Form $form){
 			$this->flashMessage('Kategorie byla aktualizována.');
 			$this->redirect('this');

@@ -7,8 +7,8 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Model\PostModel;
-use App\Model\FormFactory;
-use App\Model\TagsFactory;
+use App\Forms\FormFactory;
+use App\Forms\TagsFactory;
 use App\Presenters\BasePresenter;
 use Nette\Utils\DateTime;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
@@ -22,7 +22,6 @@ final class TagsFactory
     $tagForm = new Form;
     $tagForm->addText('name', 'Název Kategorie: ')->setRequired();
     $tagForm->addSubmit('send', 'Aktualizace')->setHtmlAttribute('class', 'button_submit');
-    
     if(!$this->tag){
       $tagForm->onSuccess[] = [$this, 'tagProcess'];
     } else {
@@ -35,7 +34,7 @@ final class TagsFactory
   public function tagProcess(Form $form, \stdClass $values): void
   {
        try{
-        $this->tag->insert([
+        $this->model->getTags()->insert([
           'name' => $values->name,
         ]);
     }catch(Nette\Database\UniqueConstraintViolationException $e){
@@ -47,17 +46,13 @@ final class TagsFactory
   {
     $this->tag->update($values);
   }
-  
-  /*
-  * ADD TAG TO PAGE
-  */
 
   public function createAddTagForm($pageId): Form
 	{
 		$this->page = $pageId;
 		$form = new Form;
     
-		$form->addCheckboxList('tags', 'Kategorie:', $this->model->fetchTags())
+		$form->addMultiSelect('tags', 'Kategorie:', $this->model->fetchTags())
 			->setRequired();
 		$form->addSubmit('send', 'Přidat kategorii');
 

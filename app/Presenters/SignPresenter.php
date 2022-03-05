@@ -5,7 +5,7 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Model\PostModel;
-use App\Model\SignFactory;
+use App\Forms\SignFactory;
 use App\Presenters\BasePresenter;
 
 final class SignPresenter extends BasePresenter
