@@ -4278,7 +4278,7 @@ form .error {
   font-weight: bold; }
 
 #mar,
-#frm-pageForm-tags {
+#frm-pageForm-tags, #frm-addTagForm-tags {
   width: 100%; }
 
 table,
@@ -4300,12 +4300,6 @@ input {
 
 input[value='Odstranit'] {
   background-color: red; }
-
-select[readonly] {
-  opacity: 0.5;
-  pointer-events: none;
-  touch-action: none;
-  cursor: not-allowed; }
 
 .wrapper {
   position: relative;
@@ -4484,37 +4478,10 @@ a {
       left: 0;
       transition: 0.3s; }
 
-#latte-dashboard {
-  padding: 50px; }
-  #latte-dashboard .card {
-    flex-direction: row;
-    flex: 1; }
-  #latte-dashboard .bg-icon {
-    opacity: 0.3;
-    font-size: 500px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
-  #latte-dashboard .progress {
-    width: 80%; }
-  #latte-dashboard i {
-    font-size: 60px;
-    opacity: 0.3; }
-  #latte-dashboard .header {
-    text-transform: uppercase;
-    font-weight: 500;
-    padding: 10px 10px; }
-  #latte-dashboard .card-body {
-    padding: 0; }
-  #latte-dashboard .inner-number {
-    align-self: center;
-    font-size: 60px;
-    margin-left: auto; }
-  #latte-dashboard .card::before {
-    content: '';
-    border: 1px solid #0d6efd;
-    opacity: 0.2; }
+#latte-dashboard .card::before {
+  content: '';
+  border: 1px solid #0d6efd;
+  opacity: 0.2; }
 
 #latte-edit .tags:hover {
   opacity: 0.25;
@@ -4601,32 +4568,10 @@ a {
     display: none; }
   .custom-menu {
     display: none !important; }
-  #latte-edit-tag {
-    margin-bottom: 270px;
-    margin-top: -150px !important; }
-  #latte-create-tag {
-    margin-top: -145px !important;
-    margin-bottom: 310px; }
-  #latte-default {
-    margin-bottom: 135px;
-    margin-top: -120px; }
-  #latte-create {
-    display: flex;
-    padding: 10px; }
-  #latte-dashboard {
-    margin-top: -75px !important;
-    padding: 0;
-    margin-top: 0; }
-    #latte-dashboard .order {
-      order: 3; }
-  #latte-edit {
-    display: flex;
-    flex-direction: column;
-    padding: 10px; }
-    #latte-edit .card {
-      width: 100% !important; }
-  #latte-admin-home .container {
-    padding: 20px !important; }
+  #latte-dashboard .order {
+    order: 3; }
+  #latte-edit .card {
+    width: 100% !important; }
   .container-table {
     width: 300px; }
   .wrapper {
@@ -4635,14 +4580,6 @@ a {
   h1 {
     display: none; } }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   .mobile-bar {
-    display: none !important; }
-  .nav-link.button__transparent {
-    transition: 0.3s; }
-    .nav-link.button__transparent:hover:before {
-      width: 21%; }
-    .nav-link.button__transparent:before {
-      margin: 0 !important; }
-  .active {
-    margin-left: -210px; } }
+    display: none !important; } }

@@ -57,7 +57,7 @@
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
 			{$flash->message}
 		</div>
-<div class="wrapper d-flex justify-content-center">
+<div class="wrapper d-flex">
 	<nav id="sidebar" n:if="$user->isLoggedIn()">
 		<div class="custom-menu">
 			<button type="button" id="sidebarCollapse" class="btn btn-primary">

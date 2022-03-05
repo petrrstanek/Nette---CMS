@@ -72,7 +72,7 @@ form .error {
 }
 
 #mar,
-#frm-pageForm-tags {
+#frm-pageForm-tags, #frm-addTagForm-tags {
 	width: 100%;
 }
 
@@ -100,13 +100,6 @@ input {
 
 input[value='Odstranit'] {
 	background-color: red;
-}
-
-select[readonly] {
-	opacity: 0.5;
-	pointer-events: none;
-	touch-action: none;
-	cursor: not-allowed;
 }
 
 //__SIDEBAR__//
@@ -252,7 +245,6 @@ a[data-toggle='collapse'] {
 			display: none;
 		}
 	}
-
 	border: 0;
 	outline: none;
 }
@@ -378,48 +370,6 @@ a {
 }
 
 #latte-dashboard {
-	padding: 50px;
-
-	.card {
-		flex-direction: row;
-		flex: 1;
-	}
-
-	.bg-icon {
-		opacity: 0.3;
-		font-size: 500px;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-
-	.progress {
-		width: 80%;
-	}
-
-	i {
-		font-size: 60px;
-		opacity: 0.3;
-	}
-
-	.header {
-		text-transform: uppercase;
-		font-weight: 500;
-		padding: 10px 10px;
-	}
-
-	.card-body {
-		padding: 0;
-	}
-
-	.inner-number {
-		align-self: center;
-		font-size: 60px;
-		margin-left: auto;
-	}
-
-
 	.card::before {
 		content: '';
 		border: 1px solid #0d6efd;
@@ -498,7 +448,6 @@ a {
 		padding: 80px 90px;
 		box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
 		margin: 0 auto 20px auto;
-
 	}
 
 	.date-show {
@@ -568,48 +517,15 @@ a {
 		display: none !important;
 	}
 
-	#latte-edit-tag {
-		margin-bottom: 270px;
-		margin-top: -150px !important;
-	}
-
-	#latte-create-tag {
-		margin-top: -145px !important;
-		margin-bottom: 310px;
-	}
-
-	#latte-default {
-		margin-bottom: 135px;
-		margin-top: -120px;
-	}
-
-	#latte-create {
-		display: flex;
-		padding: 10px;
-	}
-
 	#latte-dashboard {
-		margin-top: -75px !important;
-		padding: 0;
 		.order {
 			order: 3;
 		}
-		margin-top: 0;
 	}
 
 	#latte-edit {
-		display: flex;
-		flex-direction: column;
-		padding: 10px;
-
 		.card {
 			width: 100% !important;
-		}
-	}
-
-	#latte-admin-home {
-		.container {
-			padding: 20px !important;
 		}
 	}
 
@@ -627,26 +543,8 @@ a {
 		}
 	}
 
-@media only screen and (min-width: 768px) {
-
-	.mobile-bar {
-		display: none !important;
-	}
-
-	.nav-link {
-		&.button__transparent {
-			transition: 0.3s;
-
-			&:hover:before {
-				width: 21%;
-			}
-
-			&:before {
-				margin: 0 !important;
-			}
+	@media only screen and (min-width: 992px){
+		.mobile-bar {
+			display: none !important;
 		}
 	}
-	.active {
-		margin-left: -210px;
-	}
-}
