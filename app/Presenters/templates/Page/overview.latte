@@ -38,12 +38,12 @@
 </div>
 <div class="pagination pb-5 text-center">
 {if $page > 1}
-<a n:href="default, $page - 1"> Zpět</a>
+<a n:href="overview, $page - 1"> Zpět</a>
 &nbsp; | &nbsp;
 {/if}{$page} z {$endPage}
 {if $page < $endPage}
 &nbsp;|&nbsp;
-<a n:href="default, $page + 1">Další</a>
+<a n:href="overview, $page + 1">Další</a>
 {/if}
 </div>
 </section>

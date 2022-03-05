@@ -2,5 +2,8 @@ services:
 	- App\Router\RouterFactory::createRouter
 	- App\Model\PostModel
 	- App\Model\MyAuthenticator
+	- App\Model\FormFactory
+	- App\Model\TagsFactory
+	- App\Model\SignFactory
 	security.passwords: Nette\Security\Passwords(::PASSWORD_BCRYPT, [cost: 12])
 

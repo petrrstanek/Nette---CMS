@@ -334,7 +334,6 @@ a {
 }
 
 //BUTTONS
-
 .button {
 	padding: 10px;
 	background-color: $main-color;
@@ -464,7 +463,6 @@ a {
 }
 
 //*** - DEFAULT - ***///
-
 .date {
 	position: absolute;
 	top: 9px;
@@ -485,17 +483,12 @@ a {
 		}
 	}
 
-
-
 	.post:not(:last-child) {
 		padding-bottom: 10px;
 	}
 }
 
-#latte-add-tag-page {}
-
 //*** - SHOW - ***///
-
 #latte-show {
 	.post-show {
 		position: relative;
@@ -548,7 +541,6 @@ a {
 	.card {
 		flex: 1;
 	}
-
 
 	#sidebar {
 		display: none !important;
@@ -628,84 +620,12 @@ a {
 	.wrapper {
 		flex-direction: column;
 		align-items: center;
-		justify-content: flex-start;
 	}
-
-	.active {
-		margin-top: -49px;
-	}
-
-	#sidebar {
-		transform: rotate(90deg);
-		display: flex;
-		top: -290px;
-		width: 50px;
-		min-width: 0px;
-
-		ul {
-
-			li {
-				font-size: 40px;
-				display: flex;
-				justify-content: center;
-
-				a {
-					color: $main-color !important;
-					height: 40px;
-					border-bottom: none;
-
-					&:hover {
-						color: black !important;
-					}
-				}
-
-				p {
-					display: none;
-				}
-			}
-		}
-
-		.bi-list::before {
-			transform: rotate(90deg);
-		}
 
 		h1 {
 			display: none;
 		}
-
-		.nav-content {
-			transform: rotate(-90deg);
-			display: flex;
-		}
-
-		.custom-menu {
-			top: 100px;
-		}
-
-		.href-create {
-			padding-right: 40px;
-		}
-
-		.href-overview {
-			padding: 0 40px;
-		}
-
-		.components {
-			padding: 15px !important;
-			display: flex;
-			margin-bottom: 0px;
-		}
 	}
-
-	.navbar {
-		z-index: 2;
-	}
-
-	.pos-r {
-		position: relative;
-		top: -250px
-	}
-}
 
 @media only screen and (min-width: 768px) {
 
@@ -726,7 +646,6 @@ a {
 			}
 		}
 	}
-
 	.active {
 		margin-left: -210px;
 	}

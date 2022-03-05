@@ -4,40 +4,74 @@ namespace App\Model;
 
 use Nette;
 use Nette\Application\UI\Form;
+use App\Model\PostModel;
+use Nette\Utils\DateTime;
 
-class FormFactory
+final class FormFactory
 {
-	private $facade;
+	private postModel $model;
+	private $page;
 
-	public function __construct(Facade $facade)
+	public function __construct(postModel $model)
 	{
-
-		$this->facade = $facade;
+		$this->model = $model;
 	}
 
-	public function create(): Form
+	public function createPageForm($page): Form
 	{
-		$form = new Form;
+		$this->page = $page;
+		$pageForm = new Form();
+		$pageForm->addText('title', 'Titulek:')->setRequired();
+		if(!$this->page){
+			$pageForm->addMultiSelect('tags', 'Kategore: ', $this->model->fetchTags());
+			$pageForm->onSuccess[] = [$this, 'pageProcess'];
+		}	
 
-		$form->addRadioList('tags', 'Kategorie:', $this->model->fetchTagManager())
-			->setRequired();
+		$pageForm->addTextArea('content', 'Obsah')
+		->setHtmlAttribute('id', 'editor')
+		->setRequired();
 
-		$form->addSubmit('send', 'Přidat kategorii');
+		$pageForm->addSubmit('send', 'Aktualizovat')
+		->setHtmlAttribute('class',  'button__submit');
 
-		$form->onSuccess[] = [$this, 'processForm'];
+		if($this->page){
+			$pageForm->onSuccess[] = [$this, 'pageEditProcess'];
+		}
+		
+		return $pageForm;
+	}	
 
-		return $form;
-
-	}
-
-	public function processForm(Form $addTagForm, array $values): void
+	public function pageProcess(Form $form, \stdClass $values): void
 	{
 		try{
-			$this->facade->process($values);
+			$page = $this->model->getPages()->insert([
+				'title' => $values->title,
+				'content' => $values->content,
+				'updatedAt' => new Datetime(),
+				'createdAt' => new DateTime(),
+			]);
 
-		}catch(AnyModelException $e) {
-			$addTagForm->addError('ERROR');
+			foreach($values->tags as $tag){
+				$this->model->getRelatedTags()->insert([
+					'page_id' => $page->id,
+					'tag_id' => $tag,
+				]);
+			}
+		} catch(AnyModelException $e){
+			$form->addError('Error');
 		}
+	}
 
+	public function pageEditProcess(Form $form, \stdClass $values): void
+	{
+		try{
+			$this->page->update([
+				'updatedAt' => new DateTime(),
+				'title' => $values->title,
+				'content' => $values->content,
+			]);
+		} catch(AnyModelException $e){
+			$form->addError('Error');
+		}
 	}
 }

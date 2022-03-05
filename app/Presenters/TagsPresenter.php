@@ -6,24 +6,25 @@ use Nette;
 use App\Model\PostModel;
 use Nette\Application\UI\Form;
 use App\Presenters\BasePresenter;
+use App\Model\TagsFactory;
 
 class TagsPresenter extends BasePresenter
 {
 	private postModel $model;
+	private TagsFactory $tagsFactory;
 	private $tag;
+	private $page;
 
-	public function __construct(PostModel $model)
+	public function __construct(PostModel $model, TagsFactory $tagsFactory)
 	{
-		parent::__construct($model);
+		parent::__construct($model, $tagsFactory);
 		$this->model = $model;
+		$this->tagsFactory = $tagsFactory;
 	}
 
 	protected function createComponentControlTagForm(): Form
 	{
-		$formTag = new Form();
-		$formTag->addText('name', 'Název Kategorie:')->setRequired();
-		$formTag->addSubmit('send', 'Aktualizovat')->setHtmlAttribute('class', 'button_submit');
-		return $formTag;
+		return $this->tagsFactory->createTag($this->tag);
 	}
 
 	public function renderDefault(): void
@@ -34,41 +35,21 @@ class TagsPresenter extends BasePresenter
 	public function actionCreateTag(): void
 	{
 		$this->tag = $this->model->getTags();
-		$this->getComponent('controlTagForm')->onSuccess[] = [$this, 'createTagProcess'];
+		$this->getComponent('controlTagForm')->onSuccess[] = function(Form $form)
+		{
+			$this->flashMessage('Úspěšně jste přidal kategorii');
+			$this->redirect('Tags:');
+		};
 	}
 
 	public function actionEditTag(int $tagId): void
 	{
 		$this->tag = $this->model->getTags()->get($tagId);
 		$this->getComponent('controlTagForm')->setDefaults($this->tag->toArray())
-		->onSuccess[] = [$this, 'editTagProcess'];
-	}
-
-	public function editTagProcess(array $values): void
-	{
-			$this->tag->update($values);
+		->onSuccess[] = function(Form $form){
 			$this->flashMessage('Kategorie byla aktualizována.');
-			$this->redirect('Tags:');
-	}
-
-	public function createTagProcess(\stdClass $values): void
-	{
-		$exist = false;
-		foreach ($this->tag as $tag) {
-			if ($tag->name == $values->name) {
-				$this->flashMessage('Kategorie: ' . "$values->name" . ' již existuje');
-				$this->redirect('this');
-				$exist = true;
-				break;
-			}
-		}
-		if ($exist === false) {
-			$this->tag->insert([
-				'name' => $values->name,
-			]);
-			$this->flashMessage('Úspěšně jste přidal kategorii: ' . "$values->name" . ' ', 'success');
-			$this->redirect('Tags:');
-		}
+			$this->redirect('this');
+		};
 	}
 	
 	function handleDelete($tagId)

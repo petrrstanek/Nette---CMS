@@ -4631,50 +4631,9 @@ a {
     width: 300px; }
   .wrapper {
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; }
-  .active {
-    margin-top: -49px; }
-  #sidebar {
-    transform: rotate(90deg);
-    display: flex;
-    top: -290px;
-    width: 50px;
-    min-width: 0px; }
-    #sidebar ul li {
-      font-size: 40px;
-      display: flex;
-      justify-content: center; }
-      #sidebar ul li a {
-        color: #0d6efd !important;
-        height: 40px;
-        border-bottom: none; }
-        #sidebar ul li a:hover {
-          color: black !important; }
-      #sidebar ul li p {
-        display: none; }
-    #sidebar .bi-list::before {
-      transform: rotate(90deg); }
-    #sidebar h1 {
-      display: none; }
-    #sidebar .nav-content {
-      transform: rotate(-90deg);
-      display: flex; }
-    #sidebar .custom-menu {
-      top: 100px; }
-    #sidebar .href-create {
-      padding-right: 40px; }
-    #sidebar .href-overview {
-      padding: 0 40px; }
-    #sidebar .components {
-      padding: 15px !important;
-      display: flex;
-      margin-bottom: 0px; }
-  .navbar {
-    z-index: 2; }
-  .pos-r {
-    position: relative;
-    top: -250px; } }
+    align-items: center; }
+  h1 {
+    display: none; } }
 
 @media only screen and (min-width: 768px) {
   .mobile-bar {
