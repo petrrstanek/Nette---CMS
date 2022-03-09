@@ -1,0 +1,18 @@
+{block navAdmin}
+<nav class="admin-bar d-flex align-items-center" style="background-color: #f7f7f7;
+	height: 70px;
+	width: 100%;">
+  <div class="name-page pl-4 w-100">
+  <div class="container d-flex">
+<ul class="breadcrumbs d-flex">
+<li class="list-group-item d-flex align-items-center"><a n:href="Admin:dashboard">Hlavní stránka</a> &nbsp;&rArr;&nbsp;</li>
+<li class="list-group-item d-flex align-items-center">{include second}</li>
+<li class="list-group-item d-flex align-items-center">{include third}</li>
+</ul>
+<div class="d-flex header-icons ml-auto">
+{include headerIcons}
+      </div>
+</div>
+  </div>
+</nav>
+{/block}

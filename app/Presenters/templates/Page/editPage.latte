@@ -1,7 +1,14 @@
+{block navigation}
+{block second}Přehled Stránek  &nbsp;&rArr;&nbsp; {/block}
+{block third}Editace Stránky{/block}
+{block headerIcons} 
+<a n:href="add!, $page->id" class="h-icon-fav"><i class="bi bi-star-fill"></i></a>
+<a onClick="return confirm('Opravdu chcete příspěvek smazat?');" n:href="deletePage!, $page->id" class="h-icon-trash"><i class="bi bi-trash-fill"></i></a>{/block}
+{include parent}
+{/block}
 {block content}
 <section id="latte-edit" class="p-2">
   <div class="container-tags d-flex justify-content-center py-2">
-    <a n:href="Page:addTagPage $page->id">&plus;</a>
     <div class="d-flex justify-content-center flex-wrap w-75">
       <a n:href="deleteTag!, $tagActive->tag->id" class="tags" n:foreach="$tagsActive as $tagActive">
         {$tagActive->tag->name}
@@ -11,10 +18,6 @@
   <div class="card w-75 mx-auto mb-3">
     <div class="card-header" style="positon: relative;">
       <h4 class="card-title">Editace Příspěvku</h4>
-      <div class="d-flex header-icons">
-      <a n:href="add!, $page->id" class="h-icon-fav"><i class="bi bi-star-fill"></i></a>
-      <a onClick="return confirm('Opravdu chcete příspěvek smazat?');" n:href="deletePage!, $page->id" class="h-icon-trash"><i class="bi bi-trash-fill"></i></a>
-      </div>
     </div>
     <div class="card-body">
       {control pageForm}

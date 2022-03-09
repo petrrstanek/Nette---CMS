@@ -22,10 +22,9 @@ final class FormFactory
 		$this->page = $page;
 		$pageForm = new Form();
 		$pageForm->addText('title', 'Titulek:')->setRequired();
-		if(!$this->page){
-			$pageForm->addMultiSelect('tags', 'Kategore: ', $this->model->fetchTags());
-			$pageForm->onSuccess[] = [$this, 'pageProcess'];
-		}	
+		$pageForm->addMultiSelect('tags', 'Kategore: ', $this->model->fetchTags());
+		$pageForm->onSuccess[] = [$this, 'pageProcess'];
+		
 
 		$pageForm->addTextArea('content', 'Obsah')
 		->setHtmlAttribute('id', 'editor')
@@ -70,6 +69,13 @@ final class FormFactory
 				'title' => $values->title,
 				'content' => $values->content,
 			]);
+			foreach($values->tags as $tag){
+				$this->model->getRelatedTags()->insert([
+					'page_id' => $this->page->id,
+					'tag_id' => $tag
+				]);	
+			}
+			
 		} catch(AnyModelException $e){
 			$form->addError('Error');
 		}

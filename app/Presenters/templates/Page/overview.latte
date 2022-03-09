@@ -1,3 +1,9 @@
+{block navigation}
+{block second} <a n:href="Page:overview" class="bread-active"><u>Přehled Stránek</u></a>{/block}
+{block third}{/block}
+{block headerIcons}{/block}
+{include parent}
+{/block}
 {block content}
 <section id="latte-admin-home" class="mx-auto p-4">
 <div class="container">
@@ -46,4 +52,13 @@
 <a n:href="overview, $page + 1">Další</a>
 {/if}
 </div>
+{control dataGrid}
+
 </section>
+{extends $originalTemplate}
+{block data}
+{foreach $items as $item}
+{foreach $columns as $key => $column}
+{$column->render($item)}
+{/foreach}
+{/foreach}

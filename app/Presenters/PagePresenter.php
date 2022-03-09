@@ -11,6 +11,8 @@ use App\Forms\FormFactory;
 use App\Forms\TagsFactory;
 use App\Presenters\BasePresenter;
 use Nette\Utils\DateTime;
+use Ublaboo\DataGrid\DataGrid;
+use Ublaboo\NetteDatabaseDataSource\NetteDatabaseDataSource;
 
 final class PagePresenter extends BasePresenter
 {
@@ -19,13 +21,15 @@ final class PagePresenter extends BasePresenter
 	private $related;
 	private FormFactory $formFactory;
 	private TagsFactory $tagsFactory;
+	public Nette\Database\Context $ndb;
 
-	public function __construct(PostModel $model, FormFactory $formFactory, TagsFactory $tagsFactory)
+	public function __construct(PostModel $model, FormFactory $formFactory, TagsFactory $tagsFactory, Nette\Database\Context $ndb)
 	{
-		parent::__construct($model, $formFactory, $tagsFactory);
+		parent::__construct($model, $formFactory, $tagsFactory, $ndb);
 		$this->model = $model;
 		$this->formFactory = $formFactory;
 		$this->tagsFactory = $tagsFactory;
+		$this->ndb = $ndb;
 	}
 
 	protected function startup(){
@@ -35,11 +39,51 @@ final class PagePresenter extends BasePresenter
 		}
 	}
 
-	protected function createComponentSimpleGrid($name): DataGrid
+	public function createComponentDataGrid(): DataGrid
 	{
-		$grid = new DataGrid($this, $name);
-		$grid->setDataSource($this->model->getPages());
+		$grid = new DataGrid();
+		$datasource = new NetteDatabaseDataSource($this->ndb, 'SELECT * from pages');
+		$grid->setDataSource($datasource);
 
+		$grid->addColumnText('id', 'id')
+		->setAlign('left')
+		->setSortable();
+
+		// $grid->add
+
+		// $grid->addColumnText('createdAt', 'Vytvořeno')
+		// ->setAlign('right')
+		// ->setSortable();
+
+		$grid->setTemplateFile(__DIR__ . '/../../custom_datagrid_template.latte');
+
+		// $grid->addAction('this', '')
+		// ->setIcon('redo')
+		// ->setClass('btn btn-xs btn-success');
+
+		// $actionCallback = $grid->addActionCallback('custom_callback', '');
+
+		// $actionCallback
+		// ->setIcon('sun')
+		// ->setTitle('Hello, sun')
+		// ->setClass('btn btn-xs bt-default btn secondary ajax');
+
+		// $actionCallback->onClick[] = function ($itemId): void 
+		// {
+		// 	$this->flashMessage('Custom Callback trig, id: ' . $itemId);
+		// 	$this->redrawControl('flashes');
+		// };
+		
+		// $grid->addAction('delete', '', 'delete!')
+		// ->setIcon('trash')
+		// ->setTitle('Delete')
+		// ->setClass('btn btn-xs btn-danger ajax')
+		// ->setConfirmation(
+		// 	new IConfirmation('Opravdu chcete smazat tuto stránku %s', 'name')
+		// );
+
+		
+		return $grid;
 	}
 
 	public function renderOverview(int $page = 1): void

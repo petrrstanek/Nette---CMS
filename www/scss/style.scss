@@ -6,6 +6,7 @@ $secondary: #44bef1;
 
 //**** - GLOBAL - STYLES - ****//
 
+
 body {
 	color: #333;
 	background-color: $bg-color-primary !important;
@@ -78,6 +79,9 @@ table,
 input {
 	width: 100%;
 }
+tr{
+	display: flex;
+}
 
 label {
 	text-align: center;
@@ -105,6 +109,10 @@ input[value='Odstranit'] {
 	position: relative;
 	width: 100%;
 	min-height: 100vh;
+}
+
+.active{
+	margin-left: -210px!important;
 }
 
 #sidebar {
@@ -191,7 +199,7 @@ input[value='Odstranit'] {
 	.custom-menu {
 		display: inline-block;
 		position: absolute;
-		top: 20px;
+		top: 73px;
 		right: 0;
 		margin-right: -20px;
 
@@ -436,6 +444,16 @@ a {
 	}
 }
 
+	.breadcrumbs{
+		list-style-type: none;
+		margin: 0;
+		li{
+			a:hover{
+				color: $main-color!important;
+			}
+		}
+	}
+
 //*** - SHOW - ***///
 #latte-show {
 	.post-show {
@@ -489,6 +507,7 @@ a {
 		flex: 1;
 	}
 
+
 	#sidebar {
 		display: none !important;
 	}
@@ -519,6 +538,9 @@ a {
 		.order {
 			order: 3;
 		}
+	}
+	.breadcrumbs{
+		font-size: 13px;
 	}
 
 	#latte-edit {

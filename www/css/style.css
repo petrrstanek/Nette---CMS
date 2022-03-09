@@ -4306,6 +4306,9 @@ input[value='Odstranit'] {
   width: 100%;
   min-height: 100vh; }
 
+.active {
+  margin-left: -210px !important; }
+
 #sidebar {
   min-width: 210px;
   max-width: 210px;
@@ -4357,7 +4360,7 @@ input[value='Odstranit'] {
   #sidebar .custom-menu {
     display: inline-block;
     position: absolute;
-    top: 20px;
+    top: 73px;
     right: 0;
     margin-right: -20px; }
     #sidebar .custom-menu .btn {
@@ -4519,6 +4522,12 @@ a {
 #latte-default .post:not(:last-child) {
   padding-bottom: 10px; }
 
+.breadcrumbs {
+  list-style-type: none;
+  margin: 0; }
+  .breadcrumbs li a:hover {
+    color: #0d6efd !important; }
+
 #latte-show .post-show {
   position: relative;
   width: 75%;
@@ -4570,6 +4579,8 @@ a {
     display: none !important; }
   #latte-dashboard .order {
     order: 3; }
+  .breadcrumbs {
+    font-size: 13px; }
   #latte-edit .card {
     width: 100% !important; }
   .container-table {
