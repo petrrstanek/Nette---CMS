@@ -51,11 +51,11 @@ final class PagePresenter extends BasePresenter
 
 		// $grid->add
 
-		// $grid->addColumnText('createdAt', 'Vytvořeno')
-		// ->setAlign('right')
-		// ->setSortable();
+		$grid->addColumnText('createdAt', 'Vytvořeno')
+		->setAlign('right')
+		->setSortable();
 
-		$grid->setTemplateFile(__DIR__ . '/../../custom_datagrid_template.latte');
+		// $grid->setTemplateFile(__DIR__ . '/../../datagrid.latte');
 
 		// $grid->addAction('this', '')
 		// ->setIcon('redo')

@@ -1,6 +1,7 @@
 {block navigation}
 {block second}<a n:href="Tags:">Přehled Tagů</a> {/block}
-{block third} <a n:href="Tags:editTag"><u>Editace Tagu</u></a> {/block}
+{block third} <a n:href="Tags:editTag $tag->id"><u>Editace Tagu</u></a> {/block}
+{block headerIcons}{/block}
 {/block}
 {block content}
 <section id="latte-edit-tag" class=" w-100 mt-3">

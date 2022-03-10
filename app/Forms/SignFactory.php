@@ -39,10 +39,14 @@ final class SignFactory
     return $signInForm;
   }
 
-  public function signInProcess(\stdClass $data): void
+  public function signInProcess(Form $signIn, \stdClass $data): void
   {
     $this->user->setAuthenticator($this->auth);
-    $this->user->login($data->username, $data->password);
+    try{
+      $this->user->login($data->username, $data->password);  
+    }catch(Nette\Security\AuthenticationException $e){
+      $signIn->addError('Špatné jméno nebo heslo');
+    }  
   }
 
   public function createSignUp(): Form

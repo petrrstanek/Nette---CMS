@@ -21,7 +21,7 @@ final class TagsFactory
     $this->tag = $tag;
     $tagForm = new Form;
     $tagForm->addText('name', 'Název Kategorie: ')->setRequired();
-    $tagForm->addSubmit('send', 'Aktualizace')->setHtmlAttribute('class', 'button_submit');
+    $tagForm->addSubmit('send', 'Aktualizovat')->setHtmlAttribute('class', 'button_submit');
     if(!$this->tag){
       $tagForm->onSuccess[] = [$this, 'tagProcess'];
     } else {

@@ -50,6 +50,11 @@ class TagsPresenter extends BasePresenter
 			$this->redirect('this');
 		};
 	}
+
+	public function renderEditTag(): void
+	{
+		$this->template->tag = $this->tag;
+	}
 	
 	function handleDelete($tagId)
 	{

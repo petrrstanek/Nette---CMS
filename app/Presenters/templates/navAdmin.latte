@@ -3,13 +3,13 @@
 	height: 70px;
 	width: 100%;">
   <div class="name-page pl-4 w-100">
-  <div class="container d-flex">
+  <div class="container d-flex flex-wrap">
 <ul class="breadcrumbs d-flex">
-<li class="list-group-item d-flex align-items-center"><a n:href="Admin:dashboard">Hlavní stránka</a> &nbsp;&rArr;&nbsp;</li>
+<li class="list-group-item d-flex align-items-center">{block first}<a n:href="Admin:dashboard">Hlavní stránka</a> &nbsp;&rArr;&nbsp;{/block}</li>
 <li class="list-group-item d-flex align-items-center">{include second}</li>
 <li class="list-group-item d-flex align-items-center">{include third}</li>
 </ul>
-<div class="d-flex header-icons ml-auto">
+<div class="d-flex align-items-center header-icons ml-sm-auto mx-auto py-sm-0 py-2">
 {include headerIcons}
       </div>
 </div>
