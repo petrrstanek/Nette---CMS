@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bootstrap-icons": "^1.8.1",
+    "froala-editor": "^4.0.9",
     "ublaboo-datagrid": "^6.9.1"
   }
 }

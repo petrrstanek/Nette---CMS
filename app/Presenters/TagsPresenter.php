@@ -7,6 +7,9 @@ use App\Model\PostModel;
 use Nette\Application\UI\Form;
 use App\Presenters\BasePresenter;
 use App\Forms\TagsFactory;
+use Nette\Database\Explorer;
+use Ublaboo\DataGrid\DataGrid;
+use Ublaboo\NetteDatabaseDataSource\NetteDatabaseDataSource;
 
 class TagsPresenter extends BasePresenter
 {
@@ -14,12 +17,29 @@ class TagsPresenter extends BasePresenter
 	private TagsFactory $tagsFactory;
 	private $tag;
 	private $page;
+	public Nette\Database\Explorer $conn;
 
-	public function __construct(PostModel $model, TagsFactory $tagsFactory)
+	public function __construct(PostModel $model, TagsFactory $tagsFactory, Nette\Database\Explorer $conn)
 	{
-		parent::__construct($model, $tagsFactory);
+		parent::__construct($model, $tagsFactory, $conn);
 		$this->model = $model;
 		$this->tagsFactory = $tagsFactory;
+		$this->conn = $conn;
+	}
+
+	public function createComponentDataGrid()
+	{
+		$grid = new DataGrid();
+		$dataSource = new NetteDatabaseDataSource($this->conn, 'SELECT * from tags');
+		$grid->setDataSource($dataSource);
+
+		$grid->addColumnNumber('id', 'ID')->setSortable();
+		$grid->addColumnText('name', 'Název')->setSortable();
+
+		$grid->addAction('edit', '', 'editTag!')->setIcon('pencil pencil-alt')->setClass('btn btn-xs btn-default btn-secondary');
+		$grid->addAction('delete', '', 'delete!')->setIcon('trash')->setClass('btn btn-xs btn-danger');
+
+		return $grid;
 	}
 
 	protected function createComponentCreateTagForm(): Form
@@ -55,12 +75,19 @@ class TagsPresenter extends BasePresenter
 	{
 		$this->template->tag = $this->tag;
 	}
+
+	public function handleEditTag($id)
+	{
+		$tag = $this->model->getTags()->get($id);
+		$this->redirect('Tags:editTag', $tag->id);
+	}
+
 	
-	function handleDelete($tagId)
+	function handleDelete($id)
 	{
 		try 
 		{
-			$this->model->getTags()->get($tagId)->delete();
+			$this->model->getTags()->get($id)->delete();
 			$this->flashMessage('Kategorie byla smazána.');
 			$this->redirect('Tags:');
 		} 

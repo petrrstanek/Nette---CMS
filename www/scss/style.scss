@@ -75,6 +75,125 @@ form .error {
 	width: 100%;
 }
 
+#latte-default{
+	.datagrid{
+		width: 400px;
+	}
+	#snippet-dataGrid-table{
+		tr{
+			th{
+				margin: 0;
+				display: flex;
+				align-items: center;
+			}
+			th.col-action{
+				padding-right: 39px;
+			}
+			th.col-name{
+				flex: 1;
+			}
+		}
+
+		#snippet-dataGrid-tbody{
+			td{
+				margin: 0;
+				padding: 10px;
+			}
+				td.col-id{
+					width: 37px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+			td.col-name{
+				align-items: center;
+				flex: 1;
+			}
+			td.col-action{
+				a{
+					margin: 5px;
+				}
+			}
+		}
+	}
+}
+
+#latte-admin-home{
+	.datagrid{
+		width: 620px;
+	}
+	#snippet-dataGrid-table{
+		tr{
+			th{
+				margin: 0;
+				display: flex;
+				align-items: center;
+			}
+			display: flex;
+			th.col-createdAt{
+				width: 96px;
+			}
+			th.col-updatedAt{
+				width: 104px;
+			}
+			th.col-content{
+				
+				flex: 1;
+			}
+	
+			th.col-action{
+			 width: 149px
+			}
+			
+			 
+		}
+		#snippet-dataGrid-tbody{
+			tr{
+				height: 70px;
+				.col-content{
+					overflow-x: hidden;
+			}
+			td{
+				margin: 0;
+				
+			}
+	
+			td.col-id, td.col-updatedAt, td.col-createdAt{
+				display: flex;
+				align-items: center;
+			}
+			td.col-updatedAt{
+				width: 110px;
+			}
+			td.col-createdAt{
+				width: 120px;
+			}
+			td.col-action{
+				width: 149px;
+				align-items: center;
+				a{
+					margin: 5px;
+					height: 23px;
+				}
+			}
+			}
+		}
+	}
+}
+
+#snippet-dataGrid-pagination{
+	td.row-grid-bottom{
+		width: 100%
+	}
+	div {
+		a:nth-child(2){
+	display: none;
+	}
+	a:nth-child(3){
+		display: none;
+	}
+	}
+}
 table,
 input {
 	width: 100%;
@@ -499,14 +618,58 @@ a {
 		right: 4px !important;
 		opacity: 1 !important;
 	}
+
+	#latte-admin-home{
+		.datagrid{
+			width: 470px;
+		}
+		#snippet-dataGrid-table{
+			th.col-createdAt{
+				display: none;
+			}
+			th.col-updatedAt{
+				width: 102px!important;
+			}
+			
+			th.col-action{
+				display: none;
+			}
+		}
+	
+		#snippet-dataGrid-tbody{
+				
+			td.col-createdAt{
+				display: none!important;
+			}
+
+			td.col-updatedAt{
+				width: 100px;
+			}
+			td.col-action{
+				display: none;
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 768px) {
+
+	#latte-admin-home{
+		margin: 0!important;
+		padding: 0!important;
+		.datagrid{
+			margin: 0 auto;
+			width: 340px;
+		}
+	}
 
 	.card {
 		flex: 1;
 	}
 
+	.admin-bar{
+		margin-top: -15px;
+	}
 
 	#sidebar {
 		display: none !important;

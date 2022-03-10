@@ -1,43 +1,16 @@
 {block navigation}
 {block second}<a n:href="Tags:"><u>Přehled Kategorií</u></a> {/block}
 {block third}{/block}
-{block headerIcons}{/block}
+{block headerIcons}
+<a n:href="Tags:createTag"  style="color: #fff;"><i class="bi bi-plus-square-fill" style="color: #0d6efd;"></i></a>{/block}
 {include parent}
 {/block}
 {block content}
 <section id="latte-default" class=" text-center mx-auto w-100">
   <h2 class="py-5">Kategorie</h2>
   <div class="container d-flex justify-content-center">
-  <div class="container-table overflow-auto">
-    <table class="table bordered table-hover mb-4" style="border: 1px solid rgba(0,0,0, 0.1);">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Název kategorie</th>
-          <th>Editace</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr n:foreach="$tags as $tag">
-          <td>
-          {$tag->id}
-          </td>
-          <td>
-            {$tag->name}
-          </td>
-          <td>
-            <div class="d-flex justify-content-center">
-            <a n:href="Tags:editTag $tag->id" class="mr-2"><i class="bi bi-pen-fill edit-icon"></i></a>
-            <a n:href="delete! $tag->id"><i class="bi bi-trash-fill trash-icon" ></i></a>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    {control dataGrid}
   </div>
-  </div>
-  
-   <a n:href="Tags:createTag" class="button" style="color: #fff;">Přidat kategorii</a>
 </section>
 
 

@@ -21,15 +21,15 @@ final class PagePresenter extends BasePresenter
 	private $related;
 	private FormFactory $formFactory;
 	private TagsFactory $tagsFactory;
-	public Nette\Database\Context $ndb;
+	public Nette\Database\Explorer $conn;
 
-	public function __construct(PostModel $model, FormFactory $formFactory, TagsFactory $tagsFactory, Nette\Database\Context $ndb)
+	public function __construct(PostModel $model, FormFactory $formFactory, TagsFactory $tagsFactory, Nette\Database\Explorer $conn)
 	{
-		parent::__construct($model, $formFactory, $tagsFactory, $ndb);
+		parent::__construct($model, $formFactory, $tagsFactory, $conn);
 		$this->model = $model;
 		$this->formFactory = $formFactory;
 		$this->tagsFactory = $tagsFactory;
-		$this->ndb = $ndb;
+		$this->conn = $conn;
 	}
 
 	protected function startup(){
@@ -42,46 +42,20 @@ final class PagePresenter extends BasePresenter
 	public function createComponentDataGrid(): DataGrid
 	{
 		$grid = new DataGrid();
-		$datasource = new NetteDatabaseDataSource($this->ndb, 'SELECT * from pages');
+		$datasource = new NetteDatabaseDataSource($this->conn, 'SELECT * from pages');
 		$grid->setDataSource($datasource);
 
-		$grid->addColumnText('id', 'id')
-		->setAlign('left')
-		->setSortable();
+		$grid->setItemsPerPageList([5, 10, 100]);
 
-		// $grid->add
-
-		$grid->addColumnText('createdAt', 'Vytvořeno')
-		->setAlign('right')
-		->setSortable();
-
-		// $grid->setTemplateFile(__DIR__ . '/../../datagrid.latte');
-
-		// $grid->addAction('this', '')
-		// ->setIcon('redo')
-		// ->setClass('btn btn-xs btn-success');
-
-		// $actionCallback = $grid->addActionCallback('custom_callback', '');
-
-		// $actionCallback
-		// ->setIcon('sun')
-		// ->setTitle('Hello, sun')
-		// ->setClass('btn btn-xs bt-default btn secondary ajax');
-
-		// $actionCallback->onClick[] = function ($itemId): void 
-		// {
-		// 	$this->flashMessage('Custom Callback trig, id: ' . $itemId);
-		// 	$this->redrawControl('flashes');
-		// };
+		$grid->addColumnNumber('id', 'ID')->setSortable();
+		$grid->addColumnText('content', 'Perex');
+		$grid->addColumnText('createdAt', 'Vytvořeno')->setSortable();
+		$grid->addColumnText('updatedAt' , 'Aktualizace')->setSortable();
 		
-		// $grid->addAction('delete', '', 'delete!')
-		// ->setIcon('trash')
-		// ->setTitle('Delete')
-		// ->setClass('btn btn-xs btn-danger ajax')
-		// ->setConfirmation(
-		// 	new IConfirmation('Opravdu chcete smazat tuto stránku %s', 'name')
-		// );
-
+		$grid->addAction('delete', '', 'deletePage!')->setIcon('trash')->setClass('btn btn-xs btn-danger');
+		$grid->addAction('add', '', 'add!')->setIcon('star')->setClass('btn btn-xs btn-default btn-warning');
+		$grid->addAction('edit', '', 'editPage!')->setIcon('pencil pencil-alt')->setClass('btn btn-xs btn-default btn-secondary');
+		$grid->addAction('show', '', 'showPage!')->setIcon('eye')->setClass('btn btn-xs btn-default btn-primary');
 		
 		return $grid;
 	}
@@ -172,9 +146,21 @@ final class PagePresenter extends BasePresenter
 		}
 	}
 
-	public function handleAdd(int $pageId)
+	public function handleShowPage($id)
 	{
-		$page = $this->model->getPages()->get($pageId);
+		$page = $this->model->getPages()->get($id);
+		$this->redirect('Homepage:showPage', $page->id);
+	}
+
+	public function handleEditPage($id)
+	{
+		$page = $this->model->getPages()->get($id);
+		$this->redirect('Page:editPage', $page->id);
+	}
+
+	public function handleAdd($id)
+	{
+		$page = $this->model->getPages()->get($id);
 		if ($page->inMenu == 0) {
 			$page->update([
 				'inMenu' => 1
@@ -190,12 +176,12 @@ final class PagePresenter extends BasePresenter
 			}
 	}
 
-	public function handleDeletePage(int $pageId)
+	public function handleDeletePage($id)
 	{
-		$page = $this->model->getPages()->get($pageId);
+		$page = $this->model->getPages()->get($id);
 		$page->related('pages_tags')->delete();
 		$page->delete();
-		$this->flashMessage('Stránka byla úspěšně odstraněna.');
-		$this->redirect('Page:overview');
+		$this->flashMessage('smazano');
+		$this->redirect('this');
 	}
 }
