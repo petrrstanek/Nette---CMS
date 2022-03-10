@@ -4329,6 +4329,8 @@ form .error {
     align-items: center; }
   #latte-admin-home #snippet-dataGrid-table tr th.col-createdAt {
     width: 96px; }
+  #latte-admin-home #snippet-dataGrid-table tr th.col-title {
+    width: 67px; }
   #latte-admin-home #snippet-dataGrid-table tr th.col-updatedAt {
     width: 104px; }
   #latte-admin-home #snippet-dataGrid-table tr th.col-content {

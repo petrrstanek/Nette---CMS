@@ -182,7 +182,7 @@ final class PagePresenter extends BasePresenter
 		$page = $this->model->getPages()->get($id);
 		$page->related('pages_tags')->delete();
 		$page->delete();
-		$this->flashMessage('smazano');
+		$this->flashMessage('Stránka s ID: ' . $id . ' byla úspěšně smazána');
 		$this->redirect('this');
 	}
 }
