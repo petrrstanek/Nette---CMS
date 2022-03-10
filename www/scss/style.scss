@@ -28,7 +28,7 @@ div.flash {
 	background: #fff9d7;
 	border: 1px solid #e2c822;
 	padding: 1em;
-	margin: 1em 0;
+	margin: 1.5em 0;
 }
 
 a[href^='#error:'] {
@@ -76,6 +76,9 @@ form .error {
 }
 
 #latte-default{
+	tr{
+		display: flex;
+	}
 	.datagrid{
 		width: 400px;
 	}
@@ -119,8 +122,11 @@ form .error {
 }
 
 #latte-admin-home{
+	tr{
+		display: flex;
+	}
 	.datagrid{
-		width: 620px;
+		width: 750px;
 	}
 	#snippet-dataGrid-table{
 		tr{
@@ -152,10 +158,6 @@ form .error {
 				height: 70px;
 				.col-content{
 					overflow-x: hidden;
-			}
-			td{
-				margin: 0;
-				
 			}
 	
 			td.col-id, td.col-updatedAt, td.col-createdAt{
@@ -197,9 +199,6 @@ form .error {
 table,
 input {
 	width: 100%;
-}
-tr{
-	display: flex;
 }
 
 label {
@@ -621,8 +620,12 @@ a {
 
 	#latte-admin-home{
 		.datagrid{
-			width: 470px;
+			width: 550px;
 		}
+		tr{
+			display: flex;
+		}
+
 		#snippet-dataGrid-table{
 			th.col-createdAt{
 				display: none;
@@ -630,10 +633,13 @@ a {
 			th.col-updatedAt{
 				width: 102px!important;
 			}
-			
 			th.col-action{
-				display: none;
+				width: 80px!important;
 			}
+			th.col-title{
+				width: 65px;
+			}
+		
 		}
 	
 		#snippet-dataGrid-tbody{
@@ -641,12 +647,21 @@ a {
 			td.col-createdAt{
 				display: none!important;
 			}
+			td.col-title{
+				padding-right: 12px;
+				width: 67px;
+			}
 
 			td.col-updatedAt{
 				width: 100px;
 			}
 			td.col-action{
-				display: none;
+				a:nth-child(1){
+					display: none;
+				}
+				a:nth-child(2){
+					display: none;
+				}
 			}
 		}
 	}
@@ -654,12 +669,51 @@ a {
 
 @media only screen and (max-width: 768px) {
 
+	#latte-show{
+		.col{
+			margin-top: -15px;
+		}
+	}
+
 	#latte-admin-home{
+		tr{
+			display: flex;
+		}
 		margin: 0!important;
-		padding: 0!important;
+		padding: 10px!important;
 		.datagrid{
+			width: 355px;
 			margin: 0 auto;
-			width: 340px;
+		}
+
+		#snippet-dataGrid-table{
+			tr{
+				th.col-action{
+					width: 82px;
+				}
+				th.col-content{
+					display: none;
+				}
+				th.col-title{
+					flex: 1;
+				}
+			}
+			
+			th.col-updatedAt{
+				width: 110px!important;
+			}
+			#snippet-dataGrid-tbody{
+				td.col-action{
+					width: 82px!important;
+				}
+				td.col-title{
+					width: 100px;
+				}
+				td.col-content{
+					display: none;
+				}
+			}
+
 		}
 	}
 

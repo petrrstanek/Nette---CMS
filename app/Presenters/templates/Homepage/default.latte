@@ -5,7 +5,7 @@
 {/block} 
 {block content}
 <section id="latte-default" class="w-100 d-flex justify-content-center mt-4">
-  <div class="container">
+  <div class="container p-4">
     <h1 n:block="title" class="p-3 text-center">Poslední aktualizované stránky</h1>
     <div class="row">
       <div class="col-md-12">
@@ -19,7 +19,7 @@
             </div>
           </div>
         </div>
-        <div class="pagination pb-5 text-center">
+        <div class="pagination pb-5 text-center justify-content-center">
           {if $paginator > 1}
             <a n:href="default, $paginator - 1">Zpět</a>
             &nbsp; | &nbsp;

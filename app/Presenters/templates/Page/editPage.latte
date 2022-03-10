@@ -1,8 +1,8 @@
 {block navigation}
-{block second}Přehled Stránek  &nbsp;&rArr;&nbsp; {/block}
+{block second} <a n:href="Page:overview">Přehled Stránek</a>   &nbsp;&rArr;&nbsp; {/block}
 {block third} <a n:href="Page:editPage $page->id"><u> Editace Stránky</u></a>{/block}
 {block headerIcons} 
-<a n:href="add!, $page->id" class="h-icon-fav"><i class="bi bi-star-fill"></i></a>
+<a n:href="add!, $page->id" class="h-icon-fav mr-5"><i class="bi bi-star-fill"></i></a>
 <a onClick="return confirm('Opravdu chcete příspěvek smazat?');" n:href="deletePage!, $page->id" class="h-icon-trash"><i class="bi bi-trash-fill"></i></a>{/block}
 {include parent}
 {/block}

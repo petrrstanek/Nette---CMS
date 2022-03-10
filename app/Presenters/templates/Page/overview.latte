@@ -1,13 +1,18 @@
 {block navigation}
 {block second} <a n:href="Page:overview" class="bread-active"><u>Přehled Stránek</u></a>{/block}
 {block third}{/block}
-{block headerIcons}{/block}
+{block headerIcons}
+<div class="d-flex align-items-center">
+<a n:href="delete"></a><a href=""></a><a href=""></a><a href=""></a>
+</div>
+{/block}
 {include parent}
 {/block}
 {block content}
 <section id="latte-admin-home" class="mx-auto p-4">
-<div class="container">
 <h3 class="text-center py-2">Poslední aktualizované stránky</h3>
-{control dataGrid}
+<div class="container" style="overflow-x: auto;">
+
 </div>
+{control dataGrid}
 </section>

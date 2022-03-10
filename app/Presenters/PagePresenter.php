@@ -48,6 +48,7 @@ final class PagePresenter extends BasePresenter
 		$grid->setItemsPerPageList([5, 10, 100]);
 
 		$grid->addColumnNumber('id', 'ID')->setSortable();
+		$grid->addColumnText('title', 'Název');
 		$grid->addColumnText('content', 'Perex');
 		$grid->addColumnText('createdAt', 'Vytvořeno')->setSortable();
 		$grid->addColumnText('updatedAt' , 'Aktualizace')->setSortable();
