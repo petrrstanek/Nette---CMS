@@ -1,13 +1,13 @@
-{block navAdmin}
 {block second}{/block}
 {block third}{/block}
 {block headerIcons}{/block}
-{/block}
 {block content}
 <section id="latte-show" class=" w-100 mx-auto">
+{if !$user->isLoggedIn()}
       <div class="col p-3 d-flex justify-content-center bg-light">
         <a n:href="Homepage:" class="button__transparent">&larr; Zpět</a>
       </div>
+    {/if}  
     <h1 n:block="title" class="pt-4 text-center">
       {$page->title}
     </h1>
