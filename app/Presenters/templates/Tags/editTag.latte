@@ -1,13 +1,13 @@
-{block second}<a n:href="Tags:">Přehled Tagů</a> {/block}
+{block second}<a n:href="Tags:">Přehled Tagů</a> &nbsp;&rArr; &nbsp; {/block}
 {block third} <a n:href="Tags:editTag $tag->id"><u>Editace Tagu</u></a> {/block}
-{block headerIcons}{/block}
+{block headerIcons} <a n:href="delete!" class="trash-tag"><i class="bi bi-trash-fill"></i></a>{/block}
 {block content}
 <section id="latte-edit-tag" class=" w-100 mt-3">
   <div class="container d-flex">
     <div class="card m-5 w-50 mx-auto">
       <div class="card-header" style="position:relative;">
           <h4 class="card-title">Editace kategorie</h4>
-          <a n:href="delete!" class="trash-tag"><i class="bi bi-trash-fill"></i></a>
+         
       </div>
       <div class="card-body">
         {control createTagForm}

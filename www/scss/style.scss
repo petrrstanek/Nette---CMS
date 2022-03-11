@@ -140,7 +140,7 @@ form .error {
 				width: 96px;
 			}
 			th.col-title{
-				width: 67px;
+				width: 80px;
 			}
 			th.col-updatedAt{
 				width: 104px;
@@ -158,8 +158,9 @@ form .error {
 		}
 		#snippet-dataGrid-tbody{
 			tr{
-				height: 70px;
+				height: 85px;
 				.col-content{
+					flex: 1!important;
 					overflow-x: hidden;
 			}
 	
@@ -168,11 +169,16 @@ form .error {
 				align-items: center;
 			}
 			td.col-updatedAt{
-				width: 110px;
+				width: 104px;
 			}
 			td.col-createdAt{
-				width: 120px;
+				width: 96px;
 			}
+
+			td.col-title{
+				align-items: center;
+			}
+
 			td.col-action{
 				width: 149px;
 				align-items: center;
@@ -432,7 +438,6 @@ a {
 
 .trash-tag {
 	position: absolute;
-	top: 10px;
 	right: 20px;
 	color: black;
 	font-size: 20px;
@@ -519,22 +524,21 @@ a {
 		right: 20px;
 		top: 10px;
 		font-size: 20px;
+	}
 
-		.h-icon-trash {
-			padding-left: 15px;
+	.h-icon-trash {
+		padding-left: 15px;
 
-			&:hover {
-				color: red !important;
-				transform: scale(0.98);
-
-			}
+		&:hover {
+			color: red !important;
+			transform: scale(0.98);
 		}
+	}
 
-		.h-icon-fav {
-			&:hover {
-				color: yellow !important;
-				transform: scale(0.98);
-			}
+	.h-icon-fav {
+		&:hover {
+			color: yellow!important;
+			transform: scale(0.98);
 		}
 	}
 }
@@ -646,19 +650,24 @@ a {
 		}
 	
 		#snippet-dataGrid-tbody{
-				
 			td.col-createdAt{
 				display: none!important;
 			}
 			td.col-title{
 				padding-right: 12px;
-				width: 67px;
+				width: 80px;
 			}
 
 			td.col-updatedAt{
-				width: 100px;
+				width: 103px;
 			}
+
+			td.col-createdAt{
+				width: 96px;
+			}
+
 			td.col-action{
+				width: 79px!important;
 				a:nth-child(1){
 					display: none;
 				}
@@ -670,7 +679,7 @@ a {
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
 
 	#latte-show{
 		.col{

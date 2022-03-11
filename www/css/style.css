@@ -4330,7 +4330,7 @@ form .error {
   #latte-admin-home #snippet-dataGrid-table tr th.col-createdAt {
     width: 96px; }
   #latte-admin-home #snippet-dataGrid-table tr th.col-title {
-    width: 67px; }
+    width: 80px; }
   #latte-admin-home #snippet-dataGrid-table tr th.col-updatedAt {
     width: 104px; }
   #latte-admin-home #snippet-dataGrid-table tr th.col-content {
@@ -4339,16 +4339,19 @@ form .error {
     width: 149px; }
 
 #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr {
-  height: 70px; }
+  height: 85px; }
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr .col-content {
+    flex: 1 !important;
     overflow-x: hidden; }
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-id, #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-updatedAt, #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-createdAt {
     display: flex;
     align-items: center; }
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-updatedAt {
-    width: 110px; }
+    width: 104px; }
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-createdAt {
-    width: 120px; }
+    width: 96px; }
+  #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-title {
+    align-items: center; }
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-action {
     width: 149px;
     align-items: center; }
@@ -4520,7 +4523,6 @@ a {
 
 .trash-tag {
   position: absolute;
-  top: 10px;
   right: 20px;
   color: black;
   font-size: 20px; }
@@ -4580,14 +4582,16 @@ a {
   right: 20px;
   top: 10px;
   font-size: 20px; }
-  #latte-edit .header-icons .h-icon-trash {
-    padding-left: 15px; }
-    #latte-edit .header-icons .h-icon-trash:hover {
-      color: red !important;
-      transform: scale(0.98); }
-  #latte-edit .header-icons .h-icon-fav:hover {
-    color: yellow !important;
+
+#latte-edit .h-icon-trash {
+  padding-left: 15px; }
+  #latte-edit .h-icon-trash:hover {
+    color: red !important;
     transform: scale(0.98); }
+
+#latte-edit .h-icon-fav:hover {
+  color: yellow !important;
+  transform: scale(0.98); }
 
 .date {
   position: absolute;
@@ -4662,15 +4666,19 @@ a {
     display: none !important; }
   #latte-admin-home #snippet-dataGrid-tbody td.col-title {
     padding-right: 12px;
-    width: 67px; }
+    width: 80px; }
   #latte-admin-home #snippet-dataGrid-tbody td.col-updatedAt {
-    width: 100px; }
-  #latte-admin-home #snippet-dataGrid-tbody td.col-action a:nth-child(1) {
-    display: none; }
-  #latte-admin-home #snippet-dataGrid-tbody td.col-action a:nth-child(2) {
-    display: none; } }
+    width: 103px; }
+  #latte-admin-home #snippet-dataGrid-tbody td.col-createdAt {
+    width: 96px; }
+  #latte-admin-home #snippet-dataGrid-tbody td.col-action {
+    width: 79px !important; }
+    #latte-admin-home #snippet-dataGrid-tbody td.col-action a:nth-child(1) {
+      display: none; }
+    #latte-admin-home #snippet-dataGrid-tbody td.col-action a:nth-child(2) {
+      display: none; } }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   #latte-show .col {
     margin-top: -15px; }
   #latte-admin-home {
