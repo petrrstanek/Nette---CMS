@@ -16,173 +16,186 @@ use Ublaboo\NetteDatabaseDataSource\NetteDatabaseDataSource;
 
 final class PagePresenter extends BasePresenter
 {
-	private postModel $model;
-	public $page;
-	private $related;
-	private FormFactory $formFactory;
-	private TagsFactory $tagsFactory;
-	public Nette\Database\Explorer $conn;
+  private postModel $model;
+  public $page;
+  private $related;
+  private FormFactory $formFactory;
+  private TagsFactory $tagsFactory;
+  public Nette\Database\Explorer $conn;
 
-	public function __construct(PostModel $model, FormFactory $formFactory, TagsFactory $tagsFactory, Nette\Database\Explorer $conn)
-	{
-		parent::__construct($model, $formFactory, $tagsFactory, $conn);
-		$this->model = $model;
-		$this->formFactory = $formFactory;
-		$this->tagsFactory = $tagsFactory;
-		$this->conn = $conn;
-	}
+  public function __construct(
+    PostModel $model,
+    FormFactory $formFactory,
+    TagsFactory $tagsFactory,
+    Nette\Database\Explorer $conn
+  ) {
+    parent::__construct($model, $formFactory, $tagsFactory, $conn);
+    $this->model = $model;
+    $this->formFactory = $formFactory;
+    $this->tagsFactory = $tagsFactory;
+    $this->conn = $conn;
+  }
 
-	protected function startup(){
-		parent::startup();
-		if(!$this->user->isLoggedIn()){
-			$this->redirect('Sign:in');
-		}
-	}
+  protected function startup()
+  {
+    parent::startup();
+    if (!$this->user->isLoggedIn()) {
+      $this->redirect('Sign:in');
+    }
+  }
 
-	public function createComponentDataGrid(): DataGrid
-	{
-		$grid = new DataGrid();
-		$datasource = new NetteDatabaseDataSource($this->conn, 'SELECT * from pages');
-		$grid->setDataSource($datasource);
+  public function createComponentDataGrid(): DataGrid
+  {
+    $grid = new DataGrid();
+    $datasource = new NetteDatabaseDataSource($this->conn, 'SELECT * from pages');
+    $grid->setDataSource($datasource);
 
-		$grid->setItemsPerPageList([5, 10, 100]);
+    $grid->setItemsPerPageList([5, 10, 100]);
 
-		$grid->addColumnNumber('id', 'ID')->setSortable();
-		$grid->addColumnText('title', 'Název');
-		$grid->addColumnText('content', 'Perex');
-		$grid->addColumnText('createdAt', 'Vytvořeno')->setSortable();
-		$grid->addColumnText('updatedAt' , 'Aktualizace')->setSortable();
-		
-		$grid->addAction('delete', '', 'deletePage!')->setIcon('trash')->setClass('btn btn-xs btn-danger');
-		$grid->addAction('add', '', 'add!')->setIcon('star')->setClass('btn btn-xs btn-default btn-warning');
-		$grid->addAction('edit', '', 'editPage!')->setIcon('pencil pencil-alt')->setClass('btn btn-xs btn-default btn-secondary');
-		$grid->addAction('show', '', 'showPage!')->setIcon('eye')->setClass('btn btn-xs btn-default btn-primary');
-		
-		return $grid;
-	}
+    $grid->addColumnNumber('id', 'ID')->setSortable();
+    $grid->addColumnText('title', 'Název');
+    $grid->addColumnText('content', 'Perex');
+    $grid->addColumnText('createdAt', 'Vytvořeno')->setSortable();
+    $grid->addColumnText('updatedAt', 'Aktualizace')->setSortable();
 
-	public function renderOverview(int $page = 1): void
-	{
-		$pages = $this->model->getCreatedPages();
-		$endPage = 0;
+    $grid
+      ->addAction('delete', '', 'deletePage!')
+      ->setIcon('trash')
+      ->setClass('btn btn-xs btn-danger');
+    $grid
+      ->addAction('add', '', 'add!')
+      ->setIcon('star')
+      ->setClass('btn btn-xs btn-default btn-warning');
+    $grid
+      ->addAction('edit', '', 'editPage!')
+      ->setIcon('pencil pencil-alt')
+      ->setClass('btn btn-xs btn-default btn-secondary');
+    $grid
+      ->addAction('show', '', 'showPage!')
+      ->setIcon('eye')
+      ->setClass('btn btn-xs btn-default btn-primary');
 
-		$this->template->layPages = $pages->page($page, 5, $endPage);
-		$this->template->endPage = $endPage;
-		$this->template->page = $page;
-	}
+    return $grid;
+  }
 
-	protected function createComponentPageForm(): Form
-	{
-		return $this->formFactory->createPageForm($this->page);
-	}
+  public function renderOverview(int $page = 1): void
+  {
+    $pages = $this->model->getCreatedPages();
+    $endPage = 0;
 
-	public function actionCreatePage()
-	{
-		$this->getComponent('pageForm')->onSuccess[] = function(Form $form)
-		{
-			$this->flashMessage('Úspěšně jste vytvořil stránku');
-			$this->redirect('Page:overview');
-		};
-	}
+    $this->template->layPages = $pages->page($page, 5, $endPage);
+    $this->template->endPage = $endPage;
+    $this->template->page = $page;
+  }
 
-	public function actionEditPage(int $pageId): void
-	{
-		$this->page = $this->model->getPages()->get($pageId);
-		$this->related = [];
-		$postTags = $this->page->related('pages_tags');
-		foreach ($postTags as $postTag) 
-		{
-			$this->related[] = $postTag;
-		}
+  protected function createComponentPageForm(): Form
+  {
+    return $this->formFactory->createPageForm($this->page);
+  }
 
-		$this->getComponent('pageForm')->setDefaults($this->page->toArray())
-		->onSuccess[] = function (Form $form)
-		{
-		$this->flashMessage('Stránka byla aktualizovana.');
-		$this->redirect('Homepage:showPage', $this->page->id);
-		};
-	}
+  public function actionCreatePage()
+  {
+    $this->getComponent('pageForm')->onSuccess[] = function (Form $form) {
+      $this->flashMessage('Úspěšně jste vytvořil stránku');
+      $this->redirect('Page:overview');
+    };
+  }
 
-	public function renderEditPage(): void
-	{
-		$this->template->page = $this->page;
-		$this->template->tagsActive = $this->related;
-	}
+  public function actionEditPage(int $pageId): void
+  {
+    $this->page = $this->model->getPages()->get($pageId);
+    $this->related = [];
+    $tags = [];
+    $postTags = $this->page->related('pages_tags');
+    foreach ($postTags as $postTag) {
+      $this->related[] = $postTag;
+      $tags[] = $postTag->tag_id;
+    }
 
-	protected function createComponentAddTagForm(): Form
-	{
-		return $this->tagsFactory->createAddTagForm($this->page->id);
-	}
+    $this->getComponent('pageForm')->setDefaults([
+      'title' => $this->page->title,
+      'tags' => $tags,
+      'content' => $this->page->content,
+    ])->onSuccess[] = function (Form $form) {
+      $this->flashMessage('Stránka byla aktualizovana.');
+      $this->redirect('Homepage:showPage', $this->page->id);
+    };
+  }
 
-	public function actionAddTagPage(int $pageId): void
-	{
-		$this->page = $this->model->getPages()->get($pageId);
-		$this->getComponent('addTagForm')->setDefaults($this->page->toArray())
-		->onSuccess[] = function (Form $form){
-			$this->flashMessage('Úspěšně jste přidal kategorii');
-			$this->redirect('Page:editPage', $this->page->id);
-		};
-	}
+  public function renderEditPage(): void
+  {
+    $this->template->page = $this->page;
+    $this->template->tagsActive = $this->related;
+  }
 
-	public function renderAddTagPage()
-	{
-		$this->template->page = $this->page;
-	}
+  //   protected function createComponentAddTagForm(): Form
+  //   {
+  //     return $this->tagsFactory->createAddTagForm($this->page->id);
+  //   }
 
-	public function handleDeleteTag(int $tagId)
-	{
-		$tags = $this->page->related('pages_tags');
-		$size = $tags->count('*');
-		foreach ($tags as $tag) {
-			if ($tag->tag_id == $tagId) {
-				if ($size > 1) {
-					$tag->delete();
-					$this->flashMessage('Kategorie byla odstraněna');
-					$this->redirect('this');
-				} else {
-					$this->flashMessage('Nelze odstranit, příspěvek musí obsahovat min. 1. kategorii');
-					$this->redirect('this');
-				}
-			}
-		}
-	}
+  //   public function actionAddTagPage(int $pageId): void
+  //   {
+  //     $this->page = $this->model->getPages()->get($pageId);
+  //     $this->getComponent('addTagForm')->setDefaults($this->page->toArray())->onSuccess[] = function (Form $form) {
+  //       $this->flashMessage('Úspěšně jste přidal kategorii');
+  //       $this->redirect('Page:editPage', $this->page->id);
+  //     };
+  //   }
 
-	public function handleShowPage($id)
-	{
-		$page = $this->model->getPages()->get($id);
-		$this->redirect('Homepage:showPage', $page->id);
-	}
+  public function handleDeleteTag(int $tagId)
+  {
+    $tags = $this->page->related('pages_tags');
+    $size = $tags->count('*');
+    foreach ($tags as $tag) {
+      if ($tag->tag_id == $tagId) {
+        if ($size > 1) {
+          $tag->delete();
+          $this->flashMessage('Kategorie byla odstraněna');
+          $this->redirect('this');
+        } else {
+          $this->flashMessage('Nelze odstranit, příspěvek musí obsahovat min. 1. kategorii');
+          $this->redirect('this');
+        }
+      }
+    }
+  }
 
-	public function handleEditPage($id)
-	{
-		$page = $this->model->getPages()->get($id);
-		$this->redirect('Page:editPage', $page->id);
-	}
+  public function handleShowPage($id)
+  {
+    $page = $this->model->getPages()->get($id);
+    $this->redirect('Homepage:showPage', $page->id);
+  }
 
-	public function handleAdd($id)
-	{
-		$page = $this->model->getPages()->get($id);
-		if ($page->inMenu == 0) {
-			$page->update([
-				'inMenu' => 1
-			]);
-			$this->flashMessage('Stránka byla přidána do menu');
-			$this->redirect('this');
-		} else {
-			$page->update([
-				'inMenu' => 0
-			]);
-			$this->flashMessage('Stránka byla odebrána z menu');
-			$this->redirect('this');
-			}
-	}
+  public function handleEditPage($id)
+  {
+    $page = $this->model->getPages()->get($id);
+    $this->redirect('Page:editPage', $page->id);
+  }
 
-	public function handleDeletePage($id)
-	{
-		$page = $this->model->getPages()->get($id);
-		$page->related('pages_tags')->delete();
-		$page->delete();
-		$this->flashMessage('Stránka s ID: ' . $id . ' byla úspěšně smazána');
-		$this->redirect('this');
-	}
+  public function handleAdd($id)
+  {
+    $page = $this->model->getPages()->get($id);
+    if ($page->inMenu == 0) {
+      $page->update([
+        'inMenu' => 1,
+      ]);
+      $this->flashMessage('Stránka byla přidána do menu');
+      $this->redirect('this');
+    } else {
+      $page->update([
+        'inMenu' => 0,
+      ]);
+      $this->flashMessage('Stránka byla odebrána z menu');
+      $this->redirect('this');
+    }
+  }
+
+  public function handleDeletePage($id)
+  {
+    $page = $this->model->getPages()->get($id);
+    $page->related('pages_tags')->delete();
+    $page->delete();
+    $this->flashMessage('Stránka s ID: ' . $id . ' byla úspěšně smazána');
+    $this->redirect('this');
+  }
 }
