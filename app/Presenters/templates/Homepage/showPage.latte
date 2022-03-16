@@ -1,13 +1,9 @@
-{block second}{/block}
-{block third}{/block}
+{block first}{/block}
+{block second} <a n:href="Homepage:">Přehled Stránek</a>&nbsp;&rArr;&nbsp;{/block}
+{block third} <a n:href="Homepage:showPage $page->id"><u>Zobrazení stránky</u></a>{/block}
 {block headerIcons}{/block}
 {block content}
-<section id="latte-show" class=" w-100 mx-auto">
-{if !$user->isLoggedIn()}
-      <div class="col p-3 d-flex justify-content-center bg-light">
-        <a n:href="Homepage:" class="button__transparent">&larr; Zpět</a>
-      </div>
-    {/if}  
+<section id="latte-show" class=" w-100 mx-auto"> 
     <h1 n:block="title" class="pt-4 text-center">
       {$page->title}
     </h1>

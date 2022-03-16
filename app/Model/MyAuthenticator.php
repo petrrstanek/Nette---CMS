@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Model;
 use Nette;
+use Nette\Application\Routers\SimpleRouter;
 use Nette\Security\SimpleIdentity;
+use Nette\Security\IIdentity;
 
 class MyAuthenticator implements Nette\Security\Authenticator
 {

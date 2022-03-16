@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "compile:sass": "node-sass www/scss/style.scss www/css/style.css -w"
+    "compile:sass": "node-sass www/scss/style.scss www/css/style.css -w",
+    "format": "prettier --write \"app/Presenters/templates/**/*.{latte}\""
   },
   "devDependencies": {
     "@prettier/plugin-php": "^0.18.1",

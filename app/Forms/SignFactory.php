@@ -22,17 +22,14 @@ final class SignFactory
     $this->auth = $auth;
     $this->passwords = $passwords;
     $this->user = $user;
-
   }
 
   public function createSignIn(): Form
   {
     $signInForm = new Form;
-    $signInForm  ->addText('username', 'Uživatelské jméno')
-    ->setRequired('Prosím vyplňte své uživatelské jméno.');
-
-    $signInForm->addPassword('password', 'Heslo:')
-    ->setRequired('Prosím vyplňte své heslo.');
+   
+    $signInForm  ->addText('username', 'Uživatelské jméno')->setRequired('Prosím vyplňte své uživatelské jméno.');
+    $signInForm->addPassword('password', 'Heslo:') ->setRequired('Prosím vyplňte své heslo.');
     
     $signInForm->addSubmit('send', 'Přihlásit');
     $signInForm->onSuccess[] = [$this, 'signInProcess'];
