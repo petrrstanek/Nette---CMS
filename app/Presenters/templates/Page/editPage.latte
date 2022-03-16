@@ -7,9 +7,9 @@
 <section id="latte-edit" class="p-2">
   <div class="container-tags d-flex justify-content-center py-2">
     <div class="d-flex justify-content-center flex-wrap w-75">
-      <a n:href="deleteTag!, $tagActive->tag->id" class="tags" n:foreach="$tagsActive as $tagActive">
+      <div class="tags" n:foreach="$tagsActive as $tagActive">
         {$tagActive->tag->name}
-      </a>
+      </div>
     </div>
   </div>
   <div class="card w-75 mx-auto mb-3">

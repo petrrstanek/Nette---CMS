@@ -12,12 +12,13 @@
           <div class="card">
             <div class="card-body p-4">
               <h3>{$userPage->title}</h3>
-              <div class="post-inner">{$userPage->content|truncate:230|noescape}</div>
+              <div class="post-inner pb-4">{$userPage->content|noescape}</div>
               <div class="date">{$userPage->updatedAt|noescape}</div>
-              <a n:href="Homepage:showPage $userPage->id" class="button">Číst více</a>
+              <a n:href="Homepage:showPage $userPage->id" class="button mt-4">Číst více</a>
             </div>
           </div>
-        </div>
+          </div>
+          
         <div class="pagination pb-5 text-center justify-content-center">
           {if $paginator > 1}
             <a n:href="default, $paginator - 1">Zpět</a>

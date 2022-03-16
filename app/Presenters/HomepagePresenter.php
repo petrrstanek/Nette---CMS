@@ -11,35 +11,36 @@ use App\Presenters\BasePresenter;
 
 final class HomepagePresenter extends BasePresenter
 {
-	private postModel $model;
+  private postModel $model;
 
-	private $page;
+  private $page;
 
-	public function __construct(PostModel $model)
-	{
-		parent::__construct($model);
-		$this->model = $model;
-	}
+  public function __construct(PostModel $model)
+  {
+    parent::__construct($model);
+    $this->model = $model;
+  }
 
-	public function renderDefault(int $page = 1): void
-	{
-		$newPages = $this->model->getCreatedPages();
-		$lastPage = 0;
-		$this->template->userPages = $newPages->page($page, 3, $lastPage);
-		$this->template->lastPage = $lastPage;
-		$this->template->paginator = $page;
-	}
+  public function renderDefault(int $page = 1): void
+  {
+    $newPages = $this->model->getCreatedPages();
+    $lastPage = 0;
+    $this->template->userPages = $newPages->page($page, 3, $lastPage);
+    $this->template->lastPage = $lastPage;
+    $this->template->paginator = $page;
+    $this->template->userPages = $newPages;
+  }
 
-	public function actionShowPage(int $pageId): void
-	{
-		$this->page = $this->model->getPages()->get($pageId);
-		if (!$this->page) {
-			$this->error('Stránka nebyla nalezena.');
-		}
-	}
+  public function actionShowPage(int $pageId): void
+  {
+    $this->page = $this->model->getPages()->get($pageId);
+    if (!$this->page) {
+      $this->error('Stránka nebyla nalezena.');
+    }
+  }
 
-	public function renderShowPage(int $pageId): void
-	{
-		$this->template->page = $this->page;
-	}
+  public function renderShowPage(int $pageId): void
+  {
+    $this->template->page = $this->page;
+  }
 }

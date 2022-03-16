@@ -128,38 +128,6 @@ final class PagePresenter extends BasePresenter
     $this->template->tagsActive = $this->related;
   }
 
-  //   protected function createComponentAddTagForm(): Form
-  //   {
-  //     return $this->tagsFactory->createAddTagForm($this->page->id);
-  //   }
-
-  //   public function actionAddTagPage(int $pageId): void
-  //   {
-  //     $this->page = $this->model->getPages()->get($pageId);
-  //     $this->getComponent('addTagForm')->setDefaults($this->page->toArray())->onSuccess[] = function (Form $form) {
-  //       $this->flashMessage('Úspěšně jste přidal kategorii');
-  //       $this->redirect('Page:editPage', $this->page->id);
-  //     };
-  //   }
-
-  public function handleDeleteTag(int $tagId)
-  {
-    $tags = $this->page->related('pages_tags');
-    $size = $tags->count('*');
-    foreach ($tags as $tag) {
-      if ($tag->tag_id == $tagId) {
-        if ($size > 1) {
-          $tag->delete();
-          $this->flashMessage('Kategorie byla odstraněna');
-          $this->redirect('this');
-        } else {
-          $this->flashMessage('Nelze odstranit, příspěvek musí obsahovat min. 1. kategorii');
-          $this->redirect('this');
-        }
-      }
-    }
-  }
-
   public function handleShowPage($id)
   {
     $page = $this->model->getPages()->get($id);

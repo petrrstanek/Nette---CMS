@@ -4700,7 +4700,7 @@ a {
     #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody td.col-action {
       width: 82px !important; }
     #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody td.col-title {
-      width: 97px;
+      width: 93px !important;
       overflow: auto; }
     #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody td.col-content {
       display: none; }
