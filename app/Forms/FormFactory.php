@@ -63,8 +63,6 @@ final class FormFactory
   public function pageEditProcess(Form $form, \stdClass $values): void
   {
     try {
-      //   bdump($values->tags);
-      //   die();
       $this->page->update([
         'updatedAt' => new DateTime(),
         'title' => $values->title,
@@ -73,6 +71,9 @@ final class FormFactory
 
       $tags = $this->page->related('pages_tags');
       $tags->delete();
+      if (empty($values->tags)) {
+        $form->addError('Stránka musí obsahovat alespoň 1. kategorii');
+      }
       foreach ($values->tags as $tag) {
         $this->model->getRelatedTags()->insert([
           'page_id' => $this->page->id,

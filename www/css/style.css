@@ -4278,7 +4278,8 @@ form .error {
   font-weight: bold; }
 
 #mar,
-#frm-pageForm-tags, #frm-addTagForm-tags {
+#frm-pageForm-tags,
+#frm-addTagForm-tags {
   width: 100%; }
 
 #latte-default tr {
@@ -4343,7 +4344,9 @@ form .error {
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr .col-content {
     flex: 1 !important;
     overflow-x: hidden; }
-  #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-id, #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-updatedAt, #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-createdAt {
+  #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-id,
+  #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-updatedAt,
+  #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-createdAt {
     display: flex;
     align-items: center; }
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-updatedAt {
@@ -4351,7 +4354,9 @@ form .error {
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-createdAt {
     width: 96px; }
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-title {
-    align-items: center; }
+    align-items: center;
+    width: 80px;
+    overflow: auto; }
   #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody tr td.col-action {
     width: 149px;
     align-items: center; }
@@ -4572,11 +4577,6 @@ a {
   border: 1px solid #0d6efd;
   opacity: 0.2; }
 
-#latte-edit .tags:hover {
-  opacity: 0.25;
-  background-color: red;
-  color: #fff; }
-
 #latte-edit .header-icons {
   position: absolute;
   right: 20px;
@@ -4700,7 +4700,8 @@ a {
     #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody td.col-action {
       width: 82px !important; }
     #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody td.col-title {
-      width: 100px; }
+      width: 97px;
+      overflow: auto; }
     #latte-admin-home #snippet-dataGrid-table #snippet-dataGrid-tbody td.col-content {
       display: none; }
   .card {
